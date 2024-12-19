@@ -308,4 +308,28 @@ def CheckLinks(input_api, output_api):
                             f'{link.file}:{link.line_num}: '
                             f'Missing link: {o.path}'))
 
+                # Links can point to:
+                # * Directory (with implicit /index.md).
+                #   /foo/bar points to /foo/bar/index.md
+                # * LOB file (e.g. images).
+                #   /foo/bar.png has /foo/bar.png.sha1
+                # * Raw file (e.g. html); does not support .md files.
+                #   /foo/bar.html
+                # Links can also point to specific md files, but we don't use
+                # that style, so don't support it.  We prefer to use dirs and
+                # index.md files exclusively.
+                elif not (input_api.os_path.exists(
+                        input_api.os_path.join(local_path, 'index.md'))
+                          or input_api.os_path.exists(local_path + '.sha1')
+                          or input_api.os_path.isfile(local_path)):
+                    # TODO(vapier): Make these fatal.
+                    if '.' not in local_path:
+                        results.append(
+                            output_api.PresubmitPromptWarning(
+                                f'{link.file}:{link.line_num}: '
+                                f'Missing link: {o.path}'))
+                    else:
+                        _create_result(link, 'Link appears to be broken',
+                                       o._replace(path='???', fragment=''))
+
     return results
