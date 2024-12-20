@@ -19,8 +19,7 @@ The documentation for Chrome extensions and apps is served at
 [developer.chrome.com/apps](https://developer.chrome.com/apps) by Google App
 Engine.
 
-See
-<https://cs.>[chromium.org/chrome/common/extensions/docs/README](/chrome/common/extensions/docs/README)
+See [chrome/common/extensions/docs/README](https://chromium.googlesource.com/chromium/src/+/main/chrome/common/extensions/docs/README.md)
 to learn how the extension/app docs are generated.
 
 ## Contributing documentation

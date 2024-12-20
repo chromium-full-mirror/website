@@ -12,7 +12,7 @@ title: Stack Traces From Chrome OS Crash Dumps
 
 If you need to get a stack from a BVT failure that has already been uploaded to
 Google Cloud Storage, there's a much easier way to do this. See the [Chrome OS
-sheriff](/developers/tree-sheriffs/sheriff-details-chromium-os) documentation
+sheriff](/chromium-os/developer-library/reference/rotations/sheriff-details-chromium-os) documentation
 under "How to find test results/crash reports". Look in a directory like
 desktopui_MediaAudioFeedback/sysinfo/iteration.1/var/spool/crash for the
 chrome.dmp.txt file. It should have a stack.

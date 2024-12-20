@@ -89,4 +89,4 @@ run_remote_tests.sh.**
 ## **What's the fast way to see if a test now works with tip of tree?**
 
 The best way is to prepare a CL and test it using
-[trybots](/chromium-os/build/local-trybot-documentation).
+[trybots](/chromium-os/developer-library/guides/development/local-trybot-documentation).

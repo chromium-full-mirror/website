@@ -192,7 +192,7 @@ Getting the BlueZ package version:
 
 And if you're enthusiastic, you can also build [BlueZ](http://www.bluez.org/)
 from source on your Chromebook in [Developer
-Mode](/chromium-os/poking-around-your-chrome-os-device), with
+Mode](/chromium-os/developer-library/guides/device/developer-mode), with
 [crouton](https://github.com/dnschneid/crouton) and run it by following these
 [instructions](https://github.com/beaufortfrancois/sandbox/blob/gh-pages/web-bluetooth/Bluez.md).
 

@@ -12,7 +12,7 @@ finally how to get more information to determine the root cause (using
 symbolized build logs, stack traces, and gdb). At the end of this codelab you
 will know the first steps to take anytime you need to debug a crash in Chrome!
 If you want more information about debugging chrome, see
-[Debugging](/chromium-os/developer-library/guides/debugging#debugging-crashes-with-gdb).
+[Debugging](/chromium-os/developer-library/guides/debugging/debugging#debugging-crashes-with-gdb).
 
 [TOC]
 

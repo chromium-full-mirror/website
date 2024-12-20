@@ -134,9 +134,9 @@ Status on linux-next/master:
 
 Certainly there are lots of ways to build and install the kernel. I'm not going
 to copy them all here but I'll just point you at the [Kernel
-FAQ](/chromium-os/how-tos-and-troubleshooting/kernel-faq). Specifically read the
+FAQ](/chromium-os/developer-library/guides/kernel/kernel-development). Specifically read the
 [How to quickly test kernel modifications (the fast
-way)](/chromium-os/how-tos-and-troubleshooting/kernel-faq#TOC-How-to-quickly-test-kernel-modifications-the-fast-way-)
+way)](/chromium-os/developer-library/guides/kernel/kernel-development#TOC-How-to-quickly-test-kernel-modifications-the-fast-way-)
 section carefully.
 
 I would strongly suggest that you boot from a fast SD card rather than directly
@@ -151,7 +151,7 @@ running system. The quick set of steps for that is:
     page](/chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices) for specific
     details.
 *   Insert an SD card with an image that you installed with `[cros
-            flash](/chromium-os/build/cros-flash)`.
+            flash](/chromium-os/developer-library/reference/tools/cros-flash)`.
 *   Reboot your Chromebook and press `Ctrl-U` at the BIOS prompt to boot
             from your SD card.
 
@@ -206,7 +206,7 @@ my last patch. :(
 ## Sending your change upstream
 
 This is documented over at the [Kernel
-FAQ](/chromium-os/how-tos-and-troubleshooting/kernel-faq), which will soon
+FAQ](/chromium-os/developer-library/guides/kernel/kernel-development), which will soon
 (hopefully) include the use of patman.
 
 ## What is known to work (and known to not work)

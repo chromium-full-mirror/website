@@ -252,7 +252,7 @@ title: Guides
 * [Running IGT tests on ChromeOS](/chromium-os/developer-library/guides/testing/igt)
 * [Running a single binary with UBSAN](/chromium-os/developer-library/guides/testing/single-binary-ubsan)
 * [Running and writing "Tast" automated end to end (E2E) tests](/chromium-os/developer-library/guides/testing/e2e-tests)
-* [Running smoke suite on a VM image](/chromium-os/developer-library/guides/testing/testing/running-smoke-suite-on-a-vm-image)
+* [Running smoke suite on a VM image](/chromium-os/developer-library/guides/testing/running-smoke-suite-on-a-vm-image)
 * [Running unittests via QEMU](/chromium-os/developer-library/guides/testing/qemu-unit-tests-design)
 * [Web Testing](/chromium-os/developer-library/guides/testing/web-testing)
   * [Testing Browser Connection](/chromium-os/developer-library/guides/testing/web-testing/browser-connection)

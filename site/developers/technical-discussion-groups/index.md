@@ -75,7 +75,7 @@ title: Technical Discussion Groups
                 webstore issues also happens here.
 *   [chromium-mojo](https://groups.google.com/a/chromium.org/forum/#!forum/chromium-mojo)
     *   Discussion of development and use of
-                [Mojo](/developers/design-documents/mojo) IPC system.
+                [Mojo](https://chromium.googlesource.com/chromium/src/+/HEAD/mojo/README.md) IPC system.
 *   [chromium-polymer](https://groups.google.com/a/chromium.org/group/chromium-polymer)
     *   List for discussing the use of
                 [Polymer](https://www.polymer-project.org/) in Chromium WebUI

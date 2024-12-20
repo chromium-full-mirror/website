@@ -114,7 +114,7 @@ normal/verified mode.
 This device uses [coreboot](http://www.coreboot.org/) and
 [Depthcharge](https://chromium.googlesource.com/chromiumos/platform/depthcharge/)
 as a payload to boot the system. See here for a [detailed description of the
-Samus FMAP / firmware flash layout](/chromium-os/firmware-porting-guide/fmap).
+Samus FMAP / firmware flash layout](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/fmap).
 You can find the source in the [ChromiumOS coreboot git
 tree](https://chromium.googlesource.com/chromiumos/third_party/coreboot/+/firmware-samus-6300.B)
 and the [ChromiumOS depthcharge git

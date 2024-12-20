@@ -3303,7 +3303,7 @@ Pwnium](http://blog.chromium.org/2015/02/pwnium-v-never-ending-pwnium.html)
 submissions, we wrote a new fuzzer for v8 builtins, which has already yielded[
 bugs](https://bugs.chromium.org/p/chromium/issues/detail?id=625752). Not
 everything can be automated, so we started auditing parts of[
-mojo](/developers/design-documents/mojo), Chrome’s new IPC mechanism, and found
+mojo](https://chromium.googlesource.com/chromium/src/+/HEAD/mojo/README.md), Chrome’s new IPC mechanism, and found
 several issues
 ([1](https://bugs.chromium.org/p/chromium/issues/detail?id=611887),[
 2](https://bugs.chromium.org/p/chromium/issues/detail?id=612364),[
@@ -3325,10 +3325,9 @@ still experimental and can be enabled under Developer Options in Settings. On
 Windows, a series of ongoing stability experiments with[ App
 Container](/developers/design-documents/sandbox#TOC-App-Container-low-box-token-:)
 and[ win32k
-lockdown](/developers/design-documents/sandbox#TOC-Win32k.sys-lockdown:) for[
-PPAPI](/nativeclient/getting-started/getting-started-background-and-basics#TOC-Pepper-Plugin-API-PPAPI-)
-processes (i.e. Flash and pdfium) have given us good data that puts us in a
-position to launch both of these new security mitigations on Windows 10 very
+lockdown](/developers/design-documents/sandbox#TOC-Win32k.sys-lockdown:) for
+PPAPI processes (i.e. Flash and pdfium) have given us good data that puts us in
+a position to launch both of these new security mitigations on Windows 10 very
 soon!
 
 **For[ Site Isolation](/developers/design-documents/site-isolation), we're
@@ -4022,7 +4021,7 @@ also working on a generic, re-usable sandbox API on Linux, which we hope can be
 useful to other Linux projects that want to employ sandboxing. On Android, we’ve
 been experimenting with single-threaded renderer execution, which can yield
 performance and security benefits for Chrome. We’ve also been involved with the
-ambitious [Mojo](/developers/design-documents/mojo) effort. On OSX, we [shipped
+ambitious [Mojo](https://chromium.googlesource.com/chromium/src/+/HEAD/mojo/README.md) effort. On OSX, we [shipped
 crashpad](https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/6eouc7q2j_g)
 (which was a necessary project to investigate those sometimes-security-relevant
 crashes!). Finally, on Windows, the support to block
@@ -4757,7 +4756,7 @@ program](/Home/chromium-security/vulnerability-rewards-program).
 
 Anecdotally, this quarter we noticed an increase in the number of IPC reviews
 and marked decrease in security issues! Not sure if our recent [security tips
-doc](/Home/chromium-security/security-tips-for-ipc) is to credit, but well done
+doc](/Home/chromium-security/education/security-tips-for-ipc) is to credit, but well done
 to all the IPC authors and editors!
 
 Process hardening

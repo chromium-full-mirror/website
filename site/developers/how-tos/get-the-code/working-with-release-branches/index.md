@@ -12,7 +12,7 @@ title: Working with Release Branches
 
 *This applies to commits to Chromium repository branches. For changes to
 Chromium OS repositories, see the information
-[here](/chromium-os/how-tos-and-troubleshooting/working-on-a-branch).*
+[here](/chromium-os/developer-library/guides/development/work-on-branch).*
 
 ## Checking out a release branch
 

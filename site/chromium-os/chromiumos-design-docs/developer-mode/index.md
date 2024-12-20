@@ -218,7 +218,7 @@ The vendor is capable of disassembling a device and making hardware
 modifications involving soldering
 
 It is acceptable for modifying a device to disable [write
-protection](/chromium-os/firmware-porting-guide/firmware-ec-write-protection) to
+protection](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/firmware-ec-write-protection) to
 be slow, as long as it is not painfully slow. Subsequent installs should be
 fast, so that the vendor can do rapid development.
 

@@ -38,7 +38,7 @@ You can hope for about 5MB/s over sshfs on a Cortex-A9 with USB Ethernet.
 ## Using NFS
 
 [Please see
-here](/chromium-os/how-tos-and-troubleshooting/network-based-development) for
+here](/chromium-os/developer-library/guides/development/network-based-development) for
 full details.
 NFS requires a lot more setup but has additional features. There are two ways to
 use NFS from your target:

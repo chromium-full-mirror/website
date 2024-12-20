@@ -250,7 +250,7 @@ and mailing lists rather than the internal versions.
 [Google Python style guide]: https://google.github.io/styleguide/pyguide.html
 [ChromiumOS Python style guidelines]: /chromium-os/developer-library/reference/style-guides/python/
 [autotest coding style]: https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/coding-style.md
-[ChromiumOS testing site]: /chromium-os/testing
+[ChromiumOS testing site]: /chromium-os/developer-library/guides/testing/building-and-running-tests
 [Google Test]: https://github.com/google/googletest
 [Why Google C++ Testing Framework?]: https://github.com/google/googletest/blob/HEAD/googletest/docs/primer.md
 [Google Test FAQ]: https://github.com/google/googletest/blob/HEAD/googletest/docs/faq.md

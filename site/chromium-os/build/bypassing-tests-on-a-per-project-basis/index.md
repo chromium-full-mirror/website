@@ -10,7 +10,7 @@ title: Per-repo and per-directory configuration of CQ and pre-CQ
 
 Different chromeos repositories have different testing needs. Using per-repo or
 per-directory configuration, it is possible to tailor the behavior of the
-[Chromeos Commit Queue](/developers/tree-sheriffs/sheriff-details-chromium-os/commit-queue-overview)
+[Chromeos Commit Queue](/chromium-os/developer-library/reference/development/cros-commit-pipeline)
 to suit the particular change being tested.
 
 This documentation needs updating for the new Parallel CQ infrastructure. The

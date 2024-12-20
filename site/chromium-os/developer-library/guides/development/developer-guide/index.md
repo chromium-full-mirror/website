@@ -2294,13 +2294,13 @@ Below are a few links to external sites that you might also find helpful
 [CrOS Flash page]: /chromium-os/developer-library/reference/tools/cros-flash/
 [Debug Button Shortcuts]: /chromium-os/developer-library/guides/debugging/debug-buttons
 [ChromeOS Devices]: /chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices
-[Developer Hardware]: /chromium-os/getting-dev-hardware/dev-hardware-list
+[Developer Hardware]: /chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices
 [crosh]: https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/crosh/
 [cros_vm]: /chromium-os/developer-library/guides/containers/cros-vm/#launch-a-locally-built-vm-from-within-the-chroot
 [cros deploy]: /chromium-os/developer-library/reference/tools/cros-deploy/
 [Create a branch for your changes]: #Create-a-branch-for-your-changes
 [chromeos-uprev-tester]: /chromium-os/developer-library/guides/development/simple-chrome-workflow/#testing-a-chromium-cl-remotely-on-cros-cq
-[Remote Debugging in ChromiumOS]: /chromium-os/how-tos-and-troubleshooting/remote-debugging
+[Remote Debugging in ChromiumOS]: /chromium-os/developer-library/guides/debugging/remote-debugging
 [cgdb]: https://cgdb.github.io/
 [crbug.com/new]: https://crbug.com/new
 [Simple Chrome Workflow]: /chromium-os/developer-library/guides/development/simple-chrome-workflow
@@ -2314,7 +2314,7 @@ Below are a few links to external sites that you might also find helpful
 [ChromeOS lab]: http://sites/chromeos/for-team-members/lab/lab-faq
 [Autotest User Documentation]: https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/user-doc.md
 [Creating a new Autotest test]: https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/user-doc.md#Writing-and-developing-tests
-[Running Autotest Smoke Suite On a VM Image]: /chromium-os/developer-library/guides/testing/testing/running-smoke-suite-on-a-vm-image
+[Running Autotest Smoke Suite On a VM Image]: /chromium-os/developer-library/guides/testing/running-smoke-suite-on-a-vm-image
 [Seeing which Autotest tests are implemented by an ebuild]: https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/user-doc.md#Q4_I-have-an-ebuild_what-tests-does-it-build
 [Creating an image that has been modified for test]: https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/user-doc.md#W4_Create-and-run-a-test_enabled-image-on-your-device
 [devserver]: https://chromium.googlesource.com/chromiumos/chromite/+/HEAD/docs/devserver.md
@@ -2322,7 +2322,7 @@ Below are a few links to external sites that you might also find helpful
 [The ChromiumOS developer FAQ]: /chromium-os/developer-library/reference/development/developer-faq
 [ChromiumOS Portage Build FAQ]: /chromium-os/developer-library/guides/portage/ebuild-faq/
 [rootfs-thread]: https://groups.google.com/a/chromium.org/group/chromium-os-dev/browse_thread/thread/967e783e27dd3a9d/0fa20a1547de2c77?lnk=gst
-[Running Smoke Suite on a VM Image]: /chromium-os/developer-library/guides/testing/testing/running-smoke-suite-on-a-vm-image
+[Running Smoke Suite on a VM Image]: /chromium-os/developer-library/guides/testing/running-smoke-suite-on-a-vm-image
 [Debugging Tips]: /chromium-os/developer-library/guides/debugging/debugging-tips
 [Working on a Branch]: /chromium-os/developer-library/guides/development/work-on-branch/
 [Git server-side information]: /chromium-os/developer-library/reference/development/source-layout#git-server-layout

@@ -14,7 +14,7 @@ title: Server Side test for ChromiumOS autotest codelab
 - [Writing Autotests](/chromium-os/developer-library/guides/testing/autotest-developer-faq#TOC-Writing-Autotests)
 - [Codelab for Writing an Autotest Test](https://wiki.corp.google.com/twiki/bin/view/Codelab/WritingAutotestTests)
     - This is a codelab teaching you how to write a generic test for Autotest.
-- [Autotest for ChromiumOS developers](/chromium-os/testing/autotest-user-doc)
+- [Autotest for ChromiumOS developers](https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/user-doc.md)
 - [ChromiumOS Developer Guide](/chromium-os/developer-guide)
 
 ## Overview
@@ -59,7 +59,16 @@ Decide if your test is a client or server test and choose the appropriate direct
 
 ## Create a new server side test
 
-[Adding a test](https://github.com/autotest/autotest/wiki/AddingTest) involves putting a control file and a properly-written test wrapper in the right place in the source tree. There are [conventions](/chromium-os/testing/autotest-best-practices#TOC-Writing-tests) that must be followed, and a[ variety of primitives](https://github.com/autotest/autotest/wiki/AutotestApi) available for use. When writing any code, whether client-side test, server-side test, or library, have a strong bias towards using[ Autotest utility code](/chromium-os/testing/existing-autotest-utilities). This keeps the codebase consistent and avoids duplicated effort.
+[Adding a test](https://github.com/autotest/autotest/wiki/AddingTest) involves
+putting a control file and a properly-written test wrapper in the right place in
+the source tree. There are
+[conventions](https://chromium.googlesource.com/chromiumos/third_party/autotest/+/HEAD/docs/best-practices.md#writing-tests)
+that must be followed, and a
+[variety of primitives](https://github.com/autotest/autotest/wiki/AutotestApi)
+available for use. When writing any code, whether client-side test, server-side
+test, or library, have a strong bias towards using
+[Autotest utility code](/chromium-os/developer-library/guides/testing/autotest-developer-faq#TOC-Where-are-useful-libraries-).
+This keeps the codebase consistent and avoids duplicated effort.
 
 In the subsections below, we will discuss the detail of following topics:
 
@@ -147,8 +156,8 @@ Some important attributes are listed here:
 Some optional attributes:
 
 - SUITE: A comma-delimited string of suite names that this test should be a part of, e.g. bvt, regression, smoke
-- [DEPENDENCIES](/chromium-os/testing/test-dependencies-in-dynamic-suites): list, of, tags known to the HW test lab, e.g., webcam, blue-tooth
-- (absolete) EXPERIMENTAL: if the test is experimental, value can be True or False. For experimental tests, failure is considered to be non-fatal. For the test you uploaded, EXPERIMENTAL should be set to True until the test passes reliably on all intended platforms in the lab.
+- [DEPENDENCIES](/chromium-os/developer-library/reference/design-docs/test-dependencies-in-dynamic-suites): list, of, tags known to the HW test lab, e.g., webcam, blue-tooth
+- (obsolete) EXPERIMENTAL: if the test is experimental, value can be True or False. For experimental tests, failure is considered to be non-fatal. For the test you uploaded, EXPERIMENTAL should be set to True until the test passes reliably on all intended platforms in the lab.
 
 #### Step 2.2. Create a test wrapper
 

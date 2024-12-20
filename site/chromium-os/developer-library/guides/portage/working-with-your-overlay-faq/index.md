@@ -57,4 +57,4 @@ setup), in which case boot-services is appropriate.
 
 The following resource goes into more detail:
 
-[Boot system design](/chromium-os/developer-library/reference/platform/boot-design)
+[Boot system design](/chromium-os/chromiumos-design-docs/boot-design)

@@ -260,7 +260,7 @@ libsigrok-0.5.2](https://github.com/vpalatin/libsigrok/commit/8147e36b8ffa48a23c
 support](https://github.com/vpalatin/libsigrok/commit/97a7e9cbb3126aa5329b96a2f017e682b9036d8f)
 
 A recipe to do this build is written down in [Build Sigrok and Pulseview from
-sources](/chromium-os/twinkie/build-sigrok-and-pulseview-from-sources).
+sources](/chromium-os/developer-library/guides/hardware-schematics/twinkie/build-sigrok-and-pulseview-from-sources).
 
 ### Capturing traces with the Sigrok tool
 

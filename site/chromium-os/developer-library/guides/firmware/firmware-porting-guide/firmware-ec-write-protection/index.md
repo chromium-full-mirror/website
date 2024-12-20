@@ -60,7 +60,7 @@ page](/chromium-os/developer-library/reference/development/developer-information
 2.  Reassemble the device, then boot to [developer
             mode](/chromium-os/chromiumos-design-docs/developer-mode).
 3.  To disable SOC firmware protection, run
-            "[flashrom](/chromium-os/packages/cros-flashrom) -p host
+            "[flashrom](https://www.flashrom.org) -p host
             --wp-disable". To disable EC firmware protection (external storage),
             run "flashrom -p ec --wp-disable". It's not possible to disable EC
             firmware WP once enabled for ECs with internal storage. Instead, RO

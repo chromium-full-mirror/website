@@ -14,7 +14,7 @@ are used, where to search for other potential useful functions, and how to run
 pylint/unittest_suite in Autotest.
 
 Before you proceed, you should have read through the [Autotest User
-Documentation](/chromium-os/testing/autotest-user-doc).
+Documentation].
 
 ## Coding Style
 
@@ -58,7 +58,7 @@ to test your change unless you can actually run an instance of the Autotest
 server locally.
 
 To quickly get functional Autotest server setup please refer to: [Setup Autotest
-Server](/chromium-os/developer-library/guides/autotest-developer-faq/setup-autotest-server)
+Server](/chromium-os/developer-library/guides/testing/autotest-developer-faq/setup-autotest-server)
 
 Reasons to run a local Autotest server might include:
 
@@ -153,7 +153,7 @@ run_remote_tests.sh.**
 ## **What's the fast way to see if a test now works with tip of tree?**
 
 The best way is to prepare a CL and test it using
-[trybots](/chromium-os/build/local-trybot-documentation).
+[trybots](/chromium-os/developer-library/guides/development/local-trybot-documentation).
 
 ## Writing Autotests
 
@@ -266,8 +266,8 @@ src/third_party/chromiumos-overlay/chromeos-base/autotest-tests and add your
 test to IUSE_TESTS or it won't be picked up by autotest when you ask it to build
 specific tests.
 
-For more information on writing your test, see the [user
-docs](/chromium-os/testing/autotest-user-doc).
+For more information on writing your test, see the [Autotest User
+Documentation].
 
 ### Adding binaries for your tests to call as part of the test
 
@@ -366,7 +366,7 @@ see below for how to run a Telemetry Test/Benchmark in autotest.
 ### How do I write a test that uses Telemetry?
 
 [Please refer to Wrapping a Telemetry test in
-Autotest](/chromium-os/developer-library/guides/autotest-design-patterns#TOC-Wrapping-a-Telemetry-test-in-Autotest)
+Autotest](/chromium-os/developer-library/guides/testing/autotest-design-patterns#TOC-Wrapping-a-Telemetry-test-in-Autotest)
 
 ### How do I bundle a bunch of tests into a suite that can be scheduled and run as a group?
 
@@ -447,7 +447,7 @@ use gmerge for autotest or autotest-tests.
 These messages come up when autotest tries to run 'make' or 'patch' on the
 client. They are not supposed to run there. Test code is only patched and
 compiled on the host as describe
-[above](/chromium-os/developer-library/guides/autotest-developer-faq#TOC-How-do-I-create-a-test-that-requires-compiling-code-).
+[above](/chromium-os/developer-library/guides/testing/autotest-developer-faq#TOC-How-do-I-create-a-test-that-requires-compiling-code-).
 
 Common mistakes are:
 

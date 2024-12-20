@@ -20,8 +20,8 @@ Follow the directions for ssh key setup, using the directory /var/www/.ssh and
 make sure everything is owned by www-data with user only permissions:
 <https://www.chromium.org/chromium-os/developer-library/guides/development/developer-guide/#Set-up-SSH-connection-between-chroot-and-DUT>
 
-If you ran the setup script please proceed to the Autotest Server Usage Guide:
-<https://www.chromium.org/chromium-os/developer-library/guides/autotest-developer-faq/autotest-server-usage>
+If you ran the setup script please proceed to the [Autotest Server Usage
+Guide](/chromium-os/developer-library/guides/testing/autotest-developer-faq/autotest-server-usage).
 
 You will want to re-run this script or the below steps for changes that are not
 easily testable in the production server. Generally this will not be needed for
@@ -227,5 +227,5 @@ setup_dev_autotest.sh.\*\*\***
 
 ## Using the Autotest Server
 
-Now that everything is setup, please proceed to the Autotest Server Usage Guide
-<https://www.chromium.org/chromium-os/developer-library/guides/autotest-developer-faq/autotest-server-usage>
+Now that everything is setup, please proceed to the [Autotest Server Usage
+Guide](/chromium-os/developer-library/guides/testing/autotest-developer-faq/autotest-server-usage).

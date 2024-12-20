@@ -1030,7 +1030,7 @@ wouldn't protect from [insider threats].
 [archive mirrors]: /chromium-os/developer-library/reference/third-party/archive-mirrors/
 [Breakage and Flake Policy]: /chromium-os/developer-library/guides/testing/breakages-and-flakes/
 [Change-Id]: https://gerrit-review.googlesource.com/Documentation/user-changeid.html
-[ChromeOS sheriff rotation]: /developers/tree-sheriffs/sheriff-details-chromium-os#TOC-How-do-I-join-or-leave-the-rotation-
+[ChromeOS sheriff rotation]: /chromium-os/developer-library/reference/rotations/sheriff-details-chromium-os#TOC-How-do-I-join-or-leave-the-rotation-
 [CL]: /chromium-os/developer-library/glossary/
 [Contributor License Agreement]: https://cla.developers.google.com/
 [CQ]: https://chromium.googlesource.com/chromium/src/+/refs/heads/main/docs/infra/cq.md

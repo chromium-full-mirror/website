@@ -69,5 +69,3 @@ latency of web pages. Its successor is
         *   Mozilla Firefox
 *   Tools
     *   [Summary of SPDY tools](/spdy/spdy-tools-and-debugging)
-    *   [Chrome page benchmarking
-                tool](/developers/design-documents/extensions/how-the-extension-system-works/chrome-benchmarking-extension)

@@ -307,7 +307,7 @@ flags, which the firmware uses to select which kernel to boot. The flags are
 designated “priority”, “successful”, and “tries”. The firmware selects the
 kernel based on these flags; the full rules are described in the [design
 document for the disk
-format](/chromium-os/chromiumos-design-docs/disk-format).
+format](/chromium-os/developer-library/reference/device/disk-format).
 The update_engine service updates these flags with specific values after
 applying an update, and again with different values after the system boots
 without failure.
@@ -555,7 +555,7 @@ causes them to be invalidated.
 ### Measuring Performance
 
 There’s a [web
-site](/chromium-os/how-tos-and-troubleshooting/measuring-boot-time-performance)
+site](/chromium-os/developer-library/guides/performance/measuring-boot-time-performance)
 for this.
 
 Boot performance is measured by capturing timestamps at specific moments during

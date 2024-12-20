@@ -108,7 +108,7 @@ When present, we tend to use variations on a theme for the announcement box on
 top of the waterfall (and some other) pages. We use the announcement to
 abbreviate and present other interesting state information. The top bar and it's
 color represents the
-[state](/developers/tree-sheriffs/sheriff-details-chromium-os#TOC-How-do-I-read-the-waterfall-)
+[state](/chromium-os/developer-library/reference/rotations/sheriff-details-chromium-os#TOC-How-do-I-read-the-waterfall-)
 of the tree, including the current
 [message](http://chromiumos-status.appspot.com/). Under that there are 2 panes.
 

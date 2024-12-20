@@ -45,7 +45,7 @@ Hardware-accelerated OpenGL or OpenGL ES support is mandatory, and the Chromium
 browser's memory footprint is an obvious lower bound for RAM.
 
 See the [Developer Hardware
-list](/chromium-os/getting-dev-hardware/dev-hardware-list) for examples of
+list](/chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices) for examples of
 netbooks on which developers are successfully running ChromiumOS.
 
 ### What about other hardware: Does ChromiumOS support my wifi card?
@@ -62,7 +62,7 @@ to
 -- if you can include a proposed patch, even better.
 
 Please see our [supported developer hardware
-wiki](/chromium-os/getting-dev-hardware/dev-hardware-list) for more details.
+wiki](/chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices) for more details.
 
 ### Is it true that you don't support hard disk drives (HDDs)?
 

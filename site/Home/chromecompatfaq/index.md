@@ -96,9 +96,6 @@ if (WebKitVersion && WebKitVersion &gt; 500 ) {
 // use spiffy WebKit feature here
 }
 
-You can find a list of Google Chrome Releases and their corresponding WebKit
-revisions [here](/developers/webkit-version-table).
-
 *   Avoid code like the following:
 
 if (isChrome) {

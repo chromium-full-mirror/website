@@ -12,7 +12,7 @@ title: Sync Data Best Practices
 
 ### Changing fields in specifics
 
-[The new sync API](/developers/design-documents/sync/syncable-service-api) uses
+[The new sync API](/developers/design-documents/sync/model-api) uses
 protobufs to communicate with Chrome services, which is nice because protobufs
 were written to be robust against protocol changes (see
 [protobuf docs](https://code.google.com/apis/protocolbuffers/docs/overview.html)

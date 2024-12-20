@@ -554,7 +554,7 @@ required. Some of the important options are:
 *   CONFIG_IP_PNP, CONFIG_IP_PNP_DHCP - required if parameter ip=dhcp is
             passed to kernel
 
-[See here](/chromium-os/chromium-os/developer-library/guides/kernel/kernel-configuration) for
+[See here](/chromium-os/developer-library/guides/kernel/kernel-configuration) for
 more information about kernel configuration.
 
 Note: some of the options below are required for NFS root, some for NFS mounting

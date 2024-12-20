@@ -15,7 +15,7 @@ easily shared with other developers, they currently typically have to commit
 their BSPs to either the public or private Chromium OS repositories and update
 the respective repo manifest files if necessary. In hosting their ebuilds in the
 Chromium OS repositories, however, they get tied into the [Chromium OS Commit
-Queue](/developers/tree-sheriffs/sheriff-details-chromium-os/commit-queue-overview)
+Queue](/chromium-os/developer-library/reference/development/cros-commit-pipeline)
 and code review process, which is not always ideal for them.
 
 ### Local Manifests

@@ -22,7 +22,7 @@ title: Creating and deploying ChromiumOS dynamic test suites
 5.  [Documentation: Working with Test
             Suites](/chromium-os/developer-library/guides/testing/test-suites)
 6.  [Test Dependencies in Dynamic
-            Suites](/chromium-os/testing/test-dependencies-in-dynamic-suites)
+            Suites](/chromium-os/developer-library/reference/design-docs/test-dependencies-in-dynamic-suites)
 
 ## Overview
 

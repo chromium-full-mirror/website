@@ -107,9 +107,6 @@ src="/developers/how-tos/getting-around-the-chrome-source-code/Content.png">](/d
 *   **gpu:** Code for the GPU process, which is used for 3D compositing
             and 3D APIs.
 *   **plugin:** Code for running browser plugins in other processes.
-*   **ppapi_plugin:** Code for the [Pepper
-            ](/developers/design-documents/pepper-plugin-implementation)plugin
-            process.
 *   **renderer**: Code for the subprocess in each tab. This embeds
             WebKit and talks to `browser` for I/O.
 *   **utility:** Code for running random operations in a sandboxed

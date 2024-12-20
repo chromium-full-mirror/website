@@ -41,4 +41,4 @@ Runnable - Cloud-based IDE
 <http://runnable.com/>
 
 To test your Android apps on ChromeOS, learn how to [sideload Android apps on
-your Chromebook](/chromium-os/sideload-android-apps-on-chromebook)
+your Chromebook](/chromium-os/developer-library/guides/app-development/sideload-android-apps-on-chromebook)

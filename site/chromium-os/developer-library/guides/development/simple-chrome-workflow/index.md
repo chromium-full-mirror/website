@@ -904,15 +904,15 @@ Some notes about the above:
 [device-specific instructions]: /chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices
 [generic instructions]: /chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices/generic
 [rootfs has been removed]: /chromium-os/developer-library/guides/device/developer-mode/#TOC-Making-changes-to-the-filesystem
-[remounted as read-write]: /chromium-os/developer-library/guides/debugging#TOC-Setting-up-the-device
-[additional debugging tips]: /chromium-os/developer-library/guides/debugging#TOC-Enabling-core-dumps
+[remounted as read-write]: /chromium-os/developer-library/guides/debugging/debugging-tips#setting-up-the-device
+[additional debugging tips]: /chromium-os/developer-library/guides/debugging/debugging-tips/#enabling-core-dumps
 [chromite repo]: https://chromium.googlesource.com/chromiumos/chromite/
 [issue 437877]: https://crbug.com/403086
 [CrOS Flash page]: /chromium-os/developer-library/reference/tools/cros-flash/
 [VM]: /chromium-os/developer-library/guides/containers/cros-vm/
 [Running a Chrome Google Test binary in the VM]: /chromium-os/developer-library/guides/containers/cros-vm/#Run-a-Chrome-GTest-binary-in-the-VM
 [go/shortleash]: http://go/shortleash
-[debugging tips]: /chromium-os/developer-library/guides/debugging
+[debugging tips]: /chromium-os/developer-library/guides/debugging/debugging-tips
 [chrome build instructions]: https://g3doc.corp.google.com/company/teams/chrome/linux_build_instructions.md
 [api-keys]: /developers/how-tos/api-keys
 [install-build-deps.py]: https://chromium.googlesource.com/chromium/src/+/HEAD/build/install-build-deps.py

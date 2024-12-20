@@ -35,7 +35,7 @@ For background and other relevant information, see the following documents:
 *   [Firmware Verified
             Boot](/chromium-os/chromiumos-design-docs/verified-boot): how kernel
             images are signed.
-*   [Disk Format](/chromium-os/chromiumos-design-docs/disk-format): disk
+*   [Disk Format](/chromium-os/developer-library/reference/device/disk-format): disk
             drive format, used for both the Chromium OS device and the recovery
             storage device.
 *   Boot Process (forthcoming): how kernel images are loaded into RAM
@@ -181,7 +181,7 @@ kinds of data appear on each type of RSD, see the "Types of recovery storage
 device" section, below.
 
 For more information on GUID partition tables and Chromium OS partition types,
-see [Disk Format](/chromium-os/chromiumos-design-docs/disk-format).
+see [Disk Format](/chromium-os/developer-library/reference/device/disk-format).
 
 ### Recovery kernel
 

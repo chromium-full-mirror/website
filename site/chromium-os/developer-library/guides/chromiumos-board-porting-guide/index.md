@@ -539,7 +539,7 @@ that takes care of all that for us. Normally it's run by
 [buildbot](http://buildbot.net/) on a
 [waterfall](http://build.chromium.org/p/chromiumos/waterfall) to produce all the
 goodness, but there's no requirement that buildbot be the tool you use. You can
-even [run it locally](/chromium-os/build/local-trybot-documentation).
+even [run it locally](/chromium-os/developer-library/guides/development/local-trybot-documentation).
 
 ### chromite/buildbot/cbuildbot_config.py
 

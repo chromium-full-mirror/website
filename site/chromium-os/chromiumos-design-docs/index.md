@@ -51,11 +51,11 @@ design docs in the coming months.**
             Info](/chromium-os/developer-library/reference/device/cros-board-info/)
 *   [Firmware Boot and
             Recovery](/chromium-os/chromiumos-design-docs/firmware-boot-and-recovery)
-*   [Disk Format](/chromium-os/chromiumos-design-docs/disk-format)
+*   [Disk Format](/chromium-os/developer-library/reference/device/disk-format)
             (including boot process)
 *   [Developer Mode](/chromium-os/chromiumos-design-docs/developer-mode)
-*   [EC-3PO](/chromium-os/chromiumos-design-docs/ec-3po) (EC console
-            interpreter)
+*   [EC-3PO](https://chromium.googlesource.com/chromiumos/third_party/hdctools/+/HEAD/docs/ec-3po-design.md)
+        (EC console interpreter)
 *   [Recovery Mode](/chromium-os/chromiumos-design-docs/recovery-mode)
 *   [SAFT](/for-testers/saft) (semi-automated firmware test)
 *   [Verified Boot](/chromium-os/chromiumos-design-docs/verified-boot)

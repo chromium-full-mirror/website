@@ -2,7 +2,7 @@
 breadcrumbs:
 - - /chromium-os
   - Chromium OS
-- - /chromium-os/firmware-porting-guide
+- - /chromium-os/developer-library/guides/firmware/firmware-porting-guide
   - Firmware Overview and Porting Guide
 page_name: u-boot-drivers
 title: 3.  U-Boot Drivers
@@ -34,7 +34,7 @@ following:
 *   Add config option(s) for the peripheral to the board configuration
             file in include/configs.
 *   Add a node for the driver to the [device tree
-            file](/chromium-os/firmware-porting-guide/2-concepts) (*.dts*),
+            file](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/2-concepts) (*.dts*),
             specifying its properties and values as well as any additional
             devices that are connected to it.
 
@@ -1421,8 +1421,8 @@ different aspects of USB, including the following:
 ## Other sections in *U-Boot Porting Guide*
 
 1. [Overview of the Porting
-Process](/chromium-os/firmware-porting-guide/1-overview)
+Process](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/1-overview)
 
-2. [Concepts](/chromium-os/firmware-porting-guide/2-concepts)
+2. [Concepts](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/2-concepts)
 
 3. U-Boot Drivers (this page)

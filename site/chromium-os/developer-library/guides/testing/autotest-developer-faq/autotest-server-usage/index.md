@@ -6,8 +6,8 @@ page_name: autotest-server-usage
 title: Autotest server usage guide
 ---
 
-Note these steps are to be ran after you have setup Autotest:
-<https://www.chromium.org/chromium-os/developer-library/guides/autotest-developer-faq/setup-autotest-server>
+Note these steps are to be ran after you have [setup
+Autotest](/chromium-os/developer-library/guides/testing/autotest-developer-faq/setup-autotest-server)
 and have the local Autotest Web Frontend running. To verify simply navigate to
 <http://localhost>
 

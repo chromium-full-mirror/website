@@ -159,7 +159,7 @@ whole backend, and the bitmap and header are backed up periodically using only
 regular IO. The actual table is divided in two parts: the main table (stored as
 “index_tb1”) always grows by a factor of 2, and the overflow or extra table
 (stored as “index_tb2”) which grows by smaller increments. (See
-[buckets](TOC-Buckets) for more details).
+[buckets](#buckets) for more details).
 
 #### Bitmap
 

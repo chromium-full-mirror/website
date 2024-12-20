@@ -293,7 +293,7 @@ This should create `image-link.bin` in `/build/link/firmware` under the chroot.
 
 The `flashrom` command can be run from a root shell on the device, or it can be
 used from a development PC connected via servo. See
-[here](/chromium-os/packages/cros-flashrom) for more detailed instructions on
+[here](https://www.flashrom.org) for more detailed instructions on
 usage.
 
 **Using the SPI flash emulator**

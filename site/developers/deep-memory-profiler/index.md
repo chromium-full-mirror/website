@@ -21,8 +21,7 @@ Doc](https://docs.google.com/document/d/1_Cw9FfzdRT2kjozkNK9cZOXedE8-1fGDqnUvdW_
 if interested.
 
 Memory bloat has been a serious issue in Chromium for years. Bloat is harder to
-fix than leak and errors. We have memory checkers like
-[Valgrind](/developers/how-tos/using-valgrind) and [Address
+fix than leak and errors. We have memory checkers like and [Address
 Sanitizer](/developers/testing/addresssanitizer) for leak and errors, but no
 handy tools for bloat. Dmprof is an easy-to-use tool for bloat to know “who is
 the memory eater”. (It would be helpful also for leak.)

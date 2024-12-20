@@ -94,9 +94,8 @@ Because the telemetry runner code requires the full lab infrastructure, you need
 to set up a local autotest frontend and devserver in order to locally test your
 telemetry changes.
 
-1.  First set up a local AFE and database by following the instructions
-            here:
-            <https://www.chromium.org/chromium-os/developer-library/guides/autotest-developer-faq/setup-autotest-server>
+1.  First set up a local AFE and database by [following the
+    instructions](/chromium-os/developer-library/guides/testing/autotest-developer-faq/setup-autotest-server).
 2.  Kick off a local devserver.
 
     ```none

@@ -24,9 +24,9 @@ Guide](/chromium-os/developer-guide).
 You might want to enter developer mode if you're following the instructions in
 the [ChromiumOS Developer Guide](/chromium-os/developer-guide), or if you just
 want to get access to a shell on your device to [poke
-around](/chromium-os/poking-around-your-chrome-os-device). To get your device
-into Developer Mode, you'll need to flip the developer switch to the "Developer
-Mode" position.
+around](/chromium-os/developer-library/guides/device/developer-mode). To get
+your device into Developer Mode, you'll need to flip the developer switch to the
+"Developer Mode" position.
 
 Caution: Modifications you make to the system are not supported by Google, may
 cause hardware issues and may void warranty.
@@ -339,7 +339,7 @@ cros flash --board=${BOARD} usb://
 ```
 
 For more details on using this tool, see the [Cros Flash
-page](/chromium-os/build/cros-flash).
+page](/chromium-os/developer-library/reference/tools/cros-flash).
 
 When the cros flash command finishes, you can simply unplug your USB key and
 it's ready to boot from.

@@ -150,7 +150,7 @@ Improve network performance / features
             (cbentzel, wtc) - 0.2 Added unit tests and manual system-level
             tests, but still need automated system level tests.
 *   [Add tests for SSL client
-            authentication](/developers/design-documents/ssl-client-authentication).
+            authentication](/developers/design-documents/crypto).
             (wtc) -- 0.2. (by rsleevi) Implemented a better way to trust a test
             root CA that doesn't require changing the system certificate store.
             Regenerated test certificates to have long validity periods.

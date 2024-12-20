@@ -74,7 +74,7 @@ immediately. This screen is always shown when booting in developer mode, to
 ensure that someone doesn't change your OS without your knowledge.
 
 Switch to
-[VT2](/poking-around-your-chrome-os-device#TOC-Get-the-command-prompt-through-VT-2)
+[VT2](/chromium-os/developer-library/guides/device/developer-mode#get-the-command-prompt-through-vt-2)
 (press \[ Ctrl \] \[ Alt \] \[ =&gt; \]), and log in as user 'chronos' (no
 password required), then run `sudo bash`.
 
@@ -235,7 +235,7 @@ stateful partition. This will do a safe wipe first, so you'll have to wait a bit
 
 At this point we're through fiddling with the partition table, so you may want
 to go back to VT2 and set a password according to these
-[instructions](/poking-around-your-chrome-os-device#TOC-Get-the-command-prompt-through-VT-2).
+[instructions](/chromium-os/developer-library/guides/device/developer-mode#get-the-command-prompt-through-vt-2).
 
 ## Acquire an Ubuntu filesystem
 

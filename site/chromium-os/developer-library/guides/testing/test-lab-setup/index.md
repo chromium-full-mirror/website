@@ -32,10 +32,8 @@ Please follow:
 Autotest is the software that is used to run the tests on devices and also
 collect the results.
 
-Please follow to install and configure the tools:
-
-<https://sites.google.com/a/ch
-romium.org/dev/chromium-os/developer-library/guides/testing/autotest-developer-faq/setup-autotest-server>
+Please follow to [install and configure the
+tools](/chromium-os/developer-library/guides/testing/autotest-developer-faq/setup-autotest-server).
 
 After this is complete you should have an Autotest Frontend (AFE) running on
 your server, please go to <http://localhost> to verify.

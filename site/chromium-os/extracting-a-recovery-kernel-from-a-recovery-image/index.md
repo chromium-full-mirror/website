@@ -35,9 +35,8 @@ from this Recovery Kernel. **NOTE**: every hardware product has a different
 secret recovery key, so you need to obtain an official Recovery Kernel that is
 specific to your product.
 
-...you might have read about the Recovery Kernel in such places as the [Poking
-around your Chrome OS
-Notebook](/chromium-os/poking-around-your-chrome-os-device) page or the
+...you might have read about the Recovery Kernel in such places as the [Developer
+Mode](/chromium-os/developer-library/guides/device/developer-mode) page or the
 [Chromium OS Developer Guide](/chromium-os/developer-guide).
 
 ## Get an officially-signed Recovery Image

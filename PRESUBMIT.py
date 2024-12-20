@@ -329,6 +329,8 @@ def CheckLinks(input_api, output_api):
                 # index.md files exclusively.
                 elif not (input_api.os_path.exists(
                         input_api.os_path.join(local_path, 'index.md'))
+                          or input_api.os_path.exists(
+                              input_api.os_path.join(local_path, 'index.html'))
                           or input_api.os_path.exists(local_path + '.sha1')
                           or input_api.os_path.isfile(local_path)):
                     # TODO(vapier): Make these fatal.

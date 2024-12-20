@@ -218,11 +218,11 @@ emerge it onto your chroot and test it there as well.
 You probably want to run at least the suite:smoke tests for each board, which
 you can do by following the tips at
 <https://www.chromium.org/chromium-os/testing>. In particular,
-you can use [trybot](/chromium-os/build/local-trybot-documentation) to determine
+you can use [trybot](/chromium-os/developer-library/guides/development/local-trybot-documentation) to determine
 what effect your upgrade will have on the greenness of the waterfall.
 
 One common cause of failure is that upstream has introduced new default
-[USE](/chromium-os/how-tos-and-troubleshooting/portage-build-faq) flags. For
+[USE flags](/chromium-os/developer-library/guides/portage/ebuild-faq). For
 example, if the upstream ebuild was set to "-foo" before (which defaults "foo"
 to off) and now is set to "+foo", a new dependency or a new runtime behavior
 might have been introduced by the change. You would need to evaluate the change

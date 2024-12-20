@@ -24,7 +24,7 @@ Guide](/chromium-os/developer-guide).
 You might want to enter developer mode if you're following the instructions in
 the [ChromiumOS Developer Guide](/chromium-os/developer-guide), or if you just
 want to get access to a shell on your device to [poke
-around](/chromium-os/poking-around-your-chrome-os-device).
+around](/chromium-os/developer-library/guides/device/developer-mode).
 
 **Caution: Modifications you make to the system are not supported by Google, may
 cause hardware, software or security issues and may void warranty.**
@@ -66,10 +66,10 @@ from the keyboard. Successive boots will:
 
 At this point, verified boot is still active but because a command line shell is
 enabled, your system is **NOT** secure. Refer to [Poking around your ChromeOS
-Notebook](/chromium-os/poking-around-your-chrome-os-device) to see how to access
-the command line shell. The message displayed at the shell itself should tell
-you how to set your own password to protect shell access and make your system
-secure again.
+Notebook](/chromium-os/developer-library/guides/device/developer-mode) to see
+how to access the command line shell. The message displayed at the shell itself
+should tell you how to set your own password to protect shell access and make
+your system secure again.
 Here's a photo showing the location of the developer switch:
 
 [<img alt="image"

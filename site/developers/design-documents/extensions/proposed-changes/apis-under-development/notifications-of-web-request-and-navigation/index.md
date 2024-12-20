@@ -29,7 +29,7 @@ This document describes the following API:
 An API of detailed Web progress notifications can be used to log traffic data,
 measure browser performance, etc. Please note that this requirement has been
 listed in the [API Wish
-List](/developers/design-documents/extensions/apiwishlist) (the Network item).
+List](/developers/design-documents/extensions/proposed-changes/apiwishlist) (the Network item).
 
 *   Configure proxy for each request.
 *   Modify headers (e.g. change User-Agent:).
@@ -802,8 +802,8 @@ publisher side for sending each notifications, it may hurt browser performance.
 
 However, in some cases we would like to affect the control flow in event
 handlers. (Please note that this has been listed as a requirement on the [API
-Wish List](/developers/design-documents/extensions/apiwishlist), the Navigation
-Interception item.)
+Wish List](/developers/design-documents/extensions/proposed-changes/apiwishlist),
+the Navigation Interception item.)
 
 Consider the following use case: in the callback function of
 chrome.webRequest.onBeforeRequest we may want to cancel the request or modify

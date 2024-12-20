@@ -252,8 +252,6 @@ which is the build script generation tool.
             Understands](/developers/design-documents/form-styles-that-chromium-understands)
 *   [Password
             Generation](/developers/design-documents/password-generation)
-*   [Pepper plugin
-            implementation](/developers/design-documents/pepper-plugin-implementation)
 *   [Plugin Power
             Saver](https://docs.google.com/document/d/1r4xFSsR4gtjBf1gOP4zHGWIFBV7WWZMgCiAHeepoHVw/edit?usp=sharing)
 *   [Preferences](/developers/design-documents/preferences)

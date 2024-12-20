@@ -143,7 +143,8 @@ useful in better understanding the risk.
 Occasionally it's useful to search top sites for a specific behavior (without
 landing a UseCounter and waiting for the data to show up in HTTP Archive). For
 advanced cases like this we can run a custom chromium build on the [telemetry
-cluster](/developers/cluster-telemetry) to crawl the top 10k (or more) sites and
+cluster](https://sites.google.com/corp/google.com/cluster-telemetry/home)
+to crawl the top 10k (or more) sites and
 record whatever we like (with a temporary UseCounter). See [Using Cluster
 Telemetry for UseCounter
 analysis](https://docs.google.com/document/d/1FSzJm2L2ow6pZTM_CuyHNJecXuX7Mx3XmBzL4SFHyLA/edit#)

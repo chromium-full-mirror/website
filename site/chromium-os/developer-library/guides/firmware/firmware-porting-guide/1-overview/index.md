@@ -2,7 +2,7 @@
 breadcrumbs:
 - - /chromium-os
   - Chromium OS
-- - /chromium-os/firmware-porting-guide
+- - /chromium-os/developer-library/guides/firmware/firmware-porting-guide
   - Firmware Overview and Porting Guide
 page_name: 1-overview
 title: 1. Overview of the Porting Process
@@ -115,7 +115,7 @@ test steps later without a deep knowledge of your environment, board, commit and
 mind.
 
 You may find the
-[crosfw](/chromium-os/firmware-porting-guide/1-overview/the-crosfw-script)
+[crosfw](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/1-overview/the-crosfw-script)
 script useful for building and testing U-Boot.
 
 **Mandatory testing:**
@@ -330,8 +330,8 @@ in a ‘cros/’ subdirectory. Here is the current split:
 ### Other sections in the U-Boot Porting Guide
 
 1. [Overview of the Porting
-Process](/chromium-os/firmware-porting-guide/1-overview) (this page)
+Process](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/1-overview) (this page)
 
-2. [Concepts](/chromium-os/firmware-porting-guide/2-concepts)
+2. [Concepts](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/2-concepts)
 
-3. [U-Boot Drivers](/chromium-os/firmware-porting-guide/u-boot-drivers)
+3. [U-Boot Drivers](/chromium-os/developer-library/guides/firmware/firmware-porting-guide/u-boot-drivers)

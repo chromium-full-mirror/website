@@ -22,7 +22,7 @@ custom kernel.
 
 ## Firmware as kernel
 
-The normal-mode [boot process](/chromium-os/chromiumos-design-docs/disk-format)
+The normal-mode [boot process](/chromium-os/developer-library/reference/device/disk-format)
 is roughly this: RO firmware verifies and launches the RW firmware, RW firmware
 verifies and launches the kernel, the kernel verifies the rootfs as it's read
 from the disk.
