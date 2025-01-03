@@ -8,7 +8,7 @@ for more details about the presubmit API built into depot_tools.
 """
 
 import re
-from typing import Iterator, NamedTuple
+from typing import Iterator, List, NamedTuple
 import urllib.parse
 
 PRESUBMIT_VERSION = '2.0.0'
@@ -132,6 +132,67 @@ _MD_HTTP_HOSTS = {
 }
 
 
+def _extract_markdown_links(results, output_api,
+                            affected_file) -> List[_MdLink]:
+    """Walk `affected_file` and extract links.
+
+    We have a variety of styles:
+      [text](link)
+      [anchor]: link
+      [anchor]: link "extra text"
+      [^footnote]
+      [^footnote]: content
+      <link>
+      link
+    """
+    ret = []
+    file = affected_file.LocalPath()
+    line_gen = enumerate(affected_file.NewContents(), start=1)
+    for i, line in line_gen:
+        # Ignore ``` blocks because the contents are not markdown, and they
+        # might use code that matches the link syntax (e.g. regexes).
+        sline = line.strip()
+        # Handle things like:
+        # ```
+        # ```language
+        # ```this is triple ` quotes inline```
+        if sline.startswith('```') and (len(sline) == 3
+                                        or not sline.endswith('```')):
+            while True:
+                try:
+                    _, line = next(line_gen)
+                except StopIteration:
+                    results.append(
+                        output_api.PresubmitError(
+                            f'{file}:{i}: Missing closing ``` blocks'))
+                    line = '```'
+                if line.lstrip().startswith('```'):
+                    break
+
+        # [text](link)
+        # We don't match the opening [ because it can span multiple lines.
+        # The ](...) part has to be on one line.
+        ret += [
+            _MdLink(file, x, True, i)
+            for x in re.findall(r'\]\(([^) ]+)\)', line)
+        ]
+
+        # [anchor]: link
+        m = re.match(r'^\[([^]]+)\]:\s*(\S+)', line)
+        if m:
+            # [^footnote]: link
+            if not m.group(1).startswith('^'):
+                ret += [_MdLink(file, m.group(2), True, i)]
+
+        # <link>
+        ret += [
+            _MdLink(file, x, False, i)
+            for x in re.findall(r'<(https?://[^>]+)>', line)
+        ]
+
+    return ret
+
+
 def CheckLinks(input_api, output_api):
     """Check links used in markdown."""
     # Build up the files to analyze.
@@ -140,57 +201,10 @@ def CheckLinks(input_api, output_api):
 
     results = []
 
-    # Extract the links from the files.  We have a variety of styles:
-    #   [text](link)
-    #   [anchor]: link
-    #   [anchor]: link "extra text"
-    #   [^footnote]
-    #   [^footnote]: content
-    #   <link>
-    #   link
+    # Extract the links from the files.
     links = []
     for affected_file in affected_files:
-        file = affected_file.LocalPath()
-        line_gen = enumerate(affected_file.NewContents(), start=1)
-        for i, line in line_gen:
-            # Ignore ``` blocks because the contents are not markdown, and they
-            # might use code that matches the link syntax (e.g. regexes).
-            sline = line.strip()
-            # Handle things like:
-            # ```
-            # ```language
-            # ```this is triple ` quotes inline```
-            if sline.startswith('```') and (len(sline) == 3
-                                            or not sline.endswith('```')):
-                while True:
-                    try:
-                        _, line = next(line_gen)
-                    except StopIteration:
-                        results.append(
-                            output_api.PresubmitError(
-                                f'{file}:{i}: Missing closing ``` blocks'))
-                        line = '```'
-                    if line.lstrip().startswith('```'):
-                        break
-
-            # [text](link)
-            # We don't match the opening [ because it can span multiple lines.
-            # The ](...) part has to be on one line.
-            links += [
-                _MdLink(file, x, True, i)
-                for x in re.findall(r'\]\(([^) ]+)\)', line)
-            ]
-            # [anchor]: link
-            m = re.match(r'^\[([^]]+)\]:\s*(\S+)', line)
-            if m:
-                # [^footnote]: link
-                if not m.group(1).startswith('^'):
-                    links.append(_MdLink(file, m.group(2), True, i))
-            # <link>
-            links += [
-                _MdLink(file, x, False, i)
-                for x in re.findall(r'<(https?://[^>]+)>', line)
-            ]
+        links += _extract_markdown_links(results, output_api, affected_file)
 
     # Check links.
 
