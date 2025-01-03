@@ -8,7 +8,7 @@ for more details about the presubmit API built into depot_tools.
 """
 
 import re
-from typing import Iterator, List, NamedTuple
+from typing import Iterator, List, NamedTuple, Tuple
 import urllib.parse
 
 PRESUBMIT_VERSION = '2.0.0'
@@ -82,6 +82,9 @@ class _MdLink(NamedTuple):
     # The file has just been created.
     new: bool
 
+    # The visible link text.
+    text: str
+
     # The actual link.
     uri: str
 
@@ -135,9 +138,12 @@ _MD_HTTP_HOSTS = {
 }
 
 
-def _extract_markdown_links(results, output_api,
+def _extract_markdown_links(results, input_api, output_api,
                             affected_file) -> List[_MdLink]:
     """Walk `affected_file` and extract links.
+
+    This parser is not complete relative to the spec our website supports, but
+    it covers pretty much all the actual usage we have.
 
     We have a variety of styles:
       [text](link)
@@ -148,13 +154,18 @@ def _extract_markdown_links(results, output_api,
       <link>
       link
     """
-    ret = []
+    # Extract all the content that links will be rendered in.  Basically,
+    # filter out all the code blocks where content is not rendered.
     file = affected_file.LocalPath()
     new_file = affected_file.Action() == 'A'
     line_gen = enumerate(affected_file.NewContents(), start=1)
+    filtered_lines = []
     for i, line in line_gen:
         # Ignore ``` blocks because the contents are not markdown, and they
         # might use code that matches the link syntax (e.g. regexes).
+        # TODO: <pre><code> blocks.
+        # TODO: `...` inline text -- but outside of [text].
+        # TODO: 4 space automatic indented blocks.
         sline = line.strip()
         # Handle things like:
         # ```
@@ -163,6 +174,8 @@ def _extract_markdown_links(results, output_api,
         if sline.startswith('```') and (len(sline) == 3
                                         or not sline.endswith('```')):
             while True:
+                # Add stub lines to keep line numbers accurate.
+                filtered_lines.append('')
                 try:
                     _, line = next(line_gen)
                 except StopIteration:
@@ -173,26 +186,38 @@ def _extract_markdown_links(results, output_api,
                 if line.lstrip().startswith('```'):
                     break
 
-        # [text](link)
-        # We don't match the opening [ because it can span multiple lines.
-        # The ](...) part has to be on one line.
-        ret += [
-            _MdLink(file, new_file, x, True, i)
-            for x in re.findall(r'\]\(([^) ]+)\)', line)
-        ]
+        filtered_lines.append(line)
 
-        # [anchor]: link
-        m = re.match(r'^\[([^]]+)\]:\s*(\S+)', line)
-        if m:
-            # [^footnote]: link
-            if not m.group(1).startswith('^'):
-                ret += [_MdLink(file, new_file, m.group(2), True, i)]
+    content = '\n'.join(filtered_lines)
 
-        # <link>
-        ret += [
-            _MdLink(file, new_file, x, False, i)
-            for x in re.findall(r'<(https?://[^>]+)>', line)
-        ]
+    def _match_to_details(m) -> Tuple[str, str, int]:
+        """Find line number for match object."""
+        text = ' '.join(m.group(1).strip().split())
+        link = m.group(2)
+        # This is not efficient, but seems to be simple & fast enough to not
+        # warrant an intelligent algorithm.
+        linenum = content[0:m.start()].count('\n') + 1
+        return (text, link, linenum)
+
+    ret = []
+
+    # [text](link)
+    # While [text] may span multiple lines, (link) may not.
+    for m in re.finditer(r'\[([^]]+)\]\(([^)\s]+)\)', content, flags=re.M):
+        text, link, linenum = _match_to_details(m)
+        ret += [_MdLink(file, new_file, text, link, True, linenum)]
+
+    # [anchor]: link
+    for m in re.finditer(r'^\[([^]]+)\]:(?: *)(\S+)', content, flags=re.M):
+        text, link, linenum = _match_to_details(m)
+        # [^footnote]: link
+        if not text.startswith('^'):
+            ret += [_MdLink(file, new_file, text, link, True, linenum)]
+
+    # <link>
+    for m in re.finditer(r'<((https?://[^>]+))>', content, flags=re.M):
+        text, link, linenum = _match_to_details(m)
+        ret += [_MdLink(file, new_file, text, link, False, linenum)]
 
     return ret
 
@@ -208,7 +233,8 @@ def CheckLinks(input_api, output_api):
     # Extract the links from the files.
     links = []
     for affected_file in affected_files:
-        links += _extract_markdown_links(results, output_api, affected_file)
+        links += _extract_markdown_links(results, input_api, output_api,
+                                         affected_file)
 
     # Check links.
 
