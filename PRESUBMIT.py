@@ -8,7 +8,7 @@ for more details about the presubmit API built into depot_tools.
 """
 
 import re
-from typing import NamedTuple
+from typing import Iterator, NamedTuple
 import urllib.parse
 
 PRESUBMIT_VERSION = '2.0.0'
@@ -17,42 +17,23 @@ PRESUBMIT_VERSION = '2.0.0'
 # use Python3 instead of Python2 when running the code in this file.
 USE_PYTHON3 = True
 
-# This list must be kept in sync with the lists in //.eleventy.js and
-# //scripts/upload_lobs.py.
-# TODO(crbug.com/1457683): Figure out how to share these lists to eliminate
-# the duplication and need to keep them in sync.
 
-LOB_EXTENSIONS = [
-    # keep-sorted start
-    '.PNG',
-    '.ai',
-    '.bin',
-    '.bmp',
-    '.brd',
-    '.bz2',
-    '.config',
-    '.crx',
-    '.dia',
-    '.gif',
-    '.graffle',
-    '.ico',
-    '.jpeg',
-    '.jpg',
-    '.mp4',
-    '.msi',
-    '.pdf',
-    '.png',
-    '.svg',
-    '.swf',
-    '.tar.gz',
-    '.tiff',
-    '.webp',
-    '.xcf',
-    '.xlsx',
-    '.zip',
-    '_trace',
-    # keep-sorted end
-]
+def get_lob_extensions(input_api) -> Iterator[str]:
+    """Get the list of known LOB extensions."""
+    path = input_api.os_path.join(input_api.PresubmitLocalPath(), 'site',
+                                  '.gitignore')
+    ilines = input_api.ReadFile(path).splitlines()
+    for line in ilines:
+        if line != '# start_lob_ignore':
+            continue
+
+        for line in ilines:
+            if line == '# end_lob_ignore':
+                return
+
+            if line and not line.startswith('#'):
+                assert line.startswith('*')
+                yield line[1:]
 
 
 def CheckPatchFormatted(input_api, output_api):
@@ -66,10 +47,11 @@ def CheckChangeHasDescription(input_api, output_api):
 
 def CheckForLobs(input_api, output_api):
     output_status = []
+    lob_extensions = list(get_lob_extensions(input_api))
     for file in input_api.change.AffectedFiles():
         # The tar.gz for example prevents using a hashmap to look up the
         # extension.
-        for ext in LOB_EXTENSIONS:
+        for ext in lob_extensions:
             if str(file).endswith(ext) and file.Action() != 'D':
                 error_msg = (
                     'The file \'{file_name}\' is a binary that has not been '
@@ -83,28 +65,6 @@ def CheckForLobs(input_api, output_api):
                 output_status.append(error)
                 break
 
-    return output_status
-
-
-def CheckLobIgnores(input_api, output_api):
-    output_status = []
-    with open("site/.gitignore", 'r') as ignore_file:
-        ignored_lobs = list(line.rstrip() for line in ignore_file.readlines())
-        ignored_lobs = set(
-            ignored_lobs[ignored_lobs.index('#start_lob_ignore') +
-                         1:ignored_lobs.index('#end_lob_ignore')])
-
-        for ignored_lob in ignored_lobs:
-            lob_sha_file = input_api.os_path.join('site', ignored_lob + '.sha1')
-            if not lob_sha_file.startswith(
-                    '#') and not input_api.os_path.exists(lob_sha_file):
-                error_msg = (
-                    'The sha1 file \'{removed_file}\' no longer exists, '
-                    'please remove "{ignored_file}" from site/.gitignore'.
-                    format(removed_file=lob_sha_file, ignored_file=ignored_lob))
-
-                error = output_api.PresubmitError(error_msg)
-                output_status.append(error)
     return output_status
 
 

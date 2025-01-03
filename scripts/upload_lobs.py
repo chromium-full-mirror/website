@@ -16,6 +16,7 @@
 import sys
 import optparse
 import os
+from typing import Iterator
 
 for path in os.environ['PATH'].split(os.path.pathsep):
     if path.endswith('depot_tools') and path not in sys.path:
@@ -24,43 +25,6 @@ for path in os.environ['PATH'].split(os.path.pathsep):
 import upload_to_google_storage
 
 import common
-
-# This list must be kept in sync with the lists in //.eleventy.js and
-# //PRESUBMIT.py.
-# TODO(crbug.com/1457683): Figure out how to share these lists to eliminate the
-# duplication and need to keep them in sync.
-
-LOB_EXTENSIONS = [
-    # keep-sorted start
-    '.PNG',
-    '.ai',
-    '.bin',
-    '.bmp',
-    '.brd',
-    '.bz2',
-    '.config',
-    '.crx',
-    '.dia',
-    '.gif',
-    '.graffle',
-    '.ico',
-    '.jpeg',
-    '.jpg',
-    '.mp4',
-    '.msi',
-    '.pdf',
-    '.png',
-    '.svg',
-    '.swf',
-    '.tar.gz',
-    '.tiff',
-    '.webp',
-    '.xcf',
-    '.xlsx',
-    '.zip',
-    '_trace',
-    # keep-sorted end
-]
 
 
 def main():
@@ -131,8 +95,6 @@ def main():
 
     base_url = 'gs://%s' % options.bucket
 
-    add_to_ignore(input_filenames)
-
     upload_status = upload_to_google_storage.upload_to_google_storage(
         input_filenames, base_url, gsutil, options.force, options.use_md5,
         options.num_threads, options.skip_hashing, options.gzip)
@@ -152,23 +114,21 @@ def remove_lobs(lob_files):
             os.remove(lob_file)
 
 
-def add_to_ignore(lob_files):
-    with open(common.SITE_DIR + "/.gitignore", 'r') as ignore_file:
-        file_lines = list(line.rstrip() for line in ignore_file.readlines())
+def get_lob_extensions() -> Iterator[str]:
+    """Get the list of known LOB extensions."""
+    with open(common.SITE_DIR + '/.gitignore', encoding='utf-8') as fp:
+        for line in fp:
+            if line.rstrip() != '# start_lob_ignore':
+                continue
 
-    end_tag_index = file_lines.index('#end_lob_ignore')
-    lob_ignores = set(file_lines[file_lines.index('#start_lob_ignore') +
-                                 1:end_tag_index])
+            for line in fp:
+                line = line.rstrip()
+                if line == '# end_lob_ignore':
+                    return
 
-    for lob_file in lob_files:
-        rel_path = os.path.relpath(lob_file, common.SITE_DIR)
-
-        if os.path.exists(lob_file) and not rel_path in lob_ignores:
-            file_lines.insert(end_tag_index, rel_path)
-            end_tag_index += 1
-
-    with open(common.SITE_DIR + "/.gitignore", 'w') as ignore_file:
-        ignore_file.writelines(line + '\n' for line in file_lines)
+                if line and not line.startswith('#'):
+                    assert line.startswith('*')
+                    yield line[1:]
 
 
 def get_lobs_from_dir(directory):
@@ -177,7 +137,7 @@ def get_lobs_from_dir(directory):
         for filename in filenames:
             absolute_filename = os.path.join(dirpath, filename)
             if os.path.isfile(absolute_filename):
-                for ext in LOB_EXTENSIONS:
+                for ext in get_lob_extensions():
                     if filename.endswith(ext):
                         lobs.append(absolute_filename)
                         break
