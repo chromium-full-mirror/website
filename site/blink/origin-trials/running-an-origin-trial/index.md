@@ -121,7 +121,7 @@ both web developers and users. Your feature must satisfy the following:
                 with a flag, then you should implement one for the origin trial.
 *   Have UMA metrics to track feature usage
     *   You should record usage with
-                [UseCounter](https://cs.chromium.org/chromium/src/third_party/blink/renderer/core/frame/use_counter.h),
+                [UseCounter](https://cs.chromium.org/chromium/src/third_party/blink/renderer/platform/instrumentation/use_counter.h),
                 as that can be automatically monitored by the origin trials
                 infrastructure.
     *   The feature must have a corresponding entry in the enum
