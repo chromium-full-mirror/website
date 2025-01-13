@@ -137,6 +137,21 @@ such as the auto update until date, first release, and more.
     <th>USB Gadget</th>
     <th>Closed Case Debugging</th>
   </tr>
+  <tr>
+    <td></td>
+    <td>FCCL</td>
+    <td><a href="https://www.fujitsu.com/jp/group/fccl/about/resources/news/press-releases/2024/1029.html">FMV Chromebook 11K</a></td>
+    <td>kyogre</td>
+    <td>corsola</td>
+    <td>corsola</td>
+    <td>arm</td>
+    <td>5.15</td>
+    <td>arm</td>
+    <td>MT8186</td>
+    <td>Convertible</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
    <tr>
     <td></td>
     <td>HP</td>
