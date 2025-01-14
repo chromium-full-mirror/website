@@ -24,7 +24,10 @@ files](http://manpages.ubuntu.com/manpages/trusty/man5/init.5.html),
 and Upstart events, such as
 [starting](http://manpages.ubuntu.com/manpages/trusty/man7/starting.7.html)
 and
-[started](http://manpages.ubuntu.com/manpages/trusty/man7/started.7.html).
+[started](http://manpages.ubuntu.com/manpages/trusty/man7/started.7.html).  An
+in-depth presentation of Upstart concepts is available in the [Upstart
+Cookbook](/chromium-os/developer-library/reference/upstart-cookbook).
+
 Readers should also have some understanding of Linux file system management
 concepts, like
 [mounting](https://www.google.com/url?q=http%3A%2F%2Flinux.die.net%2Fman%2F8%2Fmount&sa=D&sntz=1&usg=AFQjCNHWgzSgniJkKUaQX0F6aoV6tub_Zw)
@@ -33,9 +36,10 @@ and
 file systems.
 
 If you want to go deeper and read the source code, you’ll need some
-understanding of shell programming. If you want to understand the initialization
+understanding of shell programming and ChromiumOS security mechanisms
+(minijail, SELinux). If you want to understand the initialization
 of an individual package, you’ll need to be familiar with that package’s basic
-operations. Neither of these topics is covered in this document.
+operations. None of these topics is covered in this document.
 
 ## Summary of Boot Flow
 
