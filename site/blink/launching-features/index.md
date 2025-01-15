@@ -124,7 +124,9 @@ code without API changes, but you may see side effects.” This may be due to
 large-scale code refactoring or rewriting, where the goal is to cause no
 behavioral changes (but due to scope of change, side effects are likely), or
 this may encompass changes to current code that fix a bug or implement new
-changes to the spec without changes to the API shape itself.
+changes to the spec without changes to the API shape itself. This may also be
+used for changes which extend an already-exposed API to additional platforms
+(see [conditions](#behavior-change-compat)).
 
 ### Changing feature type
 
@@ -773,8 +775,14 @@ or "Existing feature implementation" feature types
 for any change with some potential to break sites. Use "Web developer facing code change"
 only for changes deemed very unlikely to break sites, and that change APIs in at most a trivial way.
 
-Another reason for a PSA could be a large-scale refactoring that
-doesn't *intend* to result in behavior changes, but may do so in practice.
+Changes which extend an already exposed API to additional platforms without
+introducing new platform-specific risks may also rely just on a PSA, along with
+updating the chromestatus entry to reflect the new platform support. For example,
+when simply extending an API already exposed on all desktop platforms to also be
+exposed on Android using the same implementation, a PSA is generally sufficient.
+But if the Android implementation has meaningful differences in behavior which
+could result in web compatibility issues, then the full "New feature incubation"
+process should be followed.
 
 The purpose of a PSA is to notify the broader Chromium community about
 the change, and enables folks to test against it and potentially
