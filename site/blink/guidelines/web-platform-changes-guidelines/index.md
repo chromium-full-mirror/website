@@ -262,10 +262,11 @@ tracker. After launch, metrics such as [use
 counters](https://www.chromestatus.com/metrics/feature/popularity) can show how
 much uptake a feature is getting in the wild.
 
-Collating this information together for easy consumption is an important final
-step in the process before shipping. The goal is to present a body of evidence
-that makes it easy for other engines to evaluate whether they would like to
-bring the proposal to their implementation, or not.
+[Collating this information together for easy
+consumption](/blink/launching-features/wide-review/web-developers/) is an
+important final step in the process before shipping. The goal is to present a
+body of evidence that makes it easy for other engines to evaluate whether they
+would like to bring the proposal to their implementation, or not.
 
 ### Browser engine reviews
 

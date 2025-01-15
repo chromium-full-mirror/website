@@ -247,9 +247,10 @@ the “Dev Trials” stage in ChromeStatus (note also exceptions enumerated
 [here](/blink/launching-features/wide-review/#exceptions)). This will generate
 a “Ready for Developer Testing” email that you should send to
 [blink-dev](mailto:blink-dev@chromium.org) to notify the community they can
-try out the feature. At this point, you should consider asking other browser
-vendors and the web developer community for
-[signals on their opinion of the API](/blink/launching-features/wide-review).
+try out the feature. At this point, you should consider asking [other browser
+vendors](/blink/launching-features/wide-review/) and [the web developer
+community](/blink/launching-features/wide-review/web-developers/) for signals on
+their opinion of the API.
 
 This is the main iterating stage of feature development and helps you assess
 product-market-fit early on before you corner yourself (does your API address a
@@ -287,10 +288,11 @@ running an experiment you're not intending to ship as is), you can ask for an
 exception from the API owners.
 
 If you haven't already received [signals on their opinion of the
-API](/blink/launching-features/wide-review)
-from other browser vendors and the web developer community, now is the time to
-pursue getting those signals. You should ask at least a month ahead of sending
-an Intent to Ship, to give reviewers sufficient time for meaningful feedback.
+API](/blink/launching-features/wide-review/) from other browser vendors and the
+[web developer community](/blink/launching-features/wide-review/web-developers/),
+now is the time to pursue getting those signals. You should ask at least a month
+ahead of sending an Intent to Ship, to give reviewers sufficient time for
+meaningful feedback.
 
 You should also work with the documentation team to ensure your features will be
 documented when shipped, and estimate when (in what milestone) you would like to

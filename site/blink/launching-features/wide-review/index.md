@@ -8,13 +8,14 @@ page_name: wide-review
 title: Getting Wide Review
 ---
 
-To help the [API owners](/blink/guidelines/api-owners) follow the [guidelines
-for Web Platform changes](/blink/guidelines/web-platform-changes-guidelines),
+To help the [API owners](/blink/guidelines/api-owners) follow the
+[guidelines for Web Platform changes](/blink/guidelines/web-platform-changes-guidelines),
 every intent to ship has to show what external stakeholders (in particular the
 [W3C TAG](#tag), the [non-Chromium browser engines](#standards-positions), and
-[web developers](https://goo.gle/developer-signals)) think about the new
-feature. These signals are only a few inputs that the process takes into
-consideration. None of them are either a veto nor an implicit approval to ship.
+[web developers](/blink/launching-features/wide-review/web-developers)) think
+about the new feature. These signals are only a few inputs that the process
+takes into consideration. None of them are either a veto nor an implicit
+approval to ship.
 
 This page describes how to collect that evidence. See the [launch
 process](/blink/launching-features) when to request reviews.
