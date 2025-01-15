@@ -12,7 +12,7 @@ title: Logging
 
 You can view verbose logs (`VLOG`s and `LOG(VERBOSE)`) by passing runtime
 arguments to enable logging. You must first enable passing runtime arguments;
-see the [Getting Started](/chromium-os/developer-library/getting-started).
+see the [Setup Chromebook Optional Steps](/chromium-os/developer-library/getting-started/setup-chromebook/#optional-enable-runtime-argument-passing).
 
 Once you’ve done that, specific flags need to be added to the
 `/etc/chrome_dev.conf` file.

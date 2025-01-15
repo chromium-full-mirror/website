@@ -516,7 +516,10 @@ $ reboot ; exit
 ```
 
 This removes rootfs verification and makes the drive writeable.
-master
+
+
+### Optional: Enable runtime argument passing
+
 **You only need to follow this section if you wish to enable verbose logging or
 pass a runtime flag to Chrome. The drive must be writeable to follow this
 section.**
@@ -548,7 +551,7 @@ $ chromeos-firmwareupdate --mode=autoupdate
 $ reboot
 ```
 
-#### Optional: Configure a SSH config file
+### Optional: Configure a SSH config file
 
 To make logging into your Chromebook over `ssh` easier, you can specify the
 connection details in `~/.ssh/config` (create the directory and file if it
@@ -563,7 +566,7 @@ Host eve
 
 Then you can use `$ ssh eve` instead of `$ ssh -p 2233 root@192.168.0.1`.
 
-#### Optional: Setup SSH key authentication
+### Optional: Setup SSH key authentication
 
 All ChromeOS test images have the same SSH public key set up for authentication,
 so if you download the
