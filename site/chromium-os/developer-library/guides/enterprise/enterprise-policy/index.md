@@ -14,7 +14,8 @@ Here, we extract a few key points from the more general
 ## Overview
 
 Features can optionally be controlled by enterprise administrators. This
-requires a few additions to the code base. For example, consider Nearby Share:
+requires a few additions to the code base. For example, consider Quick Share
+(formerly known and referenced here as Nearby Share):
 
 1.  Add an entry to policy_template.json, for example,
     [`NearbyShareAllowed`](https://source.chromium.org/chromium/chromium/src/+/main:components/policy/resources/policy_templates.json;l=17460-17480;drc=02e368ac68c1761743de421113af2eea2b0fdce5).

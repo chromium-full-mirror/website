@@ -486,7 +486,7 @@ to remove this filtering on your own builds.
 You can view logs for the cross-device features (Instant Tethering, Smart Lock,
 or Android Messages integration) at chrome://proximity-auth.
 
-You can view logs for Nearby Share and other features that use the Nearby
+You can view logs for Quick Share and other features that use the Nearby
 Connections library by visiting chrome://nearby-internals. Reach out to the
 Cross-device team for more information.
 
@@ -585,6 +585,6 @@ Your hash will be different, and you can find the hash by going to
 $ cp /tmp/debug-logs_20230120-094809.tgz /home/user/278487735245a0c7255572b1704abfeb4b446408/MyFiles/Downloads/debug-logs.tgz
 ```
 
-Step 4: From your files app, nearby share the tarball to your corp computer to
+Step 4: From your files app, Quick Share the tarball to your corp computer to
 analyze. See [Bluetooth 101](http://go/chromeos-software-bt-101) for insight on
 analyzing Bluetooth.
