@@ -79,6 +79,9 @@ class _MdLink(NamedTuple):
     # The file link is found in.
     file: str
 
+    # The file has just been created.
+    new: bool
+
     # The actual link.
     uri: str
 
@@ -147,6 +150,7 @@ def _extract_markdown_links(results, output_api,
     """
     ret = []
     file = affected_file.LocalPath()
+    new_file = affected_file.Action() == 'A'
     line_gen = enumerate(affected_file.NewContents(), start=1)
     for i, line in line_gen:
         # Ignore ``` blocks because the contents are not markdown, and they
@@ -173,7 +177,7 @@ def _extract_markdown_links(results, output_api,
         # We don't match the opening [ because it can span multiple lines.
         # The ](...) part has to be on one line.
         ret += [
-            _MdLink(file, x, True, i)
+            _MdLink(file, new_file, x, True, i)
             for x in re.findall(r'\]\(([^) ]+)\)', line)
         ]
 
@@ -182,11 +186,11 @@ def _extract_markdown_links(results, output_api,
         if m:
             # [^footnote]: link
             if not m.group(1).startswith('^'):
-                ret += [_MdLink(file, m.group(2), True, i)]
+                ret += [_MdLink(file, new_file, m.group(2), True, i)]
 
         # <link>
         ret += [
-            _MdLink(file, x, False, i)
+            _MdLink(file, new_file, x, False, i)
             for x in re.findall(r'<(https?://[^>]+)>', line)
         ]
 
@@ -276,7 +280,7 @@ def CheckLinks(input_api, output_api):
                     input_api.os_path.dirname(link.file),
                     urllib.parse.unquote(o.path.lstrip('/')))
 
-                if o.path == '/system/errors/NodeNotFound':
+                if o.path == '/system/errors/NodeNotFound' and not link.new:
                     results.append(
                         output_api.PresubmitPromptWarning(
                             f'{link.file}:{link.line_num}: '
@@ -297,7 +301,7 @@ def CheckLinks(input_api, output_api):
                           or input_api.os_path.exists(local_path + '.sha1')
                           or input_api.os_path.isfile(local_path)):
                     # TODO(vapier): Make these fatal.
-                    if '.' not in local_path:
+                    if '.' not in local_path and not link.new:
                         results.append(
                             output_api.PresubmitPromptWarning(
                                 f'{link.file}:{link.line_num}: '
