@@ -129,14 +129,6 @@ luci.recipe(
     use_python3 = True,
 )
 
-luci.recipe(
-    name = "presubmit",
-    cipd_package = RECIPE_CIPD_PACKAGE,
-    cipd_version = "refs/heads/main",
-    use_bbagent = True,
-    use_python3 = True,
-)
-
 luci.builder(
     name = "chromium-website-ci-builder",
     bucket = "ci",
@@ -191,14 +183,6 @@ luci.cq_group(
                 cq.MODE_FULL_RUN,
             ],
         ),
-        luci.cq_tryjob_verifier(
-            builder = "chromium-website-presubmit",
-            disable_reuse = True,
-            mode_allowlist = [
-                cq.MODE_DRY_RUN,
-                cq.MODE_FULL_RUN,
-            ],
-        ),
     ],
 )
 
@@ -221,22 +205,6 @@ luci.builder(
     executable = RECIPE_NAME,
     service_account = "chromium-website-try-builder@chops-service-accounts.iam.gserviceaccount.com",
     execution_timeout = 1 * time.hour,
-    dimensions = {"cpu": "x86-64", "os": _LINUX_OS, "pool": "luci.flex.try"},
-    build_numbers = True,
-)
-
-luci.builder(
-    name = "chromium-website-presubmit",
-    bucket = "try",
-    executable = "presubmit",
-    service_account = "chromium-website-try-builder@chops-service-accounts.iam.gserviceaccount.com",
-    properties = {
-        "repo_name": "website",
-        "$depot_tools/presubmit": {
-            "runhooks": True,
-            "timeout_s": 600,
-        },
-    },
     dimensions = {"cpu": "x86-64", "os": _LINUX_OS, "pool": "luci.flex.try"},
     build_numbers = True,
 )
