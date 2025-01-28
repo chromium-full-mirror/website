@@ -84,6 +84,12 @@ luci.project(
         acl.entry([acl.SCHEDULER_OWNER], groups = ["project-chromium-website-committers"]),
         acl.entry([acl.LOGDOG_WRITER], groups = ["luci-logdog-chromium-website-writers"]),
     ],
+    bindings = [
+        luci.binding(
+            roles = "role/configs.validator",
+            users = ["chromium-website-try-builder@chops-service-accounts.iam.gserviceaccount.com"],
+        ),
+    ],
 )
 
 luci.logdog(
@@ -195,6 +201,7 @@ luci.cq_group(
             builder = "chromium-website-presubmit",
             disable_reuse = True,
             mode_allowlist = [
+                cq.MODE_NEW_PATCHSET_RUN,
                 cq.MODE_DRY_RUN,
                 cq.MODE_FULL_RUN,
             ],
