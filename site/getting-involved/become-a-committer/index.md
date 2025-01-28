@@ -173,15 +173,21 @@ primary email addresses to be public. Be aware, however, that if you're being
 paid to contribute to Chromium your employer may wish you to use a specific
 email address to reflect that.
 
-You can get a @chromium.org email address by getting an existing contributor to
-ask for one for you; normally it's a good idea to do this as part of being
-nominated to be a committer. Include in your request what account name you'd
-like and what secondary email we can use to associate it with (and what company
-you are affiliated with, if you wish to make that clear; we track this
-affiliating internally but it isn't publicly visible). People tend to match
-usernames (for example, someone who usually uses email@example.com would ask for
-email@chromium.org) to minimize confusion, but you are not required to do so and
-some people do not.
+You must be an active contributor to Chromium or ChromiumOS in order to get a
+@chromium.org email address (i.e., be one of the other things listed on this
+page: either be a committer, or have tryjob or bug-editing access, or the
+ChromiumOS equivalents). You can get one by asking another existing
+contributor to ask for one for you; normally it's a good idea to do this as
+part of being nominated to be a committer. Include in your request what account
+name you'd like and what secondary email we can use to associate it with (and
+what company you are affiliated with, if you wish to make that clear; we track
+this affiliating internally but it isn't publicly visible). People tend to
+match usernames (for example, someone who usually uses email@example.com would
+ask for email@chromium.org) to minimize confusion, but you are not required to
+do so and some people do not.
+
+\[Note that we reserve the right to give people chromium.org addresses for other
+reasons as well.\]
 
 ### Try job access
 
