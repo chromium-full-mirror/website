@@ -14,9 +14,6 @@ title: Bug Life Cycle and Reporting Guidelines
 
 *   Report bugs at <https://issues.chromium.org/new>
 *   Specifically:
-    *   [Bug Reporting Guidelines for the Mac & Linux
-                builds](/for-testers/bug-reporting-guidlines-for-the-mac-linux-builds)
-                (with links to known issues pages)
     *   [Instructions for reporting
                 crashes](/for-testers/bug-reporting-guidelines/reporting-crash-bug).
     *  View existing bugs at <https://issues.chromium.org/issues?q=status:open>
