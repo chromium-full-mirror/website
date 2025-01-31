@@ -147,7 +147,7 @@ can be type-mapped to a `.mojom` enum using an `EnumTrait<>`.
           }
 
           // Failure to convert should never occur.
-          NOTREACHED_NORETURN();
+          NOTREACHED();
         }
 
     // static
