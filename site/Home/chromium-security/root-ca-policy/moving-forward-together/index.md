@@ -163,7 +163,7 @@ The Chrome Root Program participated in drafting CA/Browser Forum [Ballot SC-075
 
 **Theme:** "Encouraging modern infrastructures and agility"
 
-In Chrome Root Program Policy 1.5, we [landed](/Home/chromium-security/root-ca-policy/#root-ca-term-limit) changes that set a maximum "term-limit" (i.e., period of inclusion) for root CA certificates included in the Chrome Root Store to 15 years.
+In Chrome Root Program Policy 1.5, we [landed](/Home/chromium-security/root-ca-policy/policy-archive/version-1-5/#root-ca-term-limit) changes that set a maximum "term-limit" (i.e., period of inclusion) for root CA certificates included in the Chrome Root Store to 15 years.
 
 While we still prefer a more agile approach, and may again explore this in the future, we encourage CA Owners to explore how they can adopt more frequent root rotation.
 
