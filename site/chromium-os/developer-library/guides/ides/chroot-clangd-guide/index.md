@@ -37,7 +37,7 @@ See [the official page][lsp] for more information.
 
 ### Chroot Setup
 
-If you want to use an editor outside the chroot then you must be able to invoke
+If you want to use an editor outside the chroot, then you must be able to invoke
 `cros_sdk` and in following invocations not require a password due to a longer
 sudo password timeout.
 If you followed [CROS Developer Guide][cros-dev-guide] then you should have this
@@ -128,6 +128,10 @@ clients.
 
 ### Connecting to Chroot Clangd
 
+The build that generates `compile_commands.json` runs inside the chroot, and the
+paths in `compile_commands.json` are chroot paths. To understand these paths and
+access the codebase, `clangd` must also run inside the chroot.
+
 #### Launching your editor from *inside* chroot
 
 If you launch your editor *inside* the chroot then you can just point your
@@ -143,37 +147,31 @@ It's going to look something like below:
 ```bash
 #!/bin/bash
 
-# I work in CROS EC
-EC_DIR="/mnt/host/source/src/platform/ec"
+cd ${HOME}/chromiumos
 
-# Don't need color and I want to start the command in the EC directory
-# I do not know why but the server is more stable with --no-ns-pid
-CROS_SDK_OPTS="--nocolor --no-ns-pid --working-dir $EC_DIR"
-
-# An important clangd option here is 'path-mappings', when your editor talks to
-# clangd, the path mappings allow it to understand the path the editor is sending
-# over rpc and translate that editor known path to something the clangd server
-# understands from its context inside the chroot. This option is also useful for
-# remote development, but that's a different albeit similar topic.
-# NOTE: You may not even need this option, but do know it exists.
+# An important clangd option here is 'path-mappings'. When the editor talks to
+# clangd, the path mappings translate the path outside the chroot, seen by the
+# editor, to the corresponding path inside the chroot, seen by clangd.
 # NOTE: I set these options here, but these may be replacable by configuring
 # your editor's LSP client.
-CLANGD_OPTS="--inlay-hints --completion-style=detailed --background-index \
---clang-tidy --path-mappings='/bigssd=/home/$USER' --header-insertion=never"
+CLANGD_OPTS="--completion-style=detailed --background-index \
+--clang-tidy --header-insertion=never \
+--path-mappings=${HOME}/chromiumos=/mnt/host/source"
 
-# Let's run the command!
-# It runs in the foreground.
-cros_sdk $CROS_SDK_OPTS -- clangd $CLANGD_OPTS
-
-# If for whatever reason the editor crashed but clangd didn't stop,
-# this cleans any spawned clangd processes.
-# This helps if your lsp client ends up having to restart clangd too.
-trap 'kill $(jobs -p)' EXIT
+# This will run until killed by the LSP client.
+# Append any arguments passed in by the LSP client.
+cros_sdk -- clangd $CLANGD_OPTS $@
 ```
 
-**NOTE:** When using this script to re/start the server with `cros_sdk --
-clangd` after the sudo password timeout, you must prime sudo to be passwordless
-with a `sudo` command.
+**NOTES:**
+* When using this script to re/start the server with `cros_sdk -- clangd` after
+  the sudo password timeout, you must prime sudo to be passwordless with a
+  `sudo` command.
+* Anecdotally `clangd` may be more stable if `cros_sdk` is invoked with
+  `--no-ns-pid`, e.g. `cros_sdk --no-ns-pid -- clangd ...`.
+* The `cd` destination and the first (outside chroot) path in `--path-mappings`
+  will vary depending on the location of the CrOS SDK checkout.
+* The `--path-mappings` values must be absolute paths.
 
 If you use other language servers in the chroot with an editor outside, a
 similar wrapper script is likely needed.
