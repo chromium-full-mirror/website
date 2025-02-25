@@ -149,37 +149,51 @@ It's going to look something like below:
 
 cd ${HOME}/chromiumos
 
-# An important clangd option here is 'path-mappings'. When the editor talks to
-# clangd, the path mappings translate the path outside the chroot, seen by the
-# editor, to the corresponding path inside the chroot, seen by clangd.
-# NOTE: I set these options here, but these may be replacable by configuring
-# your editor's LSP client.
-CLANGD_OPTS="--completion-style=detailed --background-index \
---clang-tidy --header-insertion=never \
---path-mappings=${HOME}/chromiumos=/mnt/host/source"
-
 # This will run until killed by the LSP client.
-# Append any arguments passed in by the LSP client.
-cros_sdk -- clangd $CLANGD_OPTS $@
+# Pass through any arguments passed in by the LSP client.
+cros_sdk -- clangd $@
 ```
 
 **NOTES:**
 * When using this script to re/start the server with `cros_sdk -- clangd` after
   the sudo password timeout, you must prime sudo to be passwordless with a
   `sudo` command.
+* The `cd` destination  will vary depending on the location of the CrOS SDK
+  checkout.
 * Anecdotally `clangd` may be more stable if `cros_sdk` is invoked with
   `--no-ns-pid`, e.g. `cros_sdk --no-ns-pid -- clangd ...`.
-* The `cd` destination and the first (outside chroot) path in `--path-mappings`
-  will vary depending on the location of the CrOS SDK checkout.
-* The `--path-mappings` values must be absolute paths.
+
 
 If you use other language servers in the chroot with an editor outside, a
 similar wrapper script is likely needed.
 
 Make sure your wrapper script is executable!
 
-Now just point your LSP client at your wrapper script posing as a `clangd`
-executable and it should just work.
+#### Client configuration
+
+The client must know how to invoke `clangd`. Here is an illustrative snippet for
+[YouCompleteMe](https://github.com/ycm-core/YouCompleteMe), a Vim plugin that
+acts as an LSP client:
+```
+" Set to the path of the above wrapper script.
+let g:ycm_clangd_binary_path = "~/bin/cros_ec_clangd.sh"
+let g:ycm_clangd_args = [
+			\'--completion-style=detailed',
+			\'--background-index',
+			\'--clang-tidy',
+			\'--header-insertion=never',
+			\'--path-mappings=<HOME>/chromiumos=/mnt/host/source'
+			\]
+```
+
+If the LSP client is running outside the chroot, the binary path must be the
+path of the above wrapper script,  and `--path-mappings` is required. The left
+side of the `=` is the path to the SDK outside the chroot, as seen by the
+client; the developer must replace it with their actual SDK path. The path on
+the right side is the corresponding path inside the chroot, as seen by `clangd`,
+the build, and `compile_commands.json`. Each path must be absolute.
+
+Other arguments to `clangd` are less critical and may vary according to taste.
 
 ## See also
 
