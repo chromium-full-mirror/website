@@ -4036,7 +4036,7 @@ such as the auto update until date, first release, and more.
     <td></td>
     <td></td>
  </tr>
-<tr>
+ <tr>
     <td>2024-11-02</td>
     <td>Lenovo</td>
     <td><a href="https://pcsupport.lenovo.com/us/en/products/chromebook-laptops/lenovo-chromebooks-series/lenovo-500e-chromebook-gen-4s?linkTrack=Caps%3ABody_SearchProduct&searchType=3&keyWordSearch=Lenovo%20500e%20Chromebook%20Gen%204s">Lenovo 500e Chromebook Gen 4s</a></td>
@@ -4051,5 +4051,19 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
     <td>Yes</td>
   </tr>
-
+  <tr>
+    <td>2025-28-02</td>
+    <td>Lenovo</td>
+    <td><a href="https://www.lenovo.com/content/dam/lenovo/pcsd/global/en/products/edu-devices/lenovo-chromebook-plus-2-in-1-14/smb/datasheet/LenovoEDU_ChromebookPLUS_2-in-1_SMB_Datasheet.pdf">Lenovo Chromebook Plus 2-in-1 (14", 10)</a></td>
+    <td>Lotso</td>
+    <td>Brox</td>
+    <td>Brox</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>RaptorLake-R</td>
+    <td>Chromebook</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
 </table>
