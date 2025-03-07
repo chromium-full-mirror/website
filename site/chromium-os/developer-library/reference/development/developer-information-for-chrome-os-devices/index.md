@@ -4039,7 +4039,7 @@ such as the auto update until date, first release, and more.
  <tr>
     <td>2024-11-02</td>
     <td>Lenovo</td>
-    <td><a href="https://pcsupport.lenovo.com/us/en/products/chromebook-laptops/lenovo-chromebooks-series/lenovo-500e-chromebook-gen-4s?linkTrack=Caps%3ABody_SearchProduct&searchType=3&keyWordSearch=Lenovo%20500e%20Chromebook%20Gen%204s">Lenovo 500e Chromebook Gen 4s</a></td>
+    <td><a href="https://www.lenovo.com/content/dam/lenovo/pcsd/global/en/products/edu-devices/lenovo-chromebook-500e-gen4s/datasheet/LenovoEDU_500e-Chromebook_Gen4s_Datasheet.pdf?refId=d4be62ba-01e8-4a3c-a622-7860bacd0d30">Lenovo 500e Chromebook Gen 4s</a></td>
     <td>Pujjoga</td>
     <td>Nissa</td>
     <td>Nissa</td>
