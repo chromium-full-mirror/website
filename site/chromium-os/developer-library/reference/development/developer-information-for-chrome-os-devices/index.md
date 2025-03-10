@@ -4066,4 +4066,19 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
     <td>Yes</td>
   </tr>
+  <tr>
+    <td>2025-03-09</td>
+    <td>Lenovo</td>
+    <td>Lenovo 500e Chromebook Gen 4s (Intel-TWL-N)</td>
+    <td>Pujjogatwin</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Convertible</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
 </table>
