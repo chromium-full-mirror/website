@@ -4081,4 +4081,49 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
     <td>Yes</td>
   </tr>
+  <tr>
+    <td>2024-12-27</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cr11-cr1104c/techspec/">ASUS Chromebook CR11 (CR1104CTA) / ASUS Chromebook CR12 (CR1204CTA)</a></td>
+    <td>Teliks</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>2024-12-27</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cr11-flip-cr1104f/techspec/">ASUS Chromebook CR11 Flip (CR1104FTA) / ASUS Chromebook CR12 Flip (CR1204FTA)</a></td>
+    <td>Teliks360</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Convertible</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>2025-03-31</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cx14-cx1405/techspec/">ASUS Chromebook Plus CX14 (CX1405CTA) / ASUS Chromebook CX14 (CX1405CTA)</a></td>
+    <td>Teltic</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
 </table>
