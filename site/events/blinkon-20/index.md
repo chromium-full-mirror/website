@@ -26,7 +26,7 @@ form. All presenters who elect to be in-person will be able to.
 ## **Logistics**
 
 * When: April 7-8, 2025, 9am to ~5pm PST (agenda TBD).
-* Where: Mountain View, CA, USA + Virtually on [slack](https://chromium.slack.com) (#blinkon)
+* Where: Google building C440 in Mountain View, CA, USA + Virtually on [slack](https://chromium.slack.com) (#blinkon)
 * What: Combination of live and recorded sessions, including keynotes, lightning talks, breakout talks, and social events
 
 
