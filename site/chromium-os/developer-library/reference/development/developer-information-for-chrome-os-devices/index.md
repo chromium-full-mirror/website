@@ -3994,7 +3994,7 @@ such as the auto update until date, first release, and more.
    <tr>
     <td>2024-03-15</td>
     <td>HP</td>
-    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-chromebook-14a-nf0050nr">HP Chromebook PLUS laptop14 inch-14a-nf0050nr (CX5403)</a></td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-chromebook-14a-nf0050nr">HP Chromebook PLUS laptop14 inch-14a-nf0050nr</a></td>
     <td>Yahiko</td>
     <td>Nissa</td>
     <td>Nissa</td>
@@ -4003,6 +4003,21 @@ such as the auto update until date, first release, and more.
     <td>x86_64</td>
     <td>Alderlake-N</td>
     <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+   <tr>
+    <td>2024-03-18</td>
+    <td>HP</td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-chromebook-x360-14b-cd0010nr">HP Chromebook Plus x360 14b-cd0 / HP Chromebook x360 14b-cd0</a></td>
+    <td>Joxer</td>
+    <td>Nissa</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.1</td>
+    <td>x86_64</td>
+    <td>Alderlake-N</td>
+    <td>Convertible</td>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
@@ -4126,4 +4141,20 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
     <td>Yes</td>
   </tr>
+  <tr>
+    <td>2025-04-14</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cx15-cx1505/techspec/">ASUS Chromebook Plus CX15 (CX1505CTA) / ASUS Chromebook CX15 (CX1505CTA)</a></td>
+    <td>Telith</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+
 </table>
