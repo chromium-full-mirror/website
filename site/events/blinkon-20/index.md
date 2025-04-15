@@ -8,6 +8,10 @@ title: BlinkOn 20
 
 **Welcome to BlinkOn 20!**
 
+## **Presentations**
+
+Recordings of presentations are available on the
+[BlinkOn YouTube Channel](https://youtube.com/@blinkontalks/videos)
 
 ## **Registration**
 
