@@ -3969,7 +3969,7 @@ such as the auto update until date, first release, and more.
     <td>Nissa</td>
     <td>Nissa</td>
     <td>x86_64</td>
-    <td>6.1</td>
+    <td>5.15</td>
     <td>x86_64</td>
     <td>Alderlake-N</td>
     <td>Clamshell</td>
@@ -3984,7 +3984,7 @@ such as the auto update until date, first release, and more.
     <td>Nissa</td>
     <td>Nissa</td>
     <td>x86_64</td>
-    <td>6.1</td>
+    <td>5.15</td>
     <td>x86_64</td>
     <td>Alderlake-N</td>
     <td>Convertible</td>
@@ -3999,7 +3999,7 @@ such as the auto update until date, first release, and more.
     <td>Nissa</td>
     <td>Nissa</td>
     <td>x86_64</td>
-    <td>6.1</td>
+    <td>5.15</td>
     <td>x86_64</td>
     <td>Alderlake-N</td>
     <td>Clamshell</td>
@@ -4044,7 +4044,7 @@ such as the auto update until date, first release, and more.
     <td>Nissa</td>
     <td>Nissa</td>
     <td>x86_64</td>
-    <td>6.1</td>
+    <td>5.15</td>
     <td>x86_64</td>
     <td>Alderlake-N</td>
     <td>Clamshell</td>
@@ -4059,7 +4059,7 @@ such as the auto update until date, first release, and more.
     <td>Nissa</td>
     <td>Nissa</td>
     <td>x86_64</td>
-    <td>6.1</td>
+    <td>5.15</td>
     <td>x86_64</td>
     <td>Alderlake-N</td>
     <td>Convertible</td>
