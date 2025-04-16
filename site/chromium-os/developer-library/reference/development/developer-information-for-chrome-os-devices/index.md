@@ -3422,6 +3422,36 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
   </tr>
   <tr>
+    <td>2021-09-25</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/uk/laptops/for-work/all-series/asus-chromebook-flip-cx3-cb3400-11th-gen-intel/">ASUS Chromebook Flip CB3(CB3400FMA)</a></td>
+    <td>Collis</td>
+    <td>volteer</td>
+    <td>volteer</td>
+    <td>x86_64</td>
+    <td>5.4</td>
+    <td>x86_64</td>
+    <td>Tigerlake-UP4</td>
+    <td>Convertible</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>2021-09-25</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-flip-cx3-cx3400-11th-gen-intel/">ASUS Chromebook Flip CX3 (CX3400FMA)</a></td>
+    <td>Collis</td>
+    <td>volteer</td>
+    <td>volteer</td>
+    <td>x86_64</td>
+    <td>5.4</td>
+    <td>x86_64</td>
+    <td>Tigerlake-UP4</td>
+    <td>Convertible</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+  <tr>
     <td>2021-09-27</td>
     <td>Asus</td>
     <td><a href="https://www.asus.com/Laptops/For-Students/Chromebook/ASUS-Chromebook-CR1-CR1100/">ASUS Chromebook CR1100</a></td>
@@ -3552,6 +3582,21 @@ such as the auto update until date, first release, and more.
     <td>5.4</td>
     <td>x86_64</td>
     <td>Jasper Lake</td>
+    <td>Convertible</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>2022-06-08</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/uk/laptops/for-work/chromebook/asus-chromebook-flip-cx5-cb5601/">ASUS Chromebook Flip CB5 (CB5601FBA)</a></td>
+    <td>Felwinter</td>
+    <td>brya</td>
+    <td>brya</td>
+    <td>x86_64</td>
+    <td>5.10</td>
+    <td>x86_64</td>
+    <td>Alderlake-U/P/Raptorlake-U/P</td>
     <td>Convertible</td>
     <td></td>
     <td>Yes</td>
