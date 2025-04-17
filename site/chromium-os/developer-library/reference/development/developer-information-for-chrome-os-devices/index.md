@@ -332,6 +332,36 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
   </tr>
   <tr>
+     <td>2022-11-03</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cx34-flip-cx3401-12th-gen-intel/">ASUS Chromebook CX34 Flip (CX3401)</a></td>
+    <td>Mithrax</td>
+    <td>Brya</td>
+    <td>Brya</td>
+    <td>x86_64</td>
+    <td>5.15</td>
+    <td>x86_64</td>
+    <td>Alderlake-U/P/Raptorlake-U/P</td>
+    <td>Convertible</td>
+    <td></td>
+    <td>Yes</td>
+ </tr>
+ <tr>
+    <td>2021-06-15</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-detachable-cz1-cz1000/">ASUS Chromebook Detachable CZ1</a></td>
+    <td>Katsu</td>
+    <td>Kukui</td>
+    <td>Kukui</td>
+    <td>ARM</td>
+    <td>4.19</td>
+    <td>ARM</td>
+    <td>MT8183</td>
+    <td>Detachable</td>
+    <td></td>
+    <td>Yes</td>
+ </tr>
+ <tr>
     <td>2010-12-05</td>
     <td>Google</td>
     <td><a href="/chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices/cr-48-chrome-notebook-developer-information">Cr-48</a></td>
