@@ -4111,7 +4111,43 @@ such as the auto update until date, first release, and more.
     <td></td>
     <td></td>
  </tr>
-  <tr>
+ <tr>
+    <td>2024-06-18</td>
+    <td>Asus</td>
+    <td>
+      <a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cz11-flip-cz1104f">ASUS Chromebook CZ11 Flip (CZ1104F)</a>/
+      <a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cz12-flip-cz1204f">ASUS Chromebook CZ12 Flip (CZ1204F)</a>
+    </td>
+    <td>Chinchou360</td>
+    <td>staryu</td>
+    <td>corsola</td>
+    <td>aarch64</td>
+    <td>5.15</td>
+    <td>aarch64</td>
+    <td>MT8186</td>
+    <td>Convertible</td>
+    <td></td>
+    <td></td>
+ </tr>
+ <tr>
+    <td>2024-06-18</td>
+    <td>Asus</td>
+    <td>
+      <a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cz11-cz1104c">ASUS Chromebook CZ11 (CZ1104C)</a>/
+      <a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cz12-cz1204c">ASUS Chromebook CZ12 (CZ1204C)</a>
+    </td>
+    <td>Chinchou</td>
+    <td>staryu</td>
+    <td>corsola</td>
+    <td>aarch64</td>
+    <td>5.15</td>
+    <td>aarch64</td>
+    <td>MT8186</td>
+    <td>Clamshell</td>
+    <td></td>
+    <td></td>
+ </tr>
+ <tr>
     <td>2024-08-08</td>
     <td>Lenovo</td>
     <td><a href="https://pcsupport.lenovo.com/us/en/products/chromebook-laptops/lenovo-chromebooks-series/lnv-cb-duet-11m889?searchType=3&keyWordSearch=LNV%20CB%20Duet%2011M889">Lenovo Chromebook Duet (11", 9) / Lenovo Chromebook Duet EDU G2</a></td>
