@@ -346,6 +346,36 @@ such as the auto update until date, first release, and more.
     <td></td>
     <td>Yes</td>
  </tr>
+  <tr>
+    <td>2021-03-19</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/uk/laptops/for-work/chromebook/asus-chromebook-enterprise-cx1-cb1400">ASUS Chromebook Enterprise CB1 (CB1400)</a></td>
+    <td>Sailfin</td>
+    <td>coral</td>
+    <td>coral</td>
+    <td>x86_64</td>
+    <td>4.4</td>
+    <td>x86_64</td>
+    <td>ApolloLake</td>
+    <td>Chromebook</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>2021-03-19</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/uk/laptops/for-work/chromebook/asus-chromebook-cx1-cb1500">ASUS Chromebook CB1 (CB1500)</a></td>
+    <td>Longfin</td>
+    <td>coral</td>
+    <td>coral</td>
+    <td>x86_64</td>
+    <td>4.4</td>
+    <td>x86_64</td>
+    <td>ApolloLake</td>
+    <td>Chromebook</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
  <tr>
     <td>2021-06-15</td>
     <td>Asus</td>
