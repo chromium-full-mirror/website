@@ -4268,4 +4268,164 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
   </tr>
 
+<tr>
+    <td>2023-07-24</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-work/chromebook/asus-chromebook-plus-enterprise-cx34-cx3402/">ASUS Chromebook Plus Enterprise CB3402 (CB3402CVA, CB3402CBA)</a></td>
+    <td>Marasov</td>
+    <td>Brya</td>
+    <td>Brya</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Alder Lake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2023-07-24</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-plus-cx34-cx3402/">ASUS Chromebook Plus Enterprise CX34 (CX3402CVA, CX3402CBA)</a></td>
+    <td>Marasov</td>
+    <td>Brya</td>
+    <td>Brya</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Alder Lake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2024-05-23</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cr11-cr1104c/">ASUS Chromebook CR11 (CR1104C)</a></td>
+    <td>Anraggar</td>
+    <td>Nissa</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Alder Lake N</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2024-05-23</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cr12-cr1204c/">ASUS Chromebook CR12 (CR1204C)</a></td>
+    <td>Anraggar</td>
+    <td>Nissa</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Alder Lake N</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2024-05-23</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cr11-flip-cr1104f/">ASUS Chromebook CR11 Flip (CR1104F)</a></td>
+    <td>Anraggar360</td>
+    <td>Nissa</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Alder Lake N</td>
+    <td>Convertible</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2024-05-23</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-students/chromebook/asus-chromebook-cr12-flip-cr1204f/">ASUS Chromebook CR12 Flip (CR1204F)</a></td>
+    <td>Anraggar360</td>
+    <td>Nissa</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Alder Lake N</td>
+    <td>Convertible</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2025-02-18</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-plus-cx14-cx1405/">ASUS Chromebook Plus CX14 (CX1405)</a></td>
+    <td>Awasuki</td>
+    <td>dedede</td>
+    <td>dedede</td>
+    <td>x86_64</td>
+    <td>6.1</td>
+    <td>x86_64</td>
+    <td>Jasper Lake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2025-02-18</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cx14-cx1405/">ASUS Chromebook CB14 (CB1405)</a></td>
+    <td>Awasuki</td>
+    <td>dedede</td>
+    <td>dedede</td>
+    <td>x86_64</td>
+    <td>6.1</td>
+    <td>x86_64</td>
+    <td>Jasper Lake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2025-03-03</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cx15-cx1505/">ASUS Chromebook CX15 (CX1505)</a></td>
+    <td>Awadoron</td>
+    <td>dedede</td>
+    <td>dedede</td>
+    <td>x86_64</td>
+    <td>6.1</td>
+    <td>x86_64</td>
+    <td>Jasper Lake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
+<tr>
+    <td>2025-03-03</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cx15-cx1505/">ASUS Chromebook CB15 (CB1505)</a></td>
+    <td>Awadoron</td>
+    <td>dedede</td>
+    <td>dedede</td>
+    <td>x86_64</td>
+    <td>6.1</td>
+    <td>x86_64</td>
+    <td>Jasper Lake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+</tr>
+
 </table>
