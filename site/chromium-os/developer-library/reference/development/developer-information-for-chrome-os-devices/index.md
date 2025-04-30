@@ -4458,4 +4458,83 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
 </tr>
 
+  <tr>
+    <td>2024-12-27</td>
+    <td>HP</td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-fortis-flip-g1m-11-inch-chromebook">HP Fortis Flip G1m 11 Chromebook / HP Fortis Flip G1m 11 Chromebook Enterprise</a></td>
+    <td>Veluza</td>
+    <td>corsola</td>
+    <td>corsola</td>
+    <td>arm</td>
+    <td>5.15</td>
+    <td>arm</td>
+    <td>MT8186</td>
+    <td>Convertible</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+
+  <tr>
+    <td>2024-12-23</td>
+    <td>HP</td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-fortis-g1m-11-inch-chromebook">HP Fortis G1m 11 Chromebook / HP Fortis G1m 11 Chromebook Enterprise</a></td>
+    <td>Keldeo</td>
+    <td>corsola</td>
+    <td>corsola</td>
+    <td>arm</td>
+    <td>5.15</td>
+    <td>arm</td>
+    <td>MT8186</td>
+    <td>Clamshell</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+
+  <tr>
+    <td>2025-01-26</td>
+    <td>HP</td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-fortis-flip-g1i-11-inch-chromebook-enterprise">HP Fortis G1i 11 Chromebook / HP Fortis G1i 11 Chromebook Enterprise</a></td>
+    <td>Domika</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+   </tr>
+
+  <tr>
+    <td>2025-02-08</td>
+    <td>HP</td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-fortis-g1i-14-inch-chromebook-enterprise">HP Fortis G1i 14 Chromebook / HP Fortis G1i 14 Chromebook Enterprise</a></td>
+    <td>Domiso</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+   </tr>
+
+  <tr>
+    <td>2025-01-26</td>
+    <td>HP</td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/hp-fortis-flip-g1i-11-inch-chromebook-enterprise">HP Fortis Flip G1i 11 Chromebook / HP Fortis Flip G1i 11 Chromebook Enterprise</a></td>
+    <td>Domilly</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Convertible</td>
+    <td>Yes</td>
+    <td>Yes</td>
+   </tr>
 </table>
