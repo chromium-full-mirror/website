@@ -574,7 +574,7 @@ removal of the Web Components v0 APIs.
 Deprecations that change the behavior of
 [Android WebView APIs](https://developer.android.com/reference/android/webkit/WebSettings)
 will require additional processes due to their impact on Android applications. See
-[here](https://docs.google.com/document/d/1K3ON0nm9PnneOpwlfLKpiFhaUGH45CUNhPbpxlUe3Do/edit?usp=sharing)
+[here](/blink/launching-features/webview-deprecations)
 for considerations and steps for deprecating such APIs.
 
 #### Step 1: Measure usage {:#deprecation-measure}
