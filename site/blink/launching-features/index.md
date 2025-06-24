@@ -571,6 +571,12 @@ High-usage APIs may require much more work to land successfully. See
 for a good example of how this worked in practice with the deprecation and
 removal of the Web Components v0 APIs.
 
+Deprecations that change the behavior of
+[Android WebView APIs](https://developer.android.com/reference/android/webkit/WebSettings)
+will require additional processes due to their impact on Android applications. See
+[here](https://docs.google.com/document/d/1K3ON0nm9PnneOpwlfLKpiFhaUGH45CUNhPbpxlUe3Do/edit?usp=sharing)
+for considerations and steps for deprecating such APIs.
+
 #### Step 1: Measure usage {:#deprecation-measure}
 
 Measure feature usage in the wild. [Various
