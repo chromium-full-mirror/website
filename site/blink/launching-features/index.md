@@ -325,8 +325,7 @@ If you want to gather data on the usability of your feature that an [Origin
 Trial](/blink/origin-trials/running-an-origin-trial) can help collect, proceed
 to the “Origin Trial” stage in ChromeStatus and fill out the required fields
 detailing what you hope to learn from the origin trial. This will generate an
-[Intent to
-Experiment](https://docs.google.com/document/d/1vlTlsQKThwaX0-lj_iZbVTzyqY7LioqERU8DK3u3XjI/edit)
+Intent to Experiment
 mail that you should send to [blink-dev](mailto:blink-dev@chromium.org). After
 receiving at least [one LGTM](/blink/guidelines/api-owners/procedures) from the
 API owners, you can proceed with your origin trial release. Collect data and
@@ -502,8 +501,7 @@ on documentation, this is the time to finish that work and update for any
 changes in vendor signals.
 
 Proceed to the “Prepare to Ship” stage in ChromeStatus; this will generate an
-[Intent to
-Ship](https://docs.google.com/document/d/1vlTlsQKThwaX0-lj_iZbVTzyqY7LioqERU8DK3u3XjI/edit#bookmark=id.w8j30a6lypz0)
+Intent to Ship
 mail that you should send to [blink-dev](mailto:blink-dev@chromium.org). This
 will spark a conversation with the API owners; address any feedback from them,
 and once you [get 3 LGTMs](/blink/guidelines/api-owners/procedures) from the API
@@ -637,7 +635,7 @@ If you are unsure of when a feature could be removed, or would like to
 discourage usage, you may deprecate a feature without a removal deadline. This
 is strongly discouraged and will require significant justification:
 
-* Email blink-dev using the ["Intent to Deprecate" template](https://docs.google.com/a/chromium.org/document/d/1Z7bbuD5ZMzvvLcUs9kAgYzd65ld80d5-p4Cl2a04bV0/edit).
+* Email blink-dev using an Intent to Deprecate generated from ChromeStatus
 
 * [1 LGTM](/blink/guidelines/api-owners/procedures) necessary from the API owners
 
