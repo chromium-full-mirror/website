@@ -241,7 +241,7 @@ next step.
 
 Once you have a functional and reasonably complete feature implementation
 available as a runtime enabled feature, we recommend (but don't require) that
-you [request an Early Design Review
+you [request an Early Design/Incubation Review
 from the TAG](/blink/launching-features/wide-review/#tag) and proceed to
 the “Dev Trials” stage in ChromeStatus (note also exceptions enumerated
 [here](/blink/launching-features/wide-review/#exceptions)). There is a button to
@@ -313,7 +313,7 @@ Once you have a complete specification:
 
 1. If you have one, ask your spec mentor to [review the
    specification](/blink/spec-mentors/#reviewing-the-specification).
-2. [Request a Specification Review
+2. [Request a specification review
    from the TAG](/blink/launching-features/wide-review/#tag) (except in the cases noted
    [here](/blink/launching-features/wide-review/#exceptions)). You should submit
    this at least a month ahead of sending an Intent to Ship, to give the TAG
@@ -473,7 +473,7 @@ feature ready for developers to try out under a flag, proceed to the next step.
 #### Step 2: Feature Complete behind a flag and implementation refinement {:#existing-standard-dev-trials}
 
 If the TAG has not already reviewed the consensus specification, request a
-[Specification Review](/blink/launching-features/wide-review/#tag)
+[specification review](/blink/launching-features/wide-review/#tag)
 (except in the cases noted
 [here](/blink/launching-features/wide-review/#exceptions))
 and proceed to the “Dev Trials” stage in ChromeStatus. This will generate a
