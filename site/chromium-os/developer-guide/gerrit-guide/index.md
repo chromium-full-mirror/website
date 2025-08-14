@@ -63,13 +63,12 @@ Follow the steps in [Chromium's Gerrit Guide](/developers/gerrit-guide).
 
 **For Partners:**
 
-1.  Load <https://chrome-internal.googlesource.com/new-password>
+1.  Load <https://www.googlesource.com/new-password>
     1.  **Make sure you are logged into your corp-partner account.**
     2.  **You can verify this by ensuring that the Username field looks
                 like git-&lt;user&gt;corp-partner.google.com**
 3.  Follow the directions on the new-password page to append to your
-    .gitcookies file. You should click the radio button labeled "only
-    chrome-internal.googlesource.com" if it exists.
+    .gitcookies file.
 4.  **Verification:** Find a repo in your local manifest and run `git
     ls-remote https://chrome-internal.googlesource.com/<REPO_PATH>.git` -
     Example: `git ls-remote
