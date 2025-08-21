@@ -43,12 +43,7 @@ Follow the steps in [Chromium's Gerrit Guide](/developers/gerrit-guide).
 
 **For Googlers:**
 
-1.  Opt into the new auth system to have `git cl` authenticate
-    using the corp SSO protocol:
-    ```
-    git config --global depot-tools.useNewAuthStack 1
-    ```
-2.  Ensure that `repo` authenticates to chromium and chrome-internal using
+1.  Ensure that `repo` authenticates to chromium and chrome-internal using
     the corp SSO protocol. This is required to recognise you as a Googler
     and will only work from a Google corp machine:
     ```
@@ -57,8 +52,8 @@ Follow the steps in [Chromium's Gerrit Guide](/developers/gerrit-guide).
     git config --global --replace-all url.sso://chrome-internal.insteadOf https://chrome-internal.googlesource.com
     git config --global --add url.sso://chrome-internal.insteadOf https://chrome-internal-review.googlesource.com
     ```
-3.  Run `gcert` once a day to authenticate your account.
-4.  **Verification:** Run
+2.  Run `gcert` once a day to authenticate your account.
+3.  **Verification:** Run
     `git ls-remote https://chrome-internal.googlesource.com/chromeos/manifest-internal.git`
 
 **For Partners:**
