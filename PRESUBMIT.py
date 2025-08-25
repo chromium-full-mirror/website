@@ -36,6 +36,15 @@ def get_lob_extensions(input_api) -> Iterator[str]:
                 yield line[1:]
 
 
+def CheckChangeHasOnlyOneEol(input_api, output_api):
+    """Check ending of files."""
+    return input_api.canned_checks.CheckChangeHasOnlyOneEol(
+        input_api,
+        output_api,
+        source_file_filter=lambda x: x.LocalPath().endswith(
+            '.md') or x.LocalPath().endswith('.py'))
+
+
 def CheckPatchFormatted(input_api, output_api):
     """Check formatting of files."""
     return input_api.canned_checks.CheckPatchFormatted(input_api, output_api)
