@@ -4541,7 +4541,7 @@ such as the auto update until date, first release, and more.
   <tr>
     <td>2025-07-28</td>
     <td>Lenovo</td>
-    <td>Lenovo Chromebook 2-in-1 14ITN10 / Lenovo Chromebook Plus 2-in-1 14ITN10</td>
+    <td><a href="https://psref.lenovo.com/Product//Lenovo_Chrome_2in1_14ITN10?tab=model">Lenovo Chromebook 2-in-1 14ITN10 / Lenovo Chromebook Plus 2-in-1 14ITN10</a></td>
     <td>Pujjoniru</td>
     <td>Nirul</td>
     <td>Nissa</td>
