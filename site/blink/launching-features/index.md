@@ -344,7 +344,7 @@ useful. Features that are going through the intent process should adhere to the
 following guidelines:
 * In general, **Finch experimentation is discouraged** for developer-visible web platform behavior changes,
   and should not be the normal way to launch new APIs.
-  Instead, [waterfall rollouts are preferred](https://source.chromium.org/chromium/chromium/src/+/main:docs/flag_guarding_guidelines.md#Prefer-waterfall-rollout-for-platform-changes).
+  Instead, [waterfall rollouts are preferred](https://chromium.googlesource.com/chromium/src/+/main/docs/flag_guarding_guidelines.md#Prefer-waterfall-rollout-for-platform-changes).
 * Canary, Dev, and Beta channel experimentation does not require API owners'
   approval.
 * Experimentation on 1% of Stable channel population requires an Intent to
@@ -823,7 +823,7 @@ Link to the blink-dev thread via the [Google Groups web interface](https://group
 in your CL's commit message to make it easy and clear to review.
 
 Note: Finch experimentation is discouraged for developer-visible web platform behavior changes.
-Instead, [waterfall rollouts are preferred](https://source.chromium.org/chromium/chromium/src/+/main:docs/flag_guarding_guidelines.md#Prefer-waterfall-rollout-for-platform-changes).
+Instead, [waterfall rollouts are preferred](https://chromium.googlesource.com/chromium/src/+/main/docs/flag_guarding_guidelines.md#Prefer-waterfall-rollout-for-platform-changes).
 ## Post Launch
 
 After launching a new feature, watch for crashes, regressions caused by your
