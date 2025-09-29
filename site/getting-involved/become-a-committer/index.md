@@ -119,7 +119,8 @@ If the person you ask to nominate you thinks you're not ready, they should
 be able to tell you why not and what you need to do to meet the criteria.
 
 If you haven't done so already **you'll need to set up a security key on your
-account before you're added to the committer list**.
+account before you're added to the committer list**. For more information about this
+requirement see [Gerrit ReAuth](https://chromium.googlesource.com/chromium/src/+/main/docs/gerrit_reauth.md).
 
 Mechanically, being a committer means that you are a member of
 committers@chromium.org. It may take a few days longer after your nomination
