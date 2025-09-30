@@ -4553,4 +4553,21 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
     <td>Yes</td>
   </tr>
+
+  <tr>
+    <td>2025-08-20</td>
+    <td>Samsung</td>
+    <td>Galaxy Chromebook 3 360</td>
+    <td>Meliks</td>
+    <td>Nirul</td>
+    <td>Nissa</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Convertible</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+
 </table>
