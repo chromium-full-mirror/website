@@ -16,6 +16,47 @@ if you're interested in updates, discussion, or feisty rants related to Chromium
 security.
 
 
+## Q3 2025
+
+# Chrome Security **2025 Q3** Update
+
+
+Hello everyone,
+
+The Product Security team has open positions to hire engineers to join the team to focus on tooling and data analysis to support our various processes and the overall Chrome Security team. If you are passionate about security bug handling, VRP, incident response, and the like, this will be a good fit for you! Please [apply here](https://www.google.com/about/careers/applications/jobs/results?q=%22Chrome+Product+Security%22&location=Kirkland,+WA,+USA&e=72477625). And without much further ado, here's an update on what Chrome Security was up to in Q3 of 2025.
+
+The Counter-Abuse team continued their work to protect users from suspicious notifications. Now, when you unsubscribe from receiving notifications from a site, you'll also see an option to report the notification as spam. This enables us to improve on-device detection of abusive and deceptive content using real world data, making Chrome safer for everyone.
+
+The BoringSSL team presented their [updated draft of the Merkle Tree Certificates specification](https://mailarchive.ietf.org/arch/msg/tls/6jqhUVz58s4ZgsZ8HvuZftncT9A/) at IETF Madrid. This led to the creation of a new [PKI, Logs, and Signatures (PLANTS) mailing list](https://datatracker.ietf.org/group/plants/documents/), and a Birds-of-a-Feather session at the upcoming IETF Montreal meeting. We are excited to continue to collaborate with the community to mitigate the size impact of post-quantum cryptography. We have begun implementation work in BoringSSL.
+
+The Web Platform Security team shipped an [origin trial](https://developer.chrome.com/origintrials/#/view_trial/4348788390179635201) for [improvements](https://github.com/explainers-by-googlers/script-src-v2) to script-src allowlisting in Content Security Policy. The new keyword allows for individual URLs to be allowlisted, and to provide targeted allowlisting for which scripts are allowed to call eval(). It enables developers to write a strict CSP that only relies on hash and nonce based policies, without having to use permissive hostname based allowlists or unsafe-eval.
+
+The Web Platform Security team also began the rollout of [Local Network Access](https://developer.chrome.com/blog/local-network-access?hl=en), a new permission that grants access to local networks from public sites. The aim is to protect users from cross-site request forgery (CSRF) attacks targeting routers and other devices on private networks, and to reduce the ability of sites to use these requests to fingerprint the user's local network. The permission is automatically requested when a site uses fetch() to access the local network, and developers can optionally explicitly request the permission using the Permissions API so that they can build custom user flows around managing and granting the permission. Local Network Access will roll out by default in Chrome 142.
+
+The Chrome Security Architecture (CSA) team returned to working on a [Rust prototype of the browser kernel](https://crbug.com/330668787) in Q3, exploring more ways to improve memory safety in Chrome. We also launched "[default SiteInstanceGroup](https://crbug.com/390571607)" on Android, allowing Chrome to track security principals more consistently regardless of the isolation mode. We ran a new [Origin Isolation](https://crbug.com/40259221) experiment with a memory threshold to limit the feature to higher end devices and added an [enterprise policy](https://chromeenterprise.google/policies/#OriginKeyedProcessesEnabled) for it, as well as another SitePerProcess experiment on Android beta channel. Finally, we launched the [new committed origin set](https://crbug.com/40148776) for simplifying the Site Isolation security checks, while continuing work on various performance optimizations and [metrics](https://crbug.com/415821826).
+
+The Platform Security team shipped several improvements to [app-bound encryption](https://security.googleblog.com/2024/07/improving-security-of-chrome-cookies-on.html), both to mitigate existing attacks against it and to strengthen the protection it provides. We enabled process-bound encryption to harden Chrome against local memory inspection, fixed a padding oracle attack against the mechanism, integrated with the new tracked preferences mechanism, and landed further reliability improvements. We've also been consulting with other teams to expand app-bound protection to other classes of data.
+
+We have also continued our work on GPU architectural security, with the new Dawn backend for the ANGLE WebGL implementation approaching code completion. This will allow us to move ANGLE inside the renderer process sandbox and reduce the value of exploiting ANGLE itself, and ultimately lead to considerable simplifications in the graphics stack.
+
+We've also continued to invest in security fundamentals. This quarter, we've deployed safer crypto APIs across the chromium code base, and made several improvements to //base APIs, Mojo, and ipcz to make them easier to use and harder to misuse.
+
+In memory safety news, Chrome 139 fully moved PNG parsing away from libpng and onto a [memory-safe implementation](https://github.com/image-rs/image-png). We're optimistic this will just be the first of several such projects, with the ultimate goal of doing all image parsing in memory-safe code. We've also begun enforcing the Safe Buffers C++ programming model in some projects that Chromium depends on, like [ANGLE](https://chromium-review.googlesource.com/c/angle/angle/+/6854299) and [Dawn](https://dawn-review.googlesource.com/c/dawn/+/262114).
+
+The V8 team invested in two long standing problems that have caused security problems in the past: Handling of holes and write barriers. Holes are internal values that should never leak into user JavaScript and are now allocated in a way that they trap on access. For write barriers the team added a fine-grained runtime verification to all compiler tiers that allows catching barriers that have been wrongly elided. In addition, the team enabled the use of PartitionAlloc in V8's testing shell which brings testing and fuzzing of V8 standalone closer to the shipping configuration.
+
+V8's bug detection team has invested into two ways of improving our differential fuzzing, essential to ensuring the correctness of our compilers. First, we prototyped an updated version of the [DUMPLING paper](https://www.ndss-symposium.org/ndss-paper/dumpling-fine-grained-differential-javascript-engine-fuzzing/) which achieves more comparison points without hindering optimization. This project is now on track to be integrated into V8 productively. Second, we improved tracking of WebAssembly side effects (e.g., changing globals) and incorporated it into our regular fuzzing infrastructure.
+
+Chrome Fuzzing made several improvements relating to crash stack-trace parsing and grouping in Clusterfuzz. We also enabled testing field trials in fuzzers. Efforts are underway to integrate LibAFL, a comprehensive collection of reusable fuzzer components developed in Rust, into Chrome. This initiative has identified and resolved several obstacles that impeded the integration process. Concurrently, we have sustained our commitment to enhancing Android fuzzing capabilities, primarily by focusing on enabling our suite of LibFuzzer fuzzers to compile on Android, aiming to bridge the capability gap with desktop OSes.
+
+And finally, Chrome Ops Security has continued to work on smoothing third party dependency management, and mandatory license and metadata reviews are back in house! Now when you add chromium-third-party@ as a reviewer to your import CLs, they will be reviewed by someone with high context on Chrome, and its third party import process, with a faster turnaround time.
+
+Thank you for reading!
+
+Jasika
+
+On behalf of Chrome Security
+
 ## Q2 2025
 
 # Chrome Security **2025 Q2** Update
