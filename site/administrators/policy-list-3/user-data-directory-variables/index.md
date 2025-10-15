@@ -43,7 +43,10 @@ details.
 #### ChromeOS only
 
 **${google_drive}** - The root directory of Google Drive. \
-(example resolution: "johndoe")
+(example resolution: "My Drive/")
+
+**${microsoft_onedrive}** - The root directory of Microsoft OneDrive. \
+(example resolution: "Microsoft OneDrive/")
 
 #### All platforms besides ChromeOS
 
