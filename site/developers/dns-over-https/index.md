@@ -16,8 +16,7 @@ channel, helping to further safeguard user security and privacy.
 ## Launches
 
 See these blog posts to learn more about DoH in Chrome:
-[Desktop](https://blog.chromium.org/2020/05/a-safer-and-more-private-browsing-DoH.html)
-(exception: Linux),
+[Desktop](https://blog.chromium.org/2020/05/a-safer-and-more-private-browsing-DoH.html),
 [Android](https://blog.chromium.org/2020/09/a-safer-and-more-private-browsing.html).
 
 ### DoH Providers
