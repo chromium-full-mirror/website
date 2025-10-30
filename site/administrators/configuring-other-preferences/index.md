@@ -155,7 +155,6 @@ fully-functional initial_preferences file):
     "do_not_create_taskbar_shortcut": true,
     "do_not_launch_chrome": true,
     "do_not_register_for_update_launch": true,
-    "make_chrome_default": true,
     "make_chrome_default_for_user": true,
     "system_level": true,
     "verbose_logging": true,
@@ -185,7 +184,6 @@ are:
 *   `do_not_launch_chrome`: doesn't launch chrome after the first install.
 *   `do_not_register_for_update_launch`: does not register with Google
             Update to have Chrome launched after install.
-*   `make_chrome_default`: makes chrome the default browser.
 *   `make_chrome_default_for_user`: makes chrome the default browser for
             the current user.
 *   `system_level`: install chrome to system-wide location.
