@@ -74,18 +74,17 @@ Also include `testing/gtest/include/gtest/gtest.h`, rather than relying on
 browser_test.h including it for you.
 
 Browser tests in `src/content` and `src/chrome` have their own utility headers for
-interacting with the window, to add helpers for waiting for a new window to be
-added, navigating, getting the location of a test file etc.. Tests in `src/chrome`
-use
-[src/chrome/test/base/ui_test_utils.h](https://cs.chromium.org/chromium/src/chrome/test/base/ui_test_utils.h),
-while tests in src/content use
-[src/content/public/test/content_browser_test_utils.h](https://cs.chromium.org/chromium/src/content/public/test/content_browser_test_utils.h).
+interacting with the window, waiting for a new window, navigation, getting the location of a test file, etc.
+
+Tests in `src/chrome` typically include [src/chrome/test/base/ui_test_utils.h](https://cs.chromium.org/chromium/src/chrome/test/base/ui_test_utils.h) for general utilities, or [src/chrome/test/base/chrome_test_utils.h](https://cs.chromium.org/chromium/src/chrome/test/base/chrome_test_utils.h) if you need functions like `chrome_test_utils::GetTestUrl`. You may include either or both headers depending on your needs.
+
+Tests in `src/content` use [src/content/public/test/content_browser_test_utils.h](https://cs.chromium.org/chromium/src/content/public/test/content_browser_test_utils.h).
 
 An example test in browser_tests would like:
 
 ```c++
 IN_PROC_BROWSER_TEST_F(InProcessBrowserTest, Foo) {
-  GURL test_url = ui_test_utils::GetTestUrl(test_dir, test_file);
+  GURL test_url = chrome_test_utils::GetTestUrl(test_dir, test_file);
   ui_test_utils::NavigateToURL(browser(), test_url);
   content::WebContents\* web_contents = ...
   content::SimulateMouseClick(web_contents);
