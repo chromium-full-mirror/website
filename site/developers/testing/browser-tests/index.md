@@ -207,12 +207,28 @@ Some tests may need to use multiple origins to test their code paths; one common
 way this is done is to redirect all origins to localhost:
 host_resolver()-&gt;AddRule("\*", "127.0.0.1")
 
-A small number of tests exercise code paths that make requests to Google domain.
-Due to the included [HSTS preload list](https://hstspreload.org/) in Chrome's
-networking code, your test will need to use an EmbeddedTestServer that's
-configured for https. Additionally, you will need two more switches:
+Some tests exercise code paths that make requests to origins over https, e.g. to
+make requests to domains on the [HSTS preload list](https://hstspreload.org/),
+to test web platform features only available in secure contexts, etc.
+Such a test will need to use an EmbeddedTestServer instance instantiated with
+`TYPE_HTTPS`). If your test requires https requests to hostnames other than
+localhost, you will also need to configure a valid certificate for the server.
+Do not use the flag `--ignore-certificate-errors`, which blanket ignores
+certificate errors, to get around this setup; that is most likely unnecessary
+and incorrect.
+ * In test fixtures inheriting from
+   `content::BrowserTestBase`, you may be able to directly use the provided
+   `embedded_https_test_server()`, which by default provides a valid certificate
+   for a handful of domains commonly used in tests.
+ * Otherwise, give your net::EmbeddedTestServer a valid certificate for the
+   hostnames that you need in your test:
+    * choose one of the static `ServerCertificate` options that covers the
+      necessary hostnames, or
+    * configure a generated certificate with a `ServerCertificateConfig` that
+      includes the necessary `dns_names`. You can do so by calling the helper
+      `SetCertHostnames()` on the EmbeddedTestServer instance before you start
+      the server.
 
-1.  `switches::kIgnoreCertificateErrors`: needed since the test server
-            only has a valid certificate for localhost
-2.  `switches::kIgnoreGooglePortNumbers`: needed since production code
-            only allows known ports (80/443) for Google domains
+Additionally, you may or may not need to add the switch
+`switches::kIgnoreGooglePortNumbers`, since production code only allows known
+ports (80/443) for Google domains.
