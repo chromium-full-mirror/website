@@ -10,6 +10,15 @@ This workflow allows developers with a Chromium checkout using [Simple Chrome]
 to download and launch a ChromeOS VM on their workstations, update the VM with
 locally built Chrome, and run various tests.
 
+## Alternative: Running a Prebuilt VM without a Chromium Checkout
+
+This guide focuses on the `cros vm` workflow, which is integrated with a
+Chromium checkout. If you want to run a Prebuilt ChromiumOS VM without a
+Chromium checkout, for example for testing or exploration, you can follow the
+[Prebuilt ChromiumOS VM guide]
+(/chromium-os/developer-library/guides/containers/prebuilt-vm-guide/),
+which explains a standalone method for running a VM image with QEMU.
+
 [TOC]
 
 ## Prerequisites

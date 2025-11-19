@@ -34,6 +34,7 @@ title: Guides
 ## Containers
 
 * [ChromeOS VM for Chromium developers](/chromium-os/developer-library/guides/containers/cros-vm)
+* [Running a Pre-built ChromiumOS VM](/chromium-os/developer-library/guides/containers/prebuilt-vm-guide)
 * [Crostini developer guide](/chromium-os/developer-library/guides/containers/crostini-developer-guide)
 * [Running custom containers under Chrome OS](/chromium-os/developer-library/guides/containers/containers-and-vms)
 
