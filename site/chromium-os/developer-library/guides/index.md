@@ -73,7 +73,7 @@ title: Guides
 * [CrOS work command cheatsheet](/chromium-os/developer-library/guides/development/cheatsheet)
 * [Development basics](/chromium-os/developer-library/guides/development/development-basics)
 * [Getting started with platform2](/chromium-os/developer-library/guides/development/platform2-primer)
-* [How to use LINT.IfChange to keep files in sync](/chromium-os/developer-library/guides/development/keep-files-in-sync)
+* [How to use Gerrit IfThisThenThat Lint to keep files in sync](/chromium-os/developer-library/guides/development/keep-files-in-sync)
 * [Introduction to Git & Gerrit for CrOS contributors](/chromium-os/developer-library/guides/development/git-and-gerrit-intro)
 * [Life of a Chrome commit on ChromeOS](/chromium-os/developer-library/guides/development/chrome-commit-pipeline)
 * [Local trybot](/chromium-os/developer-library/guides/development/local-trybot-documentation)
