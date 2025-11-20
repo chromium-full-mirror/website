@@ -107,6 +107,7 @@ title: Guides
 
 * [Enterprise metrics](/chromium-os/developer-library/guides/enterprise/enterprise-metrics)
 * [Enterprise policy](/chromium-os/developer-library/guides/enterprise/enterprise-policy)
+* [Testing Enterprise Policies with a Local Server](/chromium-os/developer-library/guides/enterprise/local-policy-testing)
 
 ## Documentation
 
