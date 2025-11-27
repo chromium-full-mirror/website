@@ -293,25 +293,6 @@ edges, performs a Kahn topological sort, and uses that in
 
 ## Debugging Tips
 
-### Using the dependency visualizer
-
-Chrome has a built in method to dump the profile dependency graph to a file in
-[GraphViz](http://www.graphviz.org/) format. When you run chrome with the
-command line flag --dump-browser-context-graph, chrome will write the dependency
-information to your /path/to/profile/browser-context-dependencies.dot file. You
-can then convert this text file with dot, which is part of GraphViz:
-
-```
-dot -Tpng /path/to/profile/browser-context-dependencies.dot > png-file.png
-```
-
-This will give you a visual graph like this (generated January 23rd, 2012, click
-through for full size):
-
-[<img alt="Graph as of Aug 15, 2012"
-src="/developers/design-documents/profile-architecture/graph5.png" height=40
-width=400>](/developers/design-documents/profile-architecture/graph5.png)
-
 ### Crashes at Shutdown
 
 If you get a stack that looks like this:
