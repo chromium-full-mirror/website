@@ -255,6 +255,7 @@ title: Guides
 * [Running smoke suite on a VM image](/chromium-os/developer-library/guides/testing/testing/running-smoke-suite-on-a-vm-image)
 * [Running unittests via QEMU](/chromium-os/developer-library/guides/testing/qemu-unit-tests-design)
 * [Running Puppeteer Tests on CrOS Devices](/chromium-os/developer-library/guides/testing/web-testing)
+* [Running Puppeteer Tests to interact with System apps on CrOS Devices](/chromium-os/developer-library/guides/testing/puppeteer-system-apps/)
 * [Test lab setup](/chromium-os/developer-library/guides/testing/test-lab-setup)
 * [Tips on writing C++ Browser tests](/chromium-os/developer-library/guides/testing/browser-tests-writing-tips)
 * [Tips on writing Tast tests](/chromium-os/developer-library/guides/testing/tast-tests-writing-tips)

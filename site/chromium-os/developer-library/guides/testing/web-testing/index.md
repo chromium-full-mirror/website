@@ -8,7 +8,7 @@ breadcrumbs:
   - Guides
 - - /chromium-os/developer-library/guides/testing
   - Testing
-page_name: puppeteer-web-testing-on-chromeos
+page_name: puppeteer-web-testing-on-cros
 title: Running Puppeteer Tests on CrOS Devices
 ---
 
@@ -51,8 +51,7 @@ version `M141-16376.0.0`.
 **Recommendation: Use a ChromiumOS VM**
 Starting your testing with a ChromiumOS VM is highly recommended. This allows
 for faster iteration, easier debugging, and a more controlled environment.
-Follow the [Running a Prebuilt ChromiumOS VM]
-(/chromium-os/developer-library/guides/containers/prebuilt-vm-guide/) guide.
+Follow the [Running a Prebuilt ChromiumOS VM](/chromium-os/developer-library/guides/containers/prebuilt-vm-guide/) guide.
 
 #### a. Enable Developer Mode
 
@@ -332,3 +331,10 @@ To run this test:
     ```bash
     $ node test-iwa-kiosk.js ${PORT}
     ```
+
+## 5. Testing System Web Apps
+
+Beyond standard web pages, Puppeteer can also be used to automate and test CrOS
+system web applications (System Web Apps) such as the Files app, Media app, and
+Settings. For detailed guidance on this, refer to
+[Running Puppeteer Tests to interact with System apps on CrOS Devices](/chromium-os/developer-library/guides/testing/puppeteer-system-apps/).
