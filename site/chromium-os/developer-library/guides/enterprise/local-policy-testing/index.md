@@ -62,7 +62,7 @@ process of generating policies, starting the server, and configuring Chrome. It
 is the simplest way to get started.
 
 For detailed, step-by-step instructions, please refer to the
-[Automated Usage section in the fake_dmserver README](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#2_automated-usage-recommended).
+[Automated Usage section in the fake_dmserver README](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#2_automated-usage-recommended).
 
 ## Manual Usage (Advanced)
 
@@ -70,7 +70,7 @@ This workflow is for users who want more fine-grained control over the
 process, allowing you to run each step manually.
 
 For detailed instructions, see the
-[Manual Usage section in the fake_dmserver README](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#3_manual-usage-advanced).
+[Manual Usage section in the fake_dmserver README](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#3_manual-usage-advanced).
 
 ## Enrolling a Device for Testing Device Policies
 
@@ -110,7 +110,7 @@ The `policies.json` file is the core configuration for defining which policies
 the `fake_dmserver` will apply. For a complete guide on the file structure,
 all available configuration parameters, and a detailed example, please see the
 [How to Set Valid Policies (`policies.json`) section in the `fake_dmserver`
-README](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#4_how-to-set-valid-policies).
+README](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#4_how-to-set-valid-policies).
 
 ## Advanced Topics
 
@@ -119,8 +119,8 @@ custom Chrome flags, testing unlanded policies, or local development on the
 tools themselves, please refer to the comprehensive `fake_dmserver`
 documentation.
 
-*   [Converting Policies from an Existing Device](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#6_converting-existing-policies-from-dump)
-*   [Custom Chrome Flags](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#5_custom-chrome-flags)
-*   [Troubleshooting](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#7_troubleshooting)
-*   [Testing a New (Unlanded) Policy](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#8_testing-a-new-unlanded_policy)
-*   [Local Development Workflow](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/README.md#9_local-development-workflow)
+*   [Converting Policies from an Existing Device](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#6_converting-existing-policies-from-dump)
+*   [Custom Chrome Flags](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#5_custom-chrome-flags)
+*   [Troubleshooting](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#7_troubleshooting)
+*   [Testing a New (Unlanded) Policy](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#8_testing-a-new-unlanded_policy)
+*   [Local Development Workflow](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/components/policy/tools/fake_dmserver/chromeos_instructions.md#9_local-development-workflow)
