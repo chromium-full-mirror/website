@@ -89,7 +89,7 @@ Chromium, or at runtime using environment variables.
     *   Return to the Credentials tab and click the "Add credentials"
                 button again, then select "OAuth 2.0 client ID" from the
                 drop-down list.
-    *   In the "Application type" section check the "Other" option and
+    *   In the "Application type" section check the "Desktop app" option and
                 give it a name in the "Name" text box, then click "Create"
 3.  In the pop-up window that appears you'll see a **client ID** and a
             "**client secret**" string. Copy and paste those in a text file on
