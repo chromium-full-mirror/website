@@ -224,10 +224,18 @@ the **CrOS device or VM**.
     ```
 For more details, see the [official Selenium documentation](https://www.selenium.dev/documentation/).
 
-### c. Playwright (Coming Soon)
+### c. Playwright
 
-*(Content for Playwright-specific setup and test execution will be added here in
-the future.)*
+Instead of launching a new, local browser instance with `chromium.launch()`, you
+will connect to the existing browser on the remote device using
+`chromium.connectOverCDP()`, targeting the remote debugging port that is
+forwarded through your SSH tunnel.
+
+```typescript
+import { chromium } from 'playwright';
+
+const browser = await chromium.connectOverCDP(`http://localhost:${PORT}`);
+```
 
 For complete installation and API details, refer to the
 [official Playwright documentation](https://playwright.dev/docs/intro).

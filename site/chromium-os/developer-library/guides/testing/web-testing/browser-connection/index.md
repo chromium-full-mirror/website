@@ -55,3 +55,18 @@ You can view the full script content here:
 ```bash
 $ python test-chrome-connection.py --driver-path ./chromedriver --port ${PORT}
 ```
+
+### Playwright Example
+
+The `test-chrome-connection.ts` script uses Playwright's
+`chromium.connectOverCDP()` to attach to the remote browser.
+
+You can view the full script content here:
+[test-chrome-connection.ts](./test-chrome-connection.ts).
+
+**To run the test:**
+
+(host)
+```bash
+$ npx ts-node test-chrome-connection.ts ${PORT}
+```

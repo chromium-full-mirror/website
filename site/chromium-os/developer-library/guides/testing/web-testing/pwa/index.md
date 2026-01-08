@@ -54,3 +54,18 @@ You can view the full script content here:
 ```bash
 $ python test-pwa-lifecycle.py --driver-path ./chromedriver --port ${PORT}
 ```
+
+### Playwright Example
+
+The `test-pwa-lifecycle.ts` script uses Playwright to manage the PWA lifecycle
+via CDP commands.
+
+You can view the full script content here:
+[test-pwa-lifecycle.ts](./test-pwa-lifecycle.ts).
+
+**To run the test:**
+
+(host)
+```bash
+$ npx ts-node test-pwa-lifecycle.ts ${PORT}
+```

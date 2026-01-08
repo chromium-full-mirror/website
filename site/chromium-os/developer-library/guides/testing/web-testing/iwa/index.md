@@ -57,3 +57,18 @@ You can view the full script content here:
 ```bash
 $ python test-iwa-interaction.py --driver-path ./chromedriver --port ${PORT}
 ```
+
+### Playwright Example
+
+The `test-iwa-interaction.ts` script uses Playwright to control the IWA and its
+internal UI components via CDP commands.
+
+You can view the full script content here:
+[test-iwa-interaction.ts](./test-iwa-interaction.ts).
+
+**To run the test:**
+
+(host)
+```bash
+$ npx ts-node test-iwa-interaction.ts ${PORT}
+```

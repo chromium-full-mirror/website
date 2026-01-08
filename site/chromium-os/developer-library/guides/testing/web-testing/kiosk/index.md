@@ -66,3 +66,18 @@ You can view the full script content here:
 ```bash
 $ python test-iwa-kiosk.py --port ${PORT}
 ```
+
+### Playwright Example
+
+The `test-iwa-kiosk.ts` script uses Playwright to control the Kiosk IWA via
+low-level CDP commands tunneled through a browser session.
+
+You can view the full script content here:
+[test-iwa-kiosk.ts](./test-iwa-kiosk.ts).
+
+**To run this test:**
+
+(host)
+```bash
+$ npx ts-node test-iwa-kiosk.ts ${PORT}
+```

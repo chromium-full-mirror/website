@@ -106,3 +106,18 @@ You can view the full script content here:
 ```bash
 $ python test-file-download.py --driver-path ./chromedriver --port ${PORT}
 ```
+
+### Playwright Example
+
+The `test-file-download.ts` script uses Playwright to automate the Files app
+and Media app, verifying a file download and its content.
+
+You can view the full script content here:
+[test-file-download.ts](./test-file-download.ts).
+
+**To run this test:**
+
+(host)
+```bash
+$ npx ts-node test-file-download.ts ${PORT}
+```
