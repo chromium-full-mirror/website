@@ -14,11 +14,11 @@ Here are some ways you can get involved with Chromium:
   * Get on the [Beta or Dev channel](/getting-involved/chrome-release-channels)
     or grab the [latest trunk build of
     Chromium](/getting-involved/download-chromium)
-  * [File bugs](http://code.google.com/p/chromium/issues/entry)
+  * [File bugs](https://issues.chromium.org/issues/new?noWizard=true&component=1363614)
   * [Triage bugs](/getting-involved/bug-triage) to make existing bug
     reports more useful
   * [Report
-    translation](http://code.google.com/p/chromium/issues/entry?template=Translation%20Issue)
+    translation](https://issues.chromium.org/issues/new?noWizard=true&component=1457298)
     issues
 * Develop Chromium
   * See the pages for [Developers](/developers)
@@ -28,8 +28,8 @@ Here are some ways you can get involved with Chromium:
     page
   * Adopt a bug that's marked
     [GoodFirstBug](https://issues.chromium.org/hotlists/5483263)
-  * Submit [patches](/developers/contributing-code) (submit enough
-    and you can [become a committer](/getting-involved/become-a-committer)!)
+  * Submit [patches](https://chromium.googlesource.com/chromium/src/+/main/docs/contributing.md) (submit
+    enough and you can [become a committer](/getting-involved/become-a-committer)!)
   * Optionally apply for a Chromium account by emailing
     [accounts@chromium.org](mailto:accounts@chromium.org) (Note: you
     must already be approved as a committer) (if you're a Googler, click
