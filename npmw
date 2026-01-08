@@ -16,21 +16,39 @@
 #
 # This file is a simple wrapper around whatever machine-specific version
 # of `npm` we downloaded (as part of Node).
+set -euo pipefail
 
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 
-if [ $(uname -s) = "Darwin" -a $(uname -m) = "x86_64" ]
-then
-  node_dir="${SCRIPT_DIR}/third_party/node/mac/node-darwin-x64"
-elif [ $(uname -s) = "Linux" -a $(uname -m) = "x86_64" ]
-then
-  node_dir="${SCRIPT_DIR}/third_party/node/linux/node-linux-x64"
-else
-  echo "unsupported system"
+platform=$(uname -s)
+arch=$(uname -m)
+key="${platform}-${arch}"
+
+node_path=""
+case "${key}" in
+  Darwin-x86_64)
+    node_path="mac/node-darwin-x64"
+    ;;
+  Darwin-arm64)
+    node_path="mac_arm64/node-darwin-arm64"
+    ;;
+  Linux-x86_64)
+    node_path="linux/node-linux-x64"
+    ;;
+  *)
+    echo "Unsupported system: ${key}" >&2
+    exit 1
+    ;;
+esac
+
+node_dir="${SCRIPT_DIR}/third_party/node/${node_path}"
+
+if [[ ! -d "${node_dir}" ]]; then
+  echo "Missing node binary directory: ${node_dir}" >&2
   exit 1
 fi
 
-script=$1
-shift
-export PATH=${node_dir}/bin:${SCRIPT_DIR}/node_modules/.bin:$PATH
-$node_dir/bin/node node_modules/npm/bin/npm-cli.js run-script $script "$@"
+export PATH="${node_dir}/bin:${SCRIPT_DIR}/node_modules/.bin:${PATH}"
+
+npm_cli="${SCRIPT_DIR}/node_modules/npm/bin/npm-cli.js"
+exec "${node_dir}/bin/node" "${npm_cli}" run-script "$@"
