@@ -4,140 +4,179 @@ page_name: audio-video
 title: Audio/Video
 ---
 
-Everything you need to know about audio/video inside Chromium and Chromium OS!
+A starting point for becoming familiar with audio and video in the Chromium
+projects.
 
-### Whom To Contact
+## Get Connected
 
-It's best to have discussions on chromium-dev@chromium.org or
-media-dev@chromium.org for media specific matters.
+### Slack
 
-We are component
-[Internals&gt;Media](https://bugs.chromium.org/p/chromium/issues/list?can=2&q=component%3AInternals%3EMedia)
-on the Chromium bug tracker.
+For more real-time questions and collaboration, please consider joining the
+`#media` slack channel.
 
-### Documentation
+See the main [Chromium Slack](/developers/slack) page for rules and instructions
+on signing up, as well as tips and tricks.
 
-See
+### Mailing Groups
+
+For more serious technical discussions or topics with potentially broader
+interest, it's still best practice to send to the [chromium-dev](https://groups.google.com/a/chromium.org/g/chromium-dev)
+discussion group ([chromium-dev@chromium.org](mailto:chromium-dev@chromium.org))
+or, for media specific matters, the [media-dev](https://groups.google.com/a/chromium.org/forum/#!forum/media-dev)
+discussion group ([media-dev@chromium.org](mailto:media-dev@chromium.org)).
+
+See [Technical Discussion Groups](/developers/technical-discussion-groups) for
+an extensive list of available groups.
+
+### Issue Tracking
+
+Issues are tracked in the [Chromium > Internals > Media](https://g-issues.chromium.org/components/1456190)
+component. See the [open issues](https://g-issues.chromium.org/issues?q=status:open%20componentid:1456190)
+query.
+
+## Documentation
+
+The majority of the media documentation lives in the source tree, see
 [media/README.md](https://chromium.googlesource.com/chromium/src/+/HEAD/media/README.md).
-For historical reference, here's the original [design doc for HTML5
-audio/video](/developers/design-documents/video).
 
-### Codec and Container Support
+For historical reference, here's the original
+[design doc for HTML5 audio/video](/developers/design-documents/video).
 
-Container formats
+## Codec and Container Support
 
-*   MP4 (QuickTime/ MOV / ISO-BMFF / CMAF)
-*   Ogg
-*   WebM
-*   WAV
+Chromium supports a variety of codecs and containers for content playback
+(decoding) and content capture (encoding), listed below.
 
-*   HLS \[Only on Android and only single-origin manifests\]
+### Container formats
 
-Codec formats (Decode Only)
+* MP4 (QuickTime/ MOV / ISO-BMFF / CMAF)
+* Ogg
+* WebM
+* WAV
+* Matroska
+* HLS
 
-==Audio==
+### Codec formats
 
-*   FLAC
-*   MP3
-*   Opus
-*   PCM 8-bit unsigned integer
-*   PCM 16-bit signed integer little endian
-*   PCM 32-bit float little endian
-*   PCM μ-law
-*   Vorbis
+#### Audio
 
-*   AAC \[Main, LC, HE profiles only, xHE-AAC on Android P+, macOS, Windows 11\] \[Google
-            Chrome only\]
+* FLAC
+* MP3
+* Opus
+* PCM 8-bit unsigned integer
+* PCM 16-bit signed integer little endian
+* PCM 32-bit float little endian
+* PCM μ-law
+* Vorbis
 
-==Video==
+##### Proprietary Audio Codecs (Limited to Google Chrome)
 
-*   AV1
-*   VP8
-*   VP9
+* AAC (Main, LC, HE profiles only)
+* xHE-AAC (requires native OS support, i.e. Android P+, macOS, Windows 11 22H2+)
 
-*   H.264 \[Google Chrome only\]
-*   H.265 \[Google Chrome only and only where supported by the underlying OS\]
+#### Video
 
-### Code Location
+* AV1
+* VP8
+* VP9
 
-**Chromium**
+##### Proprietary Video Codecs (Limited to Google Chrome)
 
-media/ - Home to all things media!
-media/audio - OS audio input/output abstractions
-media/video/capture - OS camera input abstraction
-media/video - software/hardware video decoder interfaces + implementations
-third_party/ffmpeg - Chromium's copy of FFmpeg
-third_party/libvpx - Chromium's copy of libvpx
+* H.264 / AVC
+* H.265 / HEVC (Proprietary, limited to Google Chrome, requires hardware support)
 
-**Blink**
+## Code Locations
 
-third_party/blink/renderer/core/html/media/html_media_element.{cpp,h,idl} -
-media element base class
+### Chromium
 
-third_party/blink/renderer/core/html/media/html_audio_element.{cpp,h,idl} -
-audio element implementation
+* [`media/`](https://chromium.googlesource.com/chromium/src/+/HEAD/media/) -
+    Home to all things media!
 
-third_party/blink/renderer/core/html/media/html_video_element.{cpp,h,idl} -
-video element implementation
+* [`media/audio`](https://chromium.googlesource.com/chromium/src/+/HEAD/media/audio/) -
+    OS audio input/output abstractions
 
-**Particularly Interesting Bits**
+* [`media/video/capture`](https://chromium.googlesource.com/chromium/src/+/HEAD/media/video/capture/) -
+    OS camera input abstraction
 
-media/base/mime_util.cc - defines canPlayType() behaviour and file extension
-mapping
+* [`media/video`](https://chromium.googlesource.com/chromium/src/+/HEAD/media/video/) -
+    software/hardware video decoder interfaces + implementations
 
-media/blink/buffered_data_source.{cc,h} - Chromium's main implementation of
-DataSource for the media pipeline
+* [`third_party/ffmpeg`](https://chromium.googlesource.com/chromium/third_party/ffmpeg) -
+    Chromium's copy of FFmpeg
 
-media/blink/buffered_resource_loader.{cc,h} - Implements the sliding window
-buffering strategy (see below)
+* [`third_party/libvpx`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/libvpx/) -
+    Chromium's copy of libvpx
 
-third_party/blink/public/platform/web_media_player.h - Blink's media player
-interface for providing HTML5 audio/video functionality
+### Blink
 
-media/blink/webmediaplayer_impl.{cc,h} - Chromium's main implementation of
-WebMediaPlayer
+* [`third_party/blink/renderer/core/html/media/html_media_element.{cpp,h,idl}`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/core/html/media/html_media_element.h) -
+    media element base class
 
-### How does everything get instantiated?
+* [`third_party/blink/renderer/core/html/media/html_audio_element.{cpp,h,idl}`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/core/html/media/html_audio_element.h) -
+    audio element implementation
 
-WebFrameClient::createMediaPlayer() is the Blink embedder API for creating a
-WebMediaPlayer and passing it back to Blink. Every HTML5 audio/video element
-will ask the embedder to create a WebMediaPlayer.
+* [`third_party/blink/renderer/core/html/media/html_video_element.{cpp,h,idl}`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/core/html/media/html_video_element.h) -
+    video element implementation
 
-For Chromium this is handled in RenderFrameImpl.
+### Particularly Interesting Bits
 
-### GN Flags
+* [`media/base/mime_util.cc`](https://chromium.googlesource.com/chromium/src/+/HEAD/media/base/mime_util.cc) -
+    defines `canPlayType()` behaviour and file extension mapping
 
-There are a few GN flags which can alter the behaviour of Chromium's HTML5
-audio/video implementation.
+* [`third_party/blink/renderer/platform/media/multi_buffer_data_source.{cc,h}`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/platform/media/multi_buffer_data_source.h) -
+    Chromium's main implementation of DataSource for the media pipeline
 
-ffmpeg_branding
+* [`third_party/blink/renderer/platform/media/multi_buffer.{cc,h}`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/platform/media/multi_buffer.h) -
+    Implements the sliding window buffering strategy (see below)
 
-Overrides which version of FFmpeg to use
+* [`third_party/blink/public/platform/web_media_player.h`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/public/platform/web_media_player.h) -
+    Blink's media player interface for providing HTML5 audio/video functionality
 
-Default: $(branding)
+* [`third_party/blink/renderer/platform/media/web_media_player_impl.{cc,h}`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/platform/media/web_media_player_impl.h) -
+    Chromium's main implementation of WebMediaPlayer
 
-Values:
+## How does everything get instantiated?
 
-Chrome - includes additional proprietary codecs (MP3, etc..) for use with Google
-Chrome
+[`WebLocalFrameClient::CreateMediaPlayer()`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/public/web/web_local_frame_client.h)
+is the Blink embedder API for creating a
+[`WebMediaPlayer`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/public/platform/web_media_player.h)
+and passing it back to Blink. Every HTML5 audio/video element will ask the
+embedder to create a
+[`WebMediaPlayer`](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/public/platform/web_media_player.h).
 
-Chromium - builds default set of codecs
+For Chromium this is handled in
+[`RenderFrameImpl`](https://chromium.googlesource.com/chromium/src/+/HEAD/content/renderer/render_frame_impl.h).
 
-proprietary_codecs
+## Build Configuration & GN Flags
 
-Alters the list of codecs Chromium claims to support, which affects
-&lt;source&gt; and canPlayType() behaviour
+Chromium currently uses the [GN](https://gn.googlesource.com/gn/) meta-build
+system for generating build files. With several exceptions, the majority of
+GN flags that alter the behavior of Chromium's HTML5 audio/video implementation
+are specified in the [media_options.gni](https://chromium.googlesource.com/chromium/src/+/HEAD/media/media_options.gni)
+file.
 
-Default: 0(gyp)/false(gn)
+### `ffmpeg_branding`
 
-Values:
+Overrides which version of FFmpeg to use.
 
-0/false - &lt;source&gt; and canPlayType() assume the default set of codecs
+* Default: `$(branding)` - matches the build branding (see [is_chrome_branded](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/google_chrome_branded_builds.md))
+* Values:
+  * `Chrome` - includes additional proprietary codecs (MP3, etc..) for use
+        with Google Chrome
+  * `Chromium` - builds default set of codecs
 
-1/true - &lt;source&gt; and canPlayType() assume they support additional
-proprietary codecs
+### `proprietary_codecs`
 
-### How the %#$& does buffering work?
+Alters the list of codecs Chromium claims to support, which affects `<source>`
+and `canPlayType()` behavior.
+
+* Default: `false`
+* Values:
+  * `false` - `<source>` and `canPlayType()` assume the default set of codecs
+  * `true` - `<source>` and `canPlayType()` assume they support additional
+    proprietary codecs
+
+## How buffering works
 
 Chromium uses a combination of range requests and an in-memory sliding window to
 buffer media. We have a low and high watermark that is used to determine when to
@@ -145,5 +184,4 @@ purposely stall the HTTP request and when to resume the HTTP request.
 
 It's complicated, so here's a picture:
 
-[<img alt="image"
-src="/audio-video/ChromiumMediaBuffering.png">](/audio-video/ChromiumMediaBuffering.png)
+![Buffering Diagram](/audio-video/ChromiumMediaBuffering.png)
