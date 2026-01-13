@@ -316,6 +316,80 @@ option when committing.
 When using `repo upload`, the tool will automatically check the project's
 configuration and then require or reject the tag accordingly.
 
+### Kernel CL Dispatching Tags
+
+When contributing bug fixes to the ChromiumOS kernel, an additional `Branches` tag is required
+in the commit message. These tags help automate the dispatching of bug fixes to
+other kernel branches: older Chromium OS kernel versions that are still supported
+and Android Desktop kernel branches. This ensures that important fixes are backported
+efficiently and consistently across the fleet:
+
+*   `Branches:` This tag specifies all kernel branches the commit should
+    additionally be targeted to. Use specific branch names (e.g.,
+    `chromeos-5.10`), group keywords (`all`, `chromeos-all`, `android-desktop-all`),
+    or `N/A` if no other branches need this commit. Multiple target branches
+    can be specified as comma-separated values (e.g. `Branches: chromeos-5.10, chromeos-6.6`).
+
+*   `Fixes:` This tag is mandatory if `Branches` is not `N/A`. It should point
+    to the git SHA and the first line of the commit message of the commit being
+    fixed. The format is `<SHA> ("<Commit message first line>")`. Example:
+    `Fixes: 86e5d3e6b77f ("CHROMIUM: Very important change")`. The SHA should
+    be based on the branch where you **upload** the commit, not where you dispatch.
+    If there is an existing `Fixes` tag coming from linux upstream, there is no need to modify it.
+
+The tags are passed in the commit message in a form of [git trailers](https://git-scm.com/docs/git-interpret-trailers)
+(e.g. `Branches: <value>`). They are then consumed by [CopyBot](https://chromium.googlesource.com/copybot/+/HEAD/)
+to automatically cherry-pick changes to the specified branches.
+
+#### Android Desktop Kernel branches: Core vs. Vendor
+
+Android Desktop kernel is split into two main parts:
+
+*   **Core Kernel:** This resides in `//kernel/common` (e.g.,
+    `android16-6.12-desktop`) and tracks the main Android Common Kernel (ACK).
+    This part contains the core kernel functionality and built-in GKI modules.
+    The `Branches` tag have the following format: `<branch-name>-core`.
+
+*   [**Vendor Modules:**](https://source.android.com/docs/core/architecture/kernel/modules)
+    These are located in a separate repository (
+    `kernel-desktop/private/desktop-google`) and contain platform-specific
+    drivers and modules. The `Branches` tag have the following format: `<branch-name>-vendor`.
+
+When dispatching changes to Android branches, consider whether the changes affect
+the core kernel or vendor-specific modules, as they reside in different
+repositories and have different acceptance criteria.
+
+For example:
+
+*   To target a fix to the core Android 16 kernel: `Branches: android16-6.12-desktop-core`
+*   To target a fix to the vendor modules for Android 16: `Branches: android16-6.12-desktop-vendor`
+
+#### ChromiumOS Kernel branches
+
+ChromiumOS kernel is monolithic, hence bare kernel branch names can be used in the `Branches` tag (e.g. `chromeos-5.10`).
+
+#### Branch Groups
+
+To facilitate targeting multiple branches at once, the `Branches` tag supports
+the following branch group names:
+
+*   `all`: Includes all active ChromiumOS kernel branches and all Android Desktop
+    kernel branches.
+*   `chromeos-all`: Includes all active ChromiumOS kernel branches.
+*   `android-desktop-all`: Includes all Android desktop kernel branches (core and
+    vendor).
+
+The list may expand over time.
+
+#### Common Workflows
+
+| Use case                                                                                                                                            | Action                                                                                                             | Branches   | Fixes                           |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :---------- | :----------------------------------------------- |
+| Submitting a new feature.                                                                                                                                            | Only bug fixes are dispatched automatically. No action required.                                                                    | `N/A`                         | Tag is not required.                             |
+| Submitting a bug fix to an existing 86e5d3e6b77f (“CHROMIUM: Very important change”) commit that should be applied to all branches where this commit is present.     | Specify Branches: all so that the dispatcher automatically cherry-picks it where it’s relevant.                                     | `all`                         | `86e5d3e6b77f (“CHROMIUM: Very important change”)` |
+| Submitting a bug fix to an existing 86e5d3e6b77f (“CHROMIUM: Very important change”) commit that should only be ported to Android Desktop.                           | Specify Branches: android-desktop-all so that the dispatcher automatically cherry-picks the commit to all Android Desktop branches. | `android-desktop-all`         | `86e5d3e6b77f (“CHROMIUM: Very important change”)` |
+| Submitting a bug fix to an existing 86e5d3e6b77f (“CHROMIUM: Very important change”) commit that should only be applied to Chromium OS 5.4 and 5.10 kernel versions. | List the kernel branches names one by one in the Branches tag.                                                                      | `chromeos-5.4, chromeos-5.10` | `86e5d3e6b77f (“CHROMIUM: Very important change”)` |
+
 ## Upload changes
 
 *** note
