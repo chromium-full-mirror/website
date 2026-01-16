@@ -16,6 +16,39 @@ if you're interested in updates, discussion, or feisty rants related to Chromium
 security.
 
 
+## Q4 2025
+
+# Chrome Security **2025 Q4** Update
+
+
+Hello everyone,
+
+To kick off the new year, a friendly reminder that Chrome Security is hiring -- please [apply here](https://www.google.com/about/careers/applications/jobs/results?q=%22Chrome%20Security%22&location=Kirkland%2C%20WA%2C%20USA&e=72477625)! Here's what we were up to in Q4 of 2025.
+
+The AI Security team has been hard at work building new mechanisms to keep Chrome users safe from indirect prompt injection while using agentic browsing, and we described some of those details in a [technical blog post](https://security.googleblog.com/2025/12/architecting-security-for-agentic.html). We hope to share more details as we roll them out and when the agentic functionality is released to preview users.
+
+The Counter-Abuse team ran an [Origin Trial](https://developer.chrome.com/origintrials/#/view_trial/3911939226324697089) for Device Bound Session Credentials (DBSC) and we plan to ship the API in Q1. We've also simplified the process of opting into the Enhanced Protection mode of Safe Browsing by making it sync across Android and Desktop devices for users that are syncing their preferences.
+
+The Secure Web and Network team [announced a timeline](https://security.googleblog.com/2025/10/https-by-default.html) for enabling "Always Use Secure Connections" by default -- this will cause Chrome to show a warning interstitial before accessing plaintext HTTP sites. We completed the first successful handshake in Chrome authenticated by a [Merkle Tree Certificate](https://www.ietf.org/archive/id/draft-davidben-tls-merkle-tree-certs-00.html), and we're excited to continue the work in the newly created [PLANTS working group](https://datatracker.ietf.org/group/plants/about/) at the IETF, as part of migrating the Web PKI to post-quantum cryptography. We also launched the [Local Network Access](https://developer.chrome.com/blog/local-network-access) permission, which helps protect devices on user's local networks (e.g. a printer or router on their home WiFi) from malicious websites. If you're a developer or administrator experiencing issues, we've written an [adoption guide](https://docs.google.com/document/d/1QQkqehw8umtAgz5z0um7THx-aoU251p705FbIQjDuGs/edit?tab=t.0#heading=h.v8oobsqxbxxy). The vast majority of use cases require no code changes to continue working with the new permission.
+
+The Anti-Covert Tracking team launched TCP port randomization on [Windows](https://issues.chromium.org/40744069) and [started a conversation with Apple](https://b.corp.google.com/issues/457405513) about what it would take to bring the same to MacOS (Linux already has support). Additionally, we started experiments aimed at [preventing user dictionary leaks via spelling/grammar highlight exploits](https://explainers-by-googlers.github.io/user-dictionary-leaks/) and [randomizing the TCP port pool size](https://groups.google.com/a/chromium.org/g/blink-dev/c/6D-pO59I-WQ/m/ZIDLF40SAgAJ) to mitigate a channel for [cross-origin connection utilization spying](https://xsleaks.dev/docs/attacks/timing-attacks/connection-pool/).
+
+The Security Architecture team focused more on Rust on a non-shipping branch, significantly expanding our [browser kernel prototype](https://crbug.com/330668787) to support semantic safety goals, and starting a new effort to [migrate ChildProcessSecurityPolicy from C++ to Rust](https://crbug.com/465497421). We also launched multiple navigation performance optimizations (including one meant to unblock the [RenderDocument](https://crbug.com/936696) launch) and fixed an issue where beforeunload handlers could be used to trap a user on a page.
+
+The Platform Security team continued our work to deploy platform-specific hardening. On macOS, we deprecated, removed all clients of, and are working on removing the implementation of the legacy keychain v1 API. We also made smaller architectural safety improvements throughout Chromium by removing several out-of-process C++ parsers in favor of memory-safe ones, and we finished our improvements to the //crypto layer.
+
+The Safe Coding team finished migrating Chromium to use a Rust-based PNG codec. Although some of our code dependencies still have build configurations that compile with libpng, we have removed all traces of it from the shipping browser. We also continued to [Spanify](https://chromium.googlesource.com/chromium/src/+/refs/tags/132.0.6794.0/docs/unsafe_buffers.md) the Chrome source tree: of the first- and second-party C++ code we ship in Chromium, more than 78% is protected by Safe Buffers diagnostics, up from 65% at the beginning of the year.
+
+The V8 team continued to invest into the [V8 sandbox](https://v8.dev/blog/sandbox) by driving down known issues and making fuzzing in this area more robust by avoiding prominent false positives. In addition the team created a [bytecode verifier](https://docs.google.com/document/d/1UUooVKUvf1zDobG34VDVuLsjoKZd-CeSuhvBcLysc7U/edit?tab=t.0#heading=h.xzptrog8pyxf) that ensures that the execution of verified bytecode does not lead to out-of-sandbox corruption. The verifier will be shipped in future where performance allows. With the shipping of Wasm support for Growable Shared ArrayBuffers/Resizable ArrayBuffers, we've also improved the fuzzing coverage of that feature.
+
+And last but not least, the Fuzzing team got most of the libfuzzer fuzzers in the tree to build for Android, and the Product Security team welcomed and onboarded new team members.
+
+Thank you for reading!
+
+Jasika
+
+On behalf of Chrome Security
+
 ## Q3 2025
 
 # Chrome Security **2025 Q3** Update
