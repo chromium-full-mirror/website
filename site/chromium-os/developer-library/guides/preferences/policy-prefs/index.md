@@ -123,7 +123,7 @@ PrefService* GetUserPrefService(const AccountId& account_id) {
 
 // Fetch the pref value.
 auto* pref_service = GetUserPrefService(GetActiveAccountId());
-const base::Value::Dict& override_prefs =
+const base::DictValue& override_prefs =
     pref_service->GetDict(prefs::kAcceleratorOverrides);
 ```
 
@@ -132,8 +132,8 @@ const base::Value::Dict& override_prefs =
 * Recall that Preference values are typed as base::Value's.
 
 ```
-// Helper function to convert a std::map<T,T> to base::Value::Dict<T,T>
-base::Value::Dict CreateAcceleratorOverrides() { ... }
+// Helper function to convert a std::map<T,T> to base::DictValue<T,T>
+base::DictValue CreateAcceleratorOverrides() { ... }
 
 auto* pref_service = GetUserPrefService(GetActiveAccountId());
 pref_service->SetDict(prefs::kAcceleratorOverrides,

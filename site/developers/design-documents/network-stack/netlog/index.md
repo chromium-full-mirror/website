@@ -144,9 +144,9 @@ As was alluded to earlier in the overview, [FileNetLogObserver](https://cs.chrom
 
 # How custom parameters are attached to events
 
-Custom parameters are specified by a `base::Value::Dict`. `Value::Dict` is used to represent a hierarchy of nodes, that maps directly into JSON; it has all the expected building blocks -- dictionaries, strings, numbers, arrays. See [values.h](https://cs.chromium.org/chromium/src/base/values.h) for more details.
-For the sake of efficiency, you do not directly create a `base::Value::Dict` when emitting events. Rather, you pass in a lambda which knows how to build the `Dict`, in case one is needed.
-This decoupling allows deferring the creation of Values until really necessary. This is good since, in the common case when not exporting events, we simply don’t need that data. Creating the custom parameters is not free since it involves copying internal state into a new `Value::Dict` hierarchy.
+Custom parameters are specified by a `base::DictValue`. `base::DictValue` is used to represent a hierarchy of nodes, that maps directly into JSON; it has all the expected building blocks -- dictionaries, strings, numbers, arrays. See [values.h](https://cs.chromium.org/chromium/src/base/values.h) for more details.
+For the sake of efficiency, you do not directly create a `base::DictValue` when emitting events. Rather, you pass in a lambda which knows how to build the `base::DictValue`, in case one is needed.
+This decoupling allows deferring the creation of Values until really necessary. This is good since, in the common case when not exporting events, we simply don’t need that data. Creating the custom parameters is not free since it involves copying internal state into a new `base::DictValue` hierarchy.
 This makes it easy to piece things together without needing to define helper structures! You are guaranteed that the lambda will only be invoked synchronously before the return of the logging function.
 
 Here is an example of how to emit an event with custom parameters:
@@ -158,26 +158,26 @@ net_log_.BeginEvent(
 });
 ```
 
-By the time `BeginEvent` returns, `NetLogURLRequestStartParams()` will have been invoked if-and-only-if the `Value::Dict` parameter was needed. That is why it is safe for the lambda to capture by reference.
+By the time `BeginEvent` returns, `NetLogURLRequestStartParams()` will have been invoked if-and-only-if the `base::DictValue` parameter was needed. That is why it is safe for the lambda to capture by reference.
 
 Here is what the bound function might look like:
 
 ```
-base::Value::Dict NetLogURLRequestStartParams(const GURL& url,
+base::DictValue NetLogURLRequestStartParams(const GURL& url,
                                               const std::string& method,
                                               int load_flags) {
-    return base::Value::Dict()
+    return base::DictValue()
       .Set("url", url.possibly_invalid_spec())
       .Set("method", method)
       .Set("load_flags", load_flags);
 }
 ```
 
-The `Value::Dict` object can also be created inline in the lambda:
+The `base::DictValue` object can also be created inline in the lambda:
 
 ```
 net_log_.BeginEvent(NetLogEventType::HTTP_STREAM_POOL_GROUP_ALIVE, [&] {
-  return base::Value::Dict()
+  return base::DictValue()
     .Set("stream_key", stream_key_.ToValue())
     .Set("force_quic", force_quic_);
 });
