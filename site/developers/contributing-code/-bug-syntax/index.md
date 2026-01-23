@@ -101,3 +101,8 @@ SVN-style monotonically increasing revision number.
 Automatically added by the git-numberer Gerrit plugin on changes which are
 submitted to branches other than master, to help someone looking at that commit
 know when that branch diverged from master.
+
+**Max-Compile-Failures:**
+
+Specifies the number of compilation failures each trybot should collect before
+terminating the build (0 means infinity).
