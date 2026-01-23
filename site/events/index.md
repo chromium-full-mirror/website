@@ -4,10 +4,11 @@ page_name: events
 title: Chromium project related events.
 ---
 
-*   [BlinkOn 20](/events/blinkon-20) (Apr 7-8, 2025 PDT)
+*   [BlinkOn 21](/events/blinkon-21) (Apr 20-21, 2026 PDT)
 
 Past events
 
+*   [BlinkOn 20](/events/blinkon-20) (Apr 7-8, 2025 PDT)
 *   [BlinkOn 19](/events/blinkon-19) (Oct 8-10, 2024 PDT)
 *   [BlinkOn 18](/events/blinkon-18) (Oct 17-19, 2023 PDT)
 *   [BlinkOn 17](/events/blinkon-17) (Nov 15-17, 2022 PDT)
