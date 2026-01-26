@@ -4599,6 +4599,39 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
     <td>Yes</td>
   </tr>
+
+  <tr>
+    <td>2026-01-12</td>
+    <td>Lenovo</td>
+    <td><a href="https://psref.lenovo.com/Product/Lenovo_Chrome_500e_2in1_G5_ITN">Lenovo Chrome 500e 2in1 G5 ITN</a></td>
+    <td>Pujjolo</td>
+    <td>Trulo</td>
+    <td>Trulo</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Convertible</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+
+  <tr>
+    <td>2026-01-12</td>
+    <td>Lenovo</td>
+    <td><a href="https://psref.lenovo.com/Product/Lenovo/Lenovo_Chrome_15ITN10">Lenovo Chromebook (15", 10) / Lenovo Chromebook Plus (15", 10)</a></td>
+    <td>Pujjoquince</td>
+    <td>Trulo</td>
+    <td>Trulo</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>Twinlake</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+
   <tr>
     <td>2026-01-20</td>
     <td>Asus</td>
