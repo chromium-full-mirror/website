@@ -226,8 +226,9 @@ Consider adding a [UseCounter](/blink/platform-predictability/compat-tools) to
 track usage of your new feature in the wild, and be sure to write integration
 tests for your feature as[
 web-platform-tests](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/testing/web_platform_tests.md)
-as you go. Continue to work with your API mentor if there are any design
-changes.
+as you go. Refer to the [Test coverage requirements](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/testing/web_platform_tests.md#test-coverage)
+to ensure your WPTs meet the necessary criteria for launch. Continue to work
+with your API mentor if there are any design changes.
 
 Ensure you have an API overview and descriptions for all IDL methods and
 properties (these are probably in your specification or explainer, but
