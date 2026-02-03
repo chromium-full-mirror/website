@@ -8,22 +8,23 @@ breadcrumbs:
   - Guides
 - - /chromium-os/developer-library/guides/testing
   - Testing
-page_name: puppeteer-web-testing-on-cros
-title: Running Puppeteer Tests on CrOS Devices
+page_name: web-apps-testing-on-cros
+title: Web Apps Testing on CrOS
 ---
 
-This document outlines the steps required to run Puppeteer tests on a
-host/development machine (e.g. Linux, macOS or Windows), controlling a Google
-Chrome browser instance on a CrOS Device or VM in dev-mode.
+This guide is the central starting point for running automated web tests on a
+CrOS Device or VM from a separate host machine. It covers the initial device
+setup, connection verification, and framework-specific configuration.
 
 [TOC]
 
 ## Typography Conventions
 
-Commands are shown with different labels to indicate whether they apply to
-* (1) Your host machine (the machine on which you're doing development)
-* (2) Your CrOS device or VM (the device on which you test your
-web apps)
+Commands are shown with different labels to indicate where they apply to:
+1. Your **host machine** (the machine on which you're doing development,
+   e.g., Linux, macOS, or Windows).
+2. Your **CrOS device or VM** (the device on which you are testing your web
+   apps).
 
 | Label | Commands |
 | --- | --- |
@@ -31,310 +32,213 @@ web apps)
 | (device) | on your CrOS device or VM |
 
 Beneath the label, the command(s) you should type are prefixed with a generic
-shell prompt, `$`. This distinguishes input from the output of commands, which
-is not so prefixed.
+shell prompt, `$`. This distinguishes input from the output of commands.
 
-Notes are shown using the following conventions:
+## Step 1: CrOS Device or VM Setup
 
-*   **IMPORTANT NOTE** describes required actions and critical information
-*   **SIDE NOTE** describes explanations, related information, and alternative
-    options
-
-## 1. Prerequisites
-
-### 1.1.CrOS Device or VM Setup
-
-Your CrOS device needs to be properly configured to allow remote control
-of the browser. It is required to use a device or VM with at least CrOS
-version `M141-16376.0.0`.
+This one-time setup configures your CrOS device to allow remote control of the
+browser. It is required to use a device or VM with at least CrOS version
+`M141-16376.0.0`.
 
 **Recommendation: Use a ChromiumOS VM**
 Starting your testing with a ChromiumOS VM is highly recommended. This allows
 for faster iteration, easier debugging, and a more controlled environment.
 Follow the [Running a Prebuilt ChromiumOS VM](/chromium-os/developer-library/guides/containers/prebuilt-vm-guide/) guide.
 
-#### a. Enable Developer Mode
+### a. Enable Developer Mode
 
-The device must be in Developer Mode to allow system-level changes.
+The device must be in Developer Mode. This will wipe all local data.
+Please refer to the [official documentation for your specific device](/chromium-os/developer-library/guides/device/developer-mode/).
 
-**IMPORTANT NOTE:** Enabling Developer Mode will wipe all local data from the
-device. Ensure you have backed up anything important.
+### b. Remove Root File System (rootfs) Verification
 
-**How to:** The process for enabling Developer Mode can vary slightly by device.
-Please refer to the [official Chromium OS documentation for your specific device](/chromium-os/developer-library/guides/device/developer-mode/).
+To modify Chrome's startup flags, you must disable rootfs verification.
 
-#### b. Remove Root File System (rootfs) Verification
+**SECURITY WARNING:** This reduces your device's security. Do not perform these
+actions on a device with sensitive information.
 
-To modify Chrome's startup flags, you'll need to disable rootfs verification.
-This allows you to make changes to the otherwise read-only parts of the
-filesystem.
-
-For detailed instructions, refer to the official documentation on
-[Making Changes to the Filesystem](/chromium-os/developer-library/guides/device/developer-mode/#making-changes-to-the-filesystem).
-
-**SECURITY WARNING:** Disabling rootfs verification and enabling remote
-debugging significantly reduces the security of your CrOS device. Do not
-perform these actions on a device that contains sensitive information.
-Avoid connecting the device to public or untrusted networks while in this
-state, as it could be vulnerable to attacks.
-
-First, execute the script to disable rootfs verification:
 (device)
 ```bash
 $ sudo /usr/share/vboot/bin/make_dev_ssd.sh \
   --remove_rootfs_verification --force && sudo reboot
 ```
+After rebooting, remount the filesystem as read-write when you need to make
+changes:
 
-After the device reboots, you must remount the filesystem as read-write each
-time you want to make changes:
 (device)
 ```bash
 $ sudo mount -o remount,rw /
 ```
 
-#### c. Enable Chrome DevTools Remote Debugging
+### c. Enable Chrome DevTools Remote Debugging
 
-You need to start Chrome with the remote debugging port and the PWA handler
-enabled.
+Start Chrome with the remote debugging port enabled by editing
+`/etc/chrome_dev.conf`.
 
-**How to:**
-1.  After removing rootfs verification and rebooting, open a shell on the
-    device (as root).
-2.  Add the `--remote-debugging-port` flag to Chrome's startup by editing or
-    creating the `/etc/chrome_dev.conf` file:
-    (device)
-    ```bash
-    $ echo "--remote-debugging-port=${PORT}" >> /etc/chrome_dev.conf
-    ```
-3.  Add the `--enable-devtools-pwa-handler` flag to the same file. This flag
-    enables testing PWAs and IWAs on the platform:
-    (device)
-    ```bash
-    $ echo "--enable-devtools-pwa-handler" >> /etc/chrome_dev.conf
-    ```
-4.  **For IWA testing, enable the `IsolatedWebAppDevMode` feature flag:**
-    You can achieve this manually:
-    *   On the CrOS device, open `chrome://flags`.
-    *   Search for the flag `#enable-isolated-web-app-dev-mode`.
-    *   Change it to `Enabled`.
-    Alternatively, you can set it in the command line flags:
-    (device)
-    ```bash
-    $ echo "--enable-features=IsolatedWebAppDevMode" >> /etc/chrome_dev.conf
-    ```
-5.  Reboot the device or restart the UI:
-    (device)
-    ```bash
-    $ sudo reboot
-    ```
-    **Verification:** After Chrome restarts, you can check if the port is
-    listening locally on the device:
-    (device)
-    ```bash
-    $ netstat -tulnp | grep ${PORT}
-    ```
-    You should see a line indicating that a process is listening on port 9222,
-    similar to this:
-    ```
-    tcp   0   0.  127.0.0.1:9222    0.0.0.0:*     LISTEN      112370/chrome
-    ```
+(device)
+```bash
+$ export PORT=9222
+$ echo "--remote-debugging-port=${PORT}" >> /etc/chrome_dev.conf
+```
+Reboot the device or restart the UI to apply the changes.
 
-Your CrOS device is now ready for testing. You can proceed to
-login as a user through the UI (with a dedicated account used for testing).
+### d. Establish and Verify SSH Tunnel
 
-### 1.2. Host Machine
+Create an SSH tunnel from your host to the device to forward the debugging port.
+This terminal window must remain open during testing.
 
-The host machine can be any operating system, but in this guide, we will use
-Linux as an example. Install packages and dependencies for Puppeteer. Refer
-to the [official Puppeteer installation documentation](https://pptr.dev/guides/installation) for details.
-
-## 2. Establishing the Connection
-
-To allow Puppeteer on your Linux host to communicate with Chrome on the
-CrOS device, you'll set up an SSH tunnel. This forwards a local
-port on your host to the remote debugging port on the device.
-
-Before you proceed, it's recommended to set the IP address of your device and
-the remote debugging port as environment variables. This will make the following
-commands easier to copy and paste.
 (host)
 ```bash
 $ export DEVICE_IP=<your_device_ip>
 $ export PORT=9222
-```
-
-### a. Create an SSH Tunnel
-
-Open a terminal on your Linux host and run the following command:
-(host)
-```bash
 $ ssh -L ${PORT}:localhost:${PORT} root@${DEVICE_IP}
 ```
-*   `-L ${PORT}:localhost:${PORT}`: Forwards the local port `${PORT}` on your
-    host to `localhost:${PORT}` on the device.
-*   `root@${DEVICE_IP}`: Uses the device's IP. The default password for `root`
-    on test devices or VMs is `test0000`.
+Verify the tunnel is working by running this command in a new terminal on your
+host:
 
-### b. Verify the Tunnel and Remote Debugging
+(host)
+```bash
+$ curl http://localhost:${PORT}/json/version
+```
+A successful connection will return a JSON object with browser details.
 
-Before running your Puppeteer script, verify that the tunnel is working and
-the Chrome browser on the CrOS device is accessible:
+## Step 2: Verify Your Connection
 
-1.  Keep the SSH tunnel command running in its terminal.
-2.  Use `curl` in another terminal on your Linux host:
+Before configuring a specific framework, run a simple connection test to ensure
+your setup is working. This guide provides example scripts for both Puppeteer
+and Selenium.
+
+*   [Verifying Your Browser Connection](/chromium-os/developer-library/guides/testing/web-testing/browser-connection)
+
+## Step 3: Host Machine Setup & Framework Configuration
+
+This guide assumes you are already familiar with your chosen testing framework.
+The primary difference when testing on CrOS is how you connect to the browser.
+Instead of launching a new local instance, you connect to the remote browser
+via its debugging port.
+
+### a. Puppeteer
+
+Instead of launching a new, local browser instance with
+`puppeteer.launch()`, you will connect to the existing browser on the remote
+device using `puppeteer.connect()`, targeting the remote debugging port that is
+forwarded through your SSH tunnel.
+
+```javascript
+const browser = await puppeteer.connect({
+  browserURL: `http://localhost:${PORT}`,
+});
+```
+
+For complete installation and API details, refer to the
+[official Puppeteer documentation](https://pptr.dev/guides/installation).
+
+### b. Selenium WebDriver
+
+Instead of having Selenium start a new, local browser instance,
+you will configure your WebDriver `Options` to connect to the existing browser
+on the remote device by setting the `debuggerAddress`. This targets the remote
+debugging port that is forwarded through your SSH tunnel.
+
+```python
+options = Options()
+options.add_experimental_option("debuggerAddress", f"127.0.0.1:{PORT}")
+driver = webdriver.Chrome(service=service, options=options)
+```
+
+#### How WebDriver, ChromeDriver, and CDP Work Together
+
+All communication with the browser happens via CDP. The key is understanding
+that `chromedriver` acts as a translator.
+
+*   **WebDriver Commands:** These are high-level, standardized commands defined
+    by the W3C WebDriver protocol. Your Selenium test script generates these
+    commands when you call functions like `driver.get()` or `element.click()`.
+    They are generic and work across different browsers (with the appropriate
+    driver).
+
+*   **Chrome DevTools Protocol (CDP) Commands:** These are low-level, granular
+    commands specific to Chromium-based browsers. They provide deep control over
+    the browser's engine for debugging, inspection, and automation.
+
+*   **The `chromedriver` executable:** acts as a bridge it listens for the high
+    level WebDriver commands from your script and translates them into the low
+    level CDP commands that the Chrome browser on your CrOS device understands.
+
+This flow is illustrated below:
+
+```
++-----------------------------------------------------------+
+| Host Machine                                              |
+|                                                           |
+| +-------------+  WebDriver  +-------------+  CDP Commands |
+| | Test Script |-----------> | chromedriver|---+           |
+| | (e.g. Py)   |  Commands   | (on Host)   |   |           |
+| +-------------+             +-------------+   |           |
+|  (High-Level)                (Translates)     |           |
++-----------------------------------------------v-----------+
+                                                |
+                                                | SSH Tunnel
+                                                v
++-----------------------------------------------+-----------+
+| CrOS Device                                   |           |
+|                                    +----------v-------+   |
+|                                    | Chrome Browser   |   |
+|                                    | (receives CDP)   |   |
+|                                    +------------------+   |
++-----------------------------------------------------------+
+```
+
+#### Download & Configure ChromeDriver
+
+Because `chromedriver` must translate commands for a specific version of
+Chrome, it is crucial that its version matches the version of Chrome running on
+the **CrOS device or VM**.
+
+1.  **Get Chrome Version:** Get the version from the device by either opening
+    the `chrome://version` page in the browser or by running the following
+    command on the device:
+
+    (device)
+    ```bash
+    $ /opt/google/chrome/chrome --version
+    ```
+    You will get a version string like `Google Chrome 144.0.7524.0`.
+
+2.  **Download and Install ChromeDriver:** Visit the
+    [Chrome for Testing Dashboard](https://googlechromelabs.github.io/chrome-for-testing/)
+    to find the matching driver for your **Host OS** (`linux64`, `mac-x64`, or
+    `win64`). If an exact build match isn't available, download the latest
+    available build for that Major version. You can either download it manually
+    from the dashboard or use a command-line utility like `curl`.
+
+    For example, to download version `144.0.7559.3` on Linux, you can use the
+    following commands:
+
     (host)
     ```bash
-    $ curl http://localhost:${PORT}/json/version
+    $ curl -o chromedriver.zip https://storage.googleapis.com/chrome-for-testing-public/144.0.7559.3/linux64/chromedriver-linux64.zip
+    $ unzip chromedriver.zip
+    $ mv chromedriver-linux64/chromedriver .
+    $ chmod +x chromedriver
     ```
-    This should return a JSON object with details about the browser,
-    including `Browser`, `Protocol-Version`, and `webSocketDebuggerUrl`. For
-    example:
-    ```json
-    {
-       "Browser": "Chrome/144.0.7524.0",
-       "Protocol-Version": "1.3",
-       "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) ...",
-       "V8-Version": "14.4.95",
-       "WebKit-Version": "537.36 (@e8644584e0429213c91c06528e8c7e6f58d4964a)",
-       "webSocketDebuggerUrl": "ws://localhost:9222/devtools/browser/..."
-    }
-    ```
-    Look for `"User-Agent"` containing `"CrOS"` to confirm it's a CrOS
-    device. If you can access this information, your tunnel is working, and
-    Chrome on the device is correctly configured for remote debugging.
+For more details, see the [official Selenium documentation](https://www.selenium.dev/documentation/).
 
-## 3. Running Puppeteer Tests
+### c. Playwright (Coming Soon)
 
-### 3.1. Browser Connection Testing
+*(Content for Playwright-specific setup and test execution will be added here in
+the future.)*
 
-This test serves two purposes: it verifies that the Puppeteer
-connection to your CrOS device is working, and it checks that the
-necessary command-line flags have been correctly applied to Chrome.
+For complete installation and API details, refer to the
+[official Playwright documentation](https://playwright.dev/docs/intro).
 
-It connects to the remote CrOS instance and opens the `chrome://version`
-page to retrieve its content. In the output, you should verify that the
-following flags are present:
-*   `--system-developer-mode`
-*   `--remote-debugging-port=9222`
-*   `--enable-devtools-pwa-handler`
+## Step 4: Explore Testing Scenarios
 
-The `test-chrome-connection.js` script is available in the same directory as
-this guide. You can view its content [here](./test-chrome-connection.js).
+Now that you have configured your framework, you can explore task-specific
+testing guides that provide concrete examples for different scenarios.
 
-To run this script:
-
-1.  Ensure your SSH tunnel is active.
-    (host)
-    ```bash
-    $ ssh -L ${PORT}:localhost:${PORT} root@${DEVICE_IP}
-    ```
-
-2.  Open a new terminal on your Linux host, navigate to the directory where you
-    saved `test-chrome-connection.js`, and run:
-    (host)
-    ```bash
-    $ node test-chrome-connection.js ${PORT}
-    ```
-    You should see output that includes the "Command Line" section.
-
-### 3.2. PWA Testing
-
-This test demonstrates a complete lifecycle of a Progressive Web App (PWA)
-using the Chrome DevTools Protocol (CDP) via Puppeteer. It programmatically
-installs the PWA, launches it, verifies its state, and then uninstalls it,
-providing an end-to-end example of PWA management.
-
-The `test-pwa-lifecycle.js` script is available in the same directory as this
-guide. You can view its content [here](./test-pwa-lifecycle.js).
-
-To run this test:
-1.  Ensure your SSH tunnel is active.
-    (host)
-    ```bash
-    $ ssh -L ${PORT}:localhost:${PORT} root@${DEVICE_IP}
-    ```
-2.  Open a new terminal on your Linux host, navigate to the directory where
-    you saved `test-pwa-lifecycle.js`, and run:
-    (host)
-    ```bash
-    $ node test-pwa-lifecycle.js ${PORT}
-    ```
-
-### 3.3. IWA Testing
-
-This test showcases how to interact with an Isolated Web App (IWA). The
-script connects to the remote CrOS instance, installs the Kitchen Sink IWA
-from its web bundle, and launches it. It then interacts with the app's UI to
-simulate sending and receiving messages via direct sockets, verifying the IWA's
-ability to communicate and function correctly in a real CrOS environment.
-
-The `test-iwa-interaction.js` script is available in the same directory as
-this guide. You can view its content [here](./test-iwa-interaction.js).
-To run this test:
-1.  Ensure your SSH tunnel is active.
-    (host)
-    ```bash
-    $ ssh -L ${PORT}:localhost:${PORT} root@${DEVICE_IP}
-    ```
-1.  Open a new terminal on your Linux host, navigate to the directory where
-    you saved `test-iwa-interaction.js`, and run:
-    (host)
-    ```bash
-    $ node test-iwa-interaction.js ${PORT}
-    ```
-
-## 4. Running Puppeteer Tests in Kiosk Mode
-
-Testing web applications in Kiosk mode requires specific device policies to be
-set to auto-launch the app. This functionality is typically available on
-ChromiumOS test images (VMs). For detailed instructions on how to set these
-policies on your test device, please refer to the
-[Testing Enterprise Policies with a Local Server](/chromium-os/developer-library/guides/enterprise/local-policy-testing/) guide.
-
-In addition to the flags mentioned in [1.1.c Enable Chrome DevTools Remote
-Debugging](#c-enable-chrome-devtools-remote-debugging), you must also enable
-the following flags by adding them to `/etc/chrome_dev.conf`:
-
-**SECURITY WARNING:** The following flags significantly reduce the security of
-your device by allowing remote access and exposing internal protocols.
-**Never enable these flags on a device connected to a public or untrusted
-network,** as it could lead to unauthorized access and data compromise.
-
-*   `--remote-debugging-address=0.0.0.0`: Allows connections from remote
-    machines, not just localhost on the DUT.
-*   `--force-devtools-available`: **This is the most critical flag.** It
-    ensures that the app's target is exposed to the DevTools protocol,
-    even in the highly restricted kiosk mode.
-
-### 4.1. Example: Testing an IWA in Kiosk Mode
-
-This test demonstrates how to interact with an Isolated Web App (IWA) running
-in a locked-down Kiosk mode. Since Kiosk mode restricts browser functionality,
-the script uses lower-level Chrome DevTools Protocol (CDP) commands to find
-the IWA's target, connect to it, and interact with its UI. This provides a
-robust example for testing apps in a restricted environment.
-
-The `test-iwa-kiosk.js` script is available in the same directory as this
-guide. You can view its content [here](./test-iwa-kiosk.js).
-
-To run this test:
-1.  Ensure your SSH tunnel is active.
-    (host)
-    ```bash
-    $ ssh -L ${PORT}:localhost:${PORT} root@${DEVICE_IP}
-    ```
-2.  Ensure your ChromiumOS VM is configured with the necessary Kiosk mode
-    policies as described in the linked guide.
-3.  Open a new terminal on your Linux host, navigate to the directory where
-    you saved `test-iwa-kiosk.js`, and run:
-    (host)
-    ```bash
-    $ node test-iwa-kiosk.js ${PORT}
-    ```
-
-## 5. Testing System Web Apps
-
-Beyond standard web pages, Puppeteer can also be used to automate and test CrOS
-system web applications (System Web Apps) such as the Files app, Media app, and
-Settings. For detailed guidance on this, refer to
-[Running Puppeteer Tests to interact with System apps on CrOS Devices](/chromium-os/developer-library/guides/testing/puppeteer-system-apps/).
+*   [Testing Browser Connection](/chromium-os/developer-library/guides/testing/web-testing/browser-connection)
+*   [Testing Progressive Web Apps (PWAs)](/chromium-os/developer-library/guides/testing/web-testing/pwa)
+*   [Testing Isolated Web Apps (IWAs)](/chromium-os/developer-library/guides/testing/web-testing/iwa)
+*   [Testing System Web Apps (SWAs)](/chromium-os/developer-library/guides/testing/web-testing/swa)
+*   [Testing in Kiosk Mode](/chromium-os/developer-library/guides/testing/web-testing/kiosk)
