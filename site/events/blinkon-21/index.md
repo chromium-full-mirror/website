@@ -13,7 +13,7 @@ title: BlinkOn 21
 ## **Logistics**
 
 * When: April 20-21, 2026, 9am to ~5pm PST (agenda TBD).
-* Where: Hosted by Microsoft on their campus in Redmond, WA, USA + Virtually on [slack](https://chromium.slack.com) (#blinkon)
+* Where: Hosted by Microsoft at [The Mixer](https://maps.app.goo.gl/m3suea1Jotmob5UHA) @ Microsoft Commons - 15251 NE 40th St, Redmond, WA 98052, USA + Virtually on [slack](https://chromium.slack.com) (#blinkon)
 * What: Combination of live and recorded sessions, including keynotes, lightning talks, breakout talks, and social events
 
 ## **Code of Conduct**
