@@ -290,8 +290,8 @@ After recording one can save a trace report by pressing the Save button. This
 will save the trace in JSON format.
 
 It is also possible to convert it to HTML (which is easier to link to) using
-[Catapult](https://github.com/catapult-project/catapult)'s
-[trace2html](https://github.com/catapult-project/catapult/blob/master/tracing/bin/trace2html)
+[Catapult](https://chromium.googlesource.com/catapult)'s
+[trace2html](https://chromium.googlesource.com/catapult/+/refs/heads/main/tracing/bin/trace2html)
 script.
 
 ## Slide deck of Android Tracing tricks

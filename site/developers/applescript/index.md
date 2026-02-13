@@ -20,4 +20,4 @@ to communicate with their application process. For more information, see[
 https://developer.chrome.com/extensions/nativeMessaging](https://developer.chrome.com/extensions/nativeMessaging)
 
 For automation, developers can also use Telemetry:
-<https://github.com/catapult-project/catapult/blob/master/telemetry/README.md>
+<https://chromium.googlesource.com/catapult/+/refs/heads/main/telemetry/README.md>

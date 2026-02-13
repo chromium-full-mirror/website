@@ -9,4 +9,4 @@ title: 'Telemetry: Run Benchmarks Locally'
 ---
 
 The latest instruction is moved to
-<https://github.com/catapult-project/catapult/blob/master/telemetry/docs/run_benchmarks_locally.md>
+<https://chromium.googlesource.com/catapult/+/refs/heads/main/telemetry/docs/run_benchmarks_locally.md>

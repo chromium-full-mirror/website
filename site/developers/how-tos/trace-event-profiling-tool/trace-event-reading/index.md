@@ -332,7 +332,7 @@ src="/developers/how-tos/trace-event-profiling-tool/trace-event-reading/Selectio
 Once recorded, you can give a trace file to someone else. Just press the save
 button. The resulting file is just JSON.
 To load a trace, use the load button, or grab the standalone trace viewer from
-<https://github.com/catapult-project/catapult/tree/master/tracing>
+<https://chromium.googlesource.com/catapult/+/refs/heads/main/tracing>
 
 ### Investigating Performance Problems
 

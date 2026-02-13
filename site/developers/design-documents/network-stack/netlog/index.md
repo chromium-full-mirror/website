@@ -217,7 +217,7 @@ mechanism.
 
 In 2018, the NetLog Viewer was removed from Chrome and moved to an external
 repository:
-<https://github.com/catapult-project/catapult/tree/master/netlog_viewer>. The
+<https://chromium.googlesource.com/catapult/+/refs/heads/main/netlog_viewer>. The
 move was made for a number of reasons, including reducing installer size and
 attack surface. Perhaps most importantly, WebUI-run JavaScript is subject to
 many tight restrictions (e.g. no external libraries) which made it hard to
@@ -271,7 +271,7 @@ Matt added the ability to save logs to a JSON file, and to import them back agai
 Other core features of v3 were unittests for the JavaScript frontend, and a timeline visualization to plot network metrics both in real-time and from postmortem dump files.
 v3 also got custom views for Sockets, SPDY sessions, Winsock LSPs (SPIs), a slew of other functionality and increased logging sprinkled throughout the network stack.
 version 4: The extraction of the viewer
-In 2018, the JavaScript of the viewer application was [removed](https://bugs.chromium.org/p/chromium/issues/detail?id=678391&desc=2#c18) from the net-internals page and extracted to a [new repository](https://github.com/catapult-project/catapult/tree/master/netlog_viewer) and running from a [public app server](https://netlog-viewer.appspot.com/#import). The reasons for this extraction are documented in the [NetLog Viewer design document](https://docs.google.com/document/d/1Ll7T5cguj5m2DqkUTad5DWRCqtbQ3L1q9FRvTN5-Y28/).
+In 2018, the JavaScript of the viewer application was [removed](https://bugs.chromium.org/p/chromium/issues/detail?id=678391&desc=2#c18) from the net-internals page and extracted to a [new repository](https://chromium.googlesource.com/catapult/+/refs/heads/main/netlog_viewer) and running from a [public app server](https://netlog-viewer.appspot.com/#import). The reasons for this extraction are documented in the [NetLog Viewer design document](https://docs.google.com/document/d/1Ll7T5cguj5m2DqkUTad5DWRCqtbQ3L1q9FRvTN5-Y28/).
 
 ## version ?:
 
