@@ -68,11 +68,11 @@ This guidance will evolve as we consider more API proposals. If your review disc
 ## Who do I request feedback from for IWA-specific APIs?
 
 * Application Developers
-* Other browser vendors*
-* W3C TAG*
 * Other JavaScript-based development platforms: Electron, Node.js, Deno, Bun, etc.
 
-\* Standards positions have been requested from [Apple](https://github.com/WebKit/standards-positions/issues/184) and [Mozilla](https://github.com/mozilla/standards-positions/issues/799), and a review request has been made to the [TAG](https://github.com/w3ctag/design-reviews/issues/842) to gauge interest in the concept of IWAs overall. Depending on the outcome of those requests requesting feedback on particular IWA-specific APIs from other browser vendors and/or the TAG may or may not be productive. When requesting feedback be sure to reference these existing requests so that reviewers are aware of the dependency between your feature and the general IWA infrastructure.
+Do not request a design review from the W3C TAG, as the conclusion of their [design review](https://github.com/w3ctag/design-reviews/issues/842) of IWAs was that they are not the right venue for discussing IWA-specific proposals. [Mozilla](https://github.com/mozilla/standards-positions/issues/799) and [Apple](https://github.com/WebKit/standards-positions/issues/184) are similarly disinterested in IWAs or IWA-specific APIs and so there is little value in requesting standards positions for IWA-specific capabilities.
+
+The [WinterTC](https://wintertc.org/) could be a good forum for reaching out to other JavaScript-based platforms such as Node.js, Deno and Bun.
 
 ## Who reviews IWA-specific API launches?
 
@@ -124,8 +124,10 @@ Same as step 5 of the [normal launch process](/blink/launching-features/#origin-
 
 Start with step 6 of the [normal launch process](/blink/launching-features/#new-feature-prepare-to-ship) for new feature incubations.
 
-Include a summary of the reason why this launch is IWA-specific from the explainer section written for step 1 in the "Intent to Ship" email.
+**Do not use ChromeStatus to sent your "Intent to Ship" email as it will not CC the correct mailing lists or include the extra information needed for IWA-specific launches.** Copy the pre-filled email template it provides and send the email yourself.
 
-IWA-specific API launches will require an additional approval from the IWA project owners. This approval process is started by sending your "Intent to Ship" email to <a href="mailto:iwa-dev@chromium.org">iwa-dev@chromium.org</a> in addition to <a href="mailto:blink-dev@chromium.org">blink-dev@chromium.org</a>.
+Add a section to the template explaining why this launch is IWA-specific. You can reuse the text from the explainer section written for step 1.
+
+IWA-specific API launches will require an additional approval from the IWA project owners. This approval process is started by sending your "Intent to Ship" email to <a href="mailto:iwa-dev@chromium.org">iwa-dev@chromium.org</a> in addition to <a href="mailto:blink-dev@chromium.org">blink-dev@chromium.org</a>. Blink API OWNERS will wait for an IWA OWNER response before reviewing the feature.
 
 Documentation for the feature should be finalized by this point. Work with Developer Relations to get an article posted to [chromeos.dev](https://chromeos.dev/). This content will move to [developer.chrome.com](https://developer.chrome.com/) when IWAs are supported on more platforms and [web.dev](https://web.dev/) when IWAs are supported by multiple browsers.
