@@ -491,7 +491,7 @@ or @google.com address who can help vouch/verify the request.
 
 Be sure to fill out the template, and to provide these details:
 *   The name of the new repository on the server.
-    *   See the [Server Layout] section above for examples.
+    *   See the [Git Server Layout] section above for examples.
 *   Whether it should be a read-only mirror, a fork of an upstream project, or
     a completely new (empty) project.
 *   Any non-standard permissions/access to the repository.
@@ -691,6 +691,7 @@ See the previous questions in this FAQ for more details.
 [full.xml]: https://chromium.googlesource.com/chromiumos/manifest/+/HEAD/full.xml
 [Gerrit project config]: https://gerrit-review.googlesource.com/Documentation/config-project-config.html
 [Gerrit refs/for]: https://gerrit-review.googlesource.com/Documentation/concept-refs-for-namespace.html
+[Git Server Layout]: #git-server-layout
 [internal_full.xml]: https://chrome-internal.googlesource.com/chromeos/manifest-internal/+/HEAD/internal_full.xml
 [kernel]: https://chromium.googlesource.com/chromiumos/third_party/kernel/
 [Local Checkout]: #local-layout
@@ -710,7 +711,6 @@ See the previous questions in this FAQ for more details.
 [repohooks]: https://chromium.googlesource.com/chromiumos/repohooks/
 [RVG]: /chromium-os/developer-library/glossary/#RVG
 [sandbox]: /chromium-os/developer-library/guides/development/contributing/#sandbox
-[Server Layout]: #server-layout
 [SemVerTag]: https://semver.org/spec/v1.0.0.html#tagging-specification-semvertag
 [ToT]: /chromium-os/developer-library/glossary/#ToT
 [vboot_reference]: https://chromium.googlesource.com/chromiumos/platform/vboot_reference/
