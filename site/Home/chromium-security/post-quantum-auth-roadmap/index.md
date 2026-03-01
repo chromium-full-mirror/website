@@ -113,7 +113,7 @@ However, some of these capabilities are fairly new, and we need to automatically
 
 ### Alternate Certificate Issuer
 
-Many existing PQ-incompatible servers, and their ACME pipelines, are only capable of configuring *one* certificate. We can do this by embedding the post-quantum certificate inside the classical one. Define an X.509 extension, `id-alternate-certificateIssuer` that describes the issuer-specific differences between the classical certificate and the equivalent post-quantum certificate. Specifically:
+Many existing PQ-incompatible servers, and their ACME pipelines, are only capable of configuring *one* certificate. We can do this by embedding the post-quantum certificate inside the classical one. Define an X.509 extension, `id-alternateCertificateIssuer` that describes the issuer-specific differences between the classical certificate and the equivalent post-quantum certificate. Specifically:
 
 * Replacement serial number
 * Replacement issuer name
@@ -132,7 +132,7 @@ Crucially, this extension *only* overrides issuer-specific information, not subj
 From the CA side, the issuance process will be:
 
 1. Issue the PQ-signature-to-classical-key certificate.
-2. Extract the PQ-issuer-specific differences into an `id-alternate-certificateIssuer` extension.
+2. Extract the PQ-issuer-specific differences into an `id-alternateCertificateIssuer` extension.
 3. Issue a classical-to-classical certificate with this extension embedded.
 
 We’ll need to take some care in how we define this extension. X.509 is extensible and does not clearly differentiate subject and issuer fields. We should ensure:
@@ -149,7 +149,7 @@ This extension is undesirable for the long-term:
 
 We intend for this to be a purely transitionary mechanism, based on the limitations of existing, older servers. For newer servers, the more principled certificate negotiation approach solves this more efficiently and flexibly.
 
-To enforce this, clients will only implement `id-alternate-certificateIssuer` when the `subjectPublicKeyInfo` field is classical. PQ-capable servers have two TLS keys and necessarily can already manage distinct certificate chains, so the extension is unnecessary. This also means that when a PQ-CA-only client migrates to fully PQ-only (Stage 4 below), support for the extension can be removed.
+To enforce this, clients will only implement `id-alternateCertificateIssuer` when the `subjectPublicKeyInfo` field is classical. PQ-capable servers have two TLS keys and necessarily can already manage distinct certificate chains, so the extension is unnecessary. This also means that when a PQ-CA-only client migrates to fully PQ-only (Stage 4 below), support for the extension can be removed.
 
 ### Removing HRPQ
 
