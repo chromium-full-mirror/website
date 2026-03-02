@@ -14,7 +14,12 @@ _David Benjamin and Joe DeBlasio, 2026-02-27_
 
 This document outlines a roadmap for post-quantum HTTPS server authentication in Chromium, that is, how a TLS connection is authenticated by an HTTPS server’s TLS key, which is in turn associated with the HTTPS server identity by a certificate from a trusted certification authority (CA).
 
-Transitioning to a PQ web will be a long process with many moving parts, and we expect details to evolve over time. As such, this document is not a precise specification but a rough outline that aims to help reason about security and compatibility properties.
+Transitioning to a PQ web will be a long process with many moving parts, and we expect details to evolve over time. As such, this document is not a precise specification but a rough outline that aims to help reason about security and compatibility properties. We divide the transition into four stages:
+
+* [Stage 1: Add Post-Quantum Options.](#stage-1-add-post-quantum-options) Making PQ auth options available on the client without removing any classical options. This starts the transition but does not not give security benefits.
+* [Stage 2: Opt-in Individual Sites.](#stage-2-opt-in-individual-sites) An HSTS-like mechanism to require PQ on sites that opt in, as a stopgap measure until Stage 3.
+* [Stage 3: Require a Post-Quantum PKI.](#stage-3-require-a-post-quantum-pki) Requiring PQ CAs (but not necessarily PQ TLS keys) from all sites for robust downgrade protection.
+* [Stage 4: Require Post-Quantum TLS Keys.](#stage-4-require-post-quantum-tls-keys) Completing the transition in a **far-future** stage that requires all sites to have fully migrated to PQ.
 
 ## Stage 1: Add Post-Quantum Options
 
