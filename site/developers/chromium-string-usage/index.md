@@ -12,11 +12,11 @@ In the Chromium code base, we use `std::string` and `std::u16string`. Blink uses
 `blink::String` instead, which is patterned on `std::string`, but is a slightly
 different class (see the
 [docs](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/platform/wtf/text/README.md)
-for their guidelines, we’ll only talk about Chromium here). We also have a
-StringPiece\[16\] class, which is basically a pointer to a string that is owned
-elsewhere with a length of how many characters from the other string form this
-“token”. Finally, there is also `blink::WebString`, which is used by the
-Blink glue layer.
+for their guidelines, we’ll only talk about Chromium here). We also use the
+`std::string_view`/`std::u16string_view` class, which is basically a pointer to
+a string that is owned elsewhere with a length of how many characters from the
+other string form this “token”. Finally, there is also `blink::WebString`, which
+is used by the Blink glue layer.
 
 ## String Encodings
 
@@ -75,8 +75,8 @@ have UTF-8 characters which are not also ASCII characters.
 *   There are many handy routines which operate on strings. You can use
             IntToString() if you want to do atoi(), and StringPrintf() if you
             need the full power of printf. You can use WriteInto() to make a C++
-            string writeable by a C API. StringPiece makes it easy and efficient
-            to write functions that take both C++ and C style strings.
+            string writeable by a C API. `std::string_view` makes it easy and
+            efficient to write functions that take both C++ and C style strings.
 *   For function input parameters, prefer to pass a string by const
             reference instead of making a new copy.
 *   For function output parameters, it is OK to either return a new
