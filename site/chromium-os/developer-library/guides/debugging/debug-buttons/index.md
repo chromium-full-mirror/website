@@ -140,7 +140,7 @@ File feedback       | Power button, hold for 3 seconds, select option in menu
 EC reset            | `Power + Volume-Up`, hold for 10 seconds
 Recovery mode       | See [firmware menu UI] section
 Developer mode      | See [firmware menu UI] section
-Battery cutoff      | `Power + Volume-Up`, hold down, remove power for 5 seconds
+Battery cutoff      | `Power + Volume-Up`, hold for 10 seconds, disconnect the power adapter cord
 Warm AP reset       | See [EC debug mode] section
 Restart Chrome      | See [EC debug mode] section
 Kernel panic/reboot | See [EC debug mode] section
