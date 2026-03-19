@@ -141,12 +141,14 @@ Possible values for the `target_cpu`:
 *   Windows supports "`x86`" and "`x64`". Since building is only supported
             on 64-bit machines, the default will always be "`x64`".
 
-*   Mac and desktop Linux supports only "`x64`". On desktop Linux you
-            might also theoretically try any of the ARM or MIPS architecture
-            strings form the Android section below, but these aren't supported
-            or tested and you will also need a sysroot.
+*   Mac supports only "`x64`" and "`arm64`".
 
-*   Chrome OS supports "`x86`" and "`x64`", but to build a 32-bit binary you
+*   Desktop Linux supports only "`x64`". On desktop Linux you might also
+            theoretically try any of the ARM or MIPS architecture strings from
+            the Android section below, but these aren't supported or tested and
+            you will also need a sysroot.
+
+*   ChromeOS supports "`x86`" and "`x64`", but to build a 32-bit binary you
             will need to use a sysroot on a 64-bit machine.
 
 *   If you specify an Android build (see below) the default CPU
@@ -231,9 +233,9 @@ solutions = [
 target_os = [ 'android' ]  # Add this to get Android stuff checked out.
 ```
 
-### Chrome OS build (from Linux)
+### ChromeOS build (from Linux)
 
-This will build the Chrome OS variant of the browser that is distributed with
+This will build the ChromeOS variant of the browser that is distributed with
 the operating system. You can run it on your Linux desktop for feature
 development.
 
@@ -241,7 +243,7 @@ development.
 target_os = "chromeos"
 ```
 
-Checkouts which are used to build Chrome OS builds must also have `'chromeos'`
+Checkouts which are used to build ChromeOS builds must also have `'chromeos'`
 added to the `target_os` list in the .gclient file. After making this change,
 you will need to run `gclient sync` once.
 
