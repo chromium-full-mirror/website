@@ -26,17 +26,16 @@ window.addEventListener('load', () => {
   });
 });
 
-// Configure Google Universal Analytics (the predecessor to GA4, we should
-// delete this when we don't need it any more).
+// Configure Google Analytics v4
 s = document.createElement('script');
-s.src = 'https://www.googletagmanager.com/gtag/js?id=UA-5484340-1'
+s.src = 'https://www.googletagmanager.com/gtag/js?id=G-24XP4PG02H'
 s.async = true;
 document.head.append(s)
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'UA-5484340-1');
+gtag('config', 'G-24XP4PG02H');
 
 // Configure consent bar.
 s = document.createElement('script');
@@ -62,16 +61,6 @@ document.head.append(s);
   <link rel="stylesheet" href="/_stylesheets/default.css">
   <link rel="stylesheet" href="/_stylesheets/highlight.js/github.min.css">
 </head>
-<!-- Configure Google Analytics v4 -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-24XP4PG02H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-24XP4PG02H');
-</script>
 
 <header>
   <a href="/">
