@@ -70,7 +70,19 @@ changes:
 $ sudo mount -o remount,rw /
 ```
 
-### c. Enable Chrome DevTools Remote Debugging
+### c. Install Developer Packages
+
+To allow SSH access and use other developer tools on a device in Developer Mode,
+you must install the developer packages. For more details, see the
+[Install Software on Base Images](/chromium-os/developer-library/guides/device/install-software-on-base-images/#overview)
+guide.
+
+(device)
+```bash
+$ dev_install
+```
+
+### d. Enable Chrome DevTools Remote Debugging
 
 Start Chrome with the remote debugging port enabled by editing
 `/etc/chrome_dev.conf`.
@@ -82,7 +94,7 @@ $ echo "--remote-debugging-port=${PORT}" >> /etc/chrome_dev.conf
 ```
 Reboot the device or restart the UI to apply the changes.
 
-### d. Establish and Verify SSH Tunnel
+### e. Establish and Verify SSH Tunnel
 
 Create an SSH tunnel from your host to the device to forward the debugging port.
 This terminal window must remain open during testing.

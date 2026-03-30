@@ -163,15 +163,20 @@ Wait for about 30 seconds for the VM to reboot.
 
 ### Add Keys to the VM
 
-Remount the root filesystem as read-write:
+**To get API keys, follow the
+[Chromium API Keys guide](/developers/how-tos/api-keys/). It is very important
+to complete the step in
+[Signing in to Chromium is restricted](/developers/how-tos/api-keys/#signing-in-to-chromium-is-restricted)
+to be able to sign in.**
+
+Once you have your keys, remount the root filesystem as read-write:
 
 ```bash
 ssh -i ~/.ssh/testing_rsa -p 2222 -o StrictHostKeyChecking=no \
   root@localhost 'mount -o remount,rw /'
 ```
 
-To get API keys, follow the [guide](/developers/how-tos/api-keys/).
-Once you have your keys, append them to `/etc/chrome_dev.conf`:
+append them to `/etc/chrome_dev.conf`:
 
 ```bash
 ssh -i ~/.ssh/testing_rsa -p 2222 -o StrictHostKeyChecking=no \
