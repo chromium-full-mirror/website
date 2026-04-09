@@ -61,6 +61,7 @@ Chromium, or at runtime using environment variables.
             might be out of date; try searching for APIs starting with "Chrome"
             or having "for Chrome" in the name.)*
     *   Cloud Search API
+    *   Chrome Sync API (and other APIs with "Chrome" in the name)
     *   Geolocation API (requires [enabling
                 billing](https://developers.google.com/console/help/#EnableBilling)
                 but is free to use; you can skip this one, in which case
