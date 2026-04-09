@@ -70,7 +70,7 @@ changes:
 $ sudo mount -o remount,rw /
 ```
 
-### c. Install Developer Packages
+### c. Install Developer Packages and Enable SSH
 
 To allow SSH access and use other developer tools on a device in Developer Mode,
 you must install the developer packages. For more details, see the
@@ -78,9 +78,28 @@ you must install the developer packages. For more details, see the
 guide.
 
 (device)
-```bash
-$ dev_install
-```
+* **Enable Developer Features:** ChromeOS has helper scripts to enable debugging
+  features, including SSH, on non-test builds in Developer Mode.
+  ```bash
+  $ dev_install
+  ```
+* **Reboot:** A reboot is required for `dev_install` changes to take effect.
+  ```bash
+  $ sudo reboot
+  ```
+* **Specifically Enable SSH:** After rebooting, run the SSH-specific helper:
+  ```bash
+  $ /usr/libexec/debugd/helpers/dev_features_ssh
+  ```
+* **Set Root Password:** Set a password for root (i.e. `test0000`):
+  ```bash
+  $ sudo passwd root
+  ```
+* **Verify SSHD is Running:**
+  ```bash
+  $ ps aux | grep sshd
+  ```
+  You should now see an active `/usr/sbin/sshd` process.
 
 ### d. Enable Chrome DevTools Remote Debugging
 
