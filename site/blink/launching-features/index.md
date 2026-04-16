@@ -361,7 +361,7 @@ Origin trials also have restrictions on the
 [subdomains](https://developer.chrome.com/docs/web-platform/origin-trial-troubleshooting#subdomain) allowed per origin trial
 token. In particular, subdomains cannot be issued for origins in the Public Suffix List.
 If your trial has a clear need for an exception to this rule, you may request
-(with justification) an exception via email to [the API owners](mailto:blink-api-owners@chromium.org).
+(with justification) an exception via email to [the API owners](mailto:blink-api-owners-discuss@chromium.org).
 Approval of the exception requires 3 LGTMs.
 
 An initial origin trial or experiment for a feature may only run for
