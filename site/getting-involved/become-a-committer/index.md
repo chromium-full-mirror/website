@@ -63,7 +63,7 @@ demonstrating your
 *   ability to judge when a patch might be ready for review and to submit
     (your work should not generally have glaring flaws unless you're
     explicitly requesting feedback on an incomplete patch), and
-*   ability to write good code (last but certainly not least)
+*   ability to create good code (last but certainly not least)
 
 ### Non-trivial patches
 
@@ -80,11 +80,43 @@ guidelines:
   non-trivial to arrive at.
 * Almost any change that isn't a pure comment change, symbol rename, or
   clearly-obvious-on-its-face rewording whose effects are completely local (e.g.
-  a transforms like "a += 1" -> "++a") is a non-trivial change.
+  transforms like "a += 1" -> "++a") is a non-trivial change.
 * Don't worry that the bar is impossibly high; you won't normally need a hundred
   CLs to find ten that qualify.
 * If you aren't certain whether your work meets the bar, ask an existing
   committer.
+
+### AI-generated code and the "Non-trivial" bar
+
+The primary goal of the "10 non-trivial patches" requirement is to build trust
+in a contributor's judgment and commitment to bring value to the Chromium
+community. While AI-assisted coding tools can be valuable for productivity,
+they must not be a substitute for the personal understanding and accountability
+required of a committer. These guidelines are intended to preserve our existing
+trust-based bar in the face of AI-assisted development.
+
+*   **Human-led reasoning and accountability**: Patches must reflect an
+    understanding of the root cause, comprehension of the existing
+    architecture, and a commitment to long-term maintainability. While code
+    may be AI-generated, the author is
+    responsible for its correctness and must be able to reason about the change
+    independently. (See the
+    [Chromium AI Policy](https://chromium.googlesource.com/chromium/src/+/main/agents/ai_policy.md)
+    for more details.)
+*   **Reflection on Feedback**: Contributors are expected to manually read and
+    internalize review comments. Blindly passing reviewer feedback to an LLM
+    without personal reflection is a sign that the contributor is not yet ready
+    for the responsibility that comes with committer status.
+*   **Verification by Committers**: Nominators and reviewers are expected to
+    evaluate whether a candidate has demonstrated genuine technical growth and
+    independent problem-solving. They should be confident that the candidate is
+    capable of independently reasoning about the cost-benefit tradeoff of their
+    contributions for the Chromium community.
+*   **Implicit Attestation**: By nominating or supporting a candidate, a
+    committer is attesting that they have seen sufficient evidence of the
+    candidate's personal judgement and that their contributions reflect
+    personal understanding rather than a blind reliance on AI.
+
 
 ### Nomination process
 
