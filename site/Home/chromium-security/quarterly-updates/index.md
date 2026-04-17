@@ -16,6 +16,35 @@ if you're interested in updates, discussion, or feisty rants related to Chromium
 security.
 
 
+## Q1 2026
+
+# Chrome Security **2026 Q1** Update
+
+
+Hello everyone,
+
+Here's an update on what Chrome Security was up to in Q1 of 2026.
+
+The Counter-Abuse team [announced](https://security.googleblog.com/2026/04/protecting-cookies-with-device-bound.html) the general availability of Device Bound Session Credentials (DBSC) for all Chrome users on Windows. This offers a capability for 3P web applications to provide greater protection against session hijacking for their users.
+
+The AI Security team is building on the [layered security mechanisms](https://security.googleblog.com/2025/12/architecting-security-for-agentic.html) for agentic browsing. We're tuning those based on real-world usage now that auto browse has launched for Gemini in Chrome, and we've built more attack datasets to test these defenses.
+
+The Chrome Root Program and Secure Web and Net teams [announced](https://security.googleblog.com/2026/02/cultivating-robust-and-efficient.html) plans to roll out post-quantum certificates in the form of the emerging [Merkle Tree Certificates](https://datatracker.ietf.org/doc/draft-ietf-plants-merkle-tree-certs/) standard. We are currently [partnering with Cloudflare](https://blog.cloudflare.com/bootstrap-mtc/) to experiment with an initial implementation of Merkle Tree Certificates. We presented our initial results showing that MTCs are viable at the [Real World Cryptography](https://rwc.iacr.org/2026/program.php) conference in Taiwan.
+
+The Exploit Defense teams continue to focus on memory safety, for example by using Rust in Chrome's browser process, both to improve memory safety and strengthen security-relevant invariants for Site Isolation and other defenses. After initial success on an [experimental branch](https://crbug.com/465497421), we have started [migrating ChildProcessSecurityPolicy to Rust](https://crbug.com/482216433) in the Chromium codebase with a live experiment on Canary channel, and we have eliminated almost all cases where ChildProcessSecurityPolicy failed a security check because the [relevant state was missing](https://crbug.com/476409377). We also have an initial implementation of a Rust Mojo client, enabling Mojo services to be fully implemented in Rust.
+
+PartitionAlloc is now enabled in [Skia](https://skia.org/) (a critical graphics library), which should unlock various protections such as MiraclePtr for this dependency, and additional [UndefinedBehaviorSanitizer](/developers/testing/undefinedbehaviorsanitizer/) (UBSan) hardening option --fsanitize=return has been enabled by default for release builds, with plans to explore slowly increase more of these.
+
+We also implemented an initial version of "process isolation," a mitigation technique that blocks some kinds of local malware from interacting with Chrome; this is available behind the #enable-process-isolation-ui flag. We also continued experimenting with network service sandboxing on Windows, and started work on improvements to macOS process startup to both reduce attack surface and improve performance.
+
+Finally, the Product Security team is seeing an increased number of security bugs because AI models are increasingly good at finding security vulnerabilities. We are responding by scaling our triage efforts, investing in tooling and process improvements, and identifying architectural defenses that make common categories of bugs less likely and impactful. We have also [updated our VRP guidance](https://bughunters.google.com/about/rules/chrome-friends/chrome-vulnerability-reward-program-rules#summary-changelog) to be more explicit about what types of submissions we accept, and published a [security-for-agents.md](https://chromium.googlesource.com/chromium/src/+/main/docs/security/security-for-agents.md) file that researchers can add to agent context to increase the probability of finding relevant bugs. Ultimately, more security bugs found means more security bugs fixed. We are energized to leverage our expertise along with AI-powered capabilities throughout the bug lifecycle to continue keeping users safe online.
+
+Thank you for reading!
+
+Jasika
+
+On behalf of Chrome Security
+
 ## Q4 2025
 
 # Chrome Security **2025 Q4** Update
