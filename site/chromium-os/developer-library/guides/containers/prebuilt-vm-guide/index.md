@@ -132,9 +132,68 @@ qemu-system-x86_64 \
   -device virtio-keyboard-pci
 ```
 
-## 5. Enabling Sign-In and Google Services (API Keys)
+## 5. Signing Into a User Session
 
-To sign into the VM with a Google account, you need to provide Google API
+Choose one of the following options to access the ChromiumOS user session.
+
+### Option 1: Autologin with a Fake User (Recommended for Testing)
+
+This method uses the
+[autologin.py](https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/third_party/autotest/files/client/bin/autologin.py)
+script to log in with a fake user session, which is ideal for rapid testing.
+
+#### Step 1: Auto Login and Set Chrome Flags
+
+Connect to the VM and run the autologin script:
+
+```bash
+ssh -p 2222 -i ~/.ssh/testing_rsa \
+  -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+  root@localhost \
+  "/usr/local/autotest/bin/autologin.py -w -- \
+    --enable-devtools-pwa-handler \
+    --enable-features=IsolatedWebAppDevMode \
+    --remote-debugging-address=0.0.0.0 \
+    --force-devtools-available"
+```
+
+Wait a few seconds until the user session is ready.
+
+#### Step 2: Establish a Direct Tunnel
+
+Once logged in, you can tunnel the remote debugging port to your host machine
+to enable web testing. Run the following command to fetch the
+active port:
+
+```bash
+export HOST_PORT=9222
+export ACTIVE_PORT=$(ssh -p 2222 -i ~/.ssh/testing_rsa \
+  -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+  root@localhost "cat /home/chronos/DevToolsActivePort | head -n 1")
+```
+
+Create an SSH tunnel from your host to the VM to forward the debugging port.
+This terminal window must remain open during testing.
+
+```bash
+ssh -p 2222 -i ~/.ssh/testing_rsa \
+    -L ${HOST_PORT}:localhost:${ACTIVE_PORT} \
+    -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \
+    root@localhost
+```
+
+Verify the tunnel is working by running this command in a new terminal on your
+host:
+
+```bash
+curl http://localhost:${HOST_PORT}/json/version
+```
+
+A successful connection will return a JSON object with browser details.
+
+### Option 2: Using Real Accounts (e.g., Gmail) with API Keys
+
+To sign into the VM with a real Google account, you need to provide Google API
 keys.
 
 For SSH key authentication setup, refer to the
@@ -161,7 +220,7 @@ ssh -i ~/.ssh/testing_rsa -p 2222 -o StrictHostKeyChecking=no \
 
 Wait for about 30 seconds for the VM to reboot.
 
-### Add Keys to the VM
+#### Add Keys to the VM
 
 **To get API keys, follow the
 [Chromium API Keys guide](/developers/how-tos/api-keys/). It is very important
@@ -176,7 +235,7 @@ ssh -i ~/.ssh/testing_rsa -p 2222 -o StrictHostKeyChecking=no \
   root@localhost 'mount -o remount,rw /'
 ```
 
-append them to `/etc/chrome_dev.conf`:
+Append them to `/etc/chrome_dev.conf`:
 
 ```bash
 ssh -i ~/.ssh/testing_rsa -p 2222 -o StrictHostKeyChecking=no \
@@ -187,7 +246,7 @@ GOOGLE_DEFAULT_CLIENT_SECRET=YOUR_CLIENT_SECRET
 ' >> /etc/chrome_dev.conf"
 ```
 
-and restart the UI:
+And restart the UI:
 
 ```bash
 ssh -i ~/.ssh/testing_rsa -p 2222 -o StrictHostKeyChecking=no \
