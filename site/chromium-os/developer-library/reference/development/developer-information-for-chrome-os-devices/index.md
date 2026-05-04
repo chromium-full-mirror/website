@@ -4647,6 +4647,7 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
     <td>Yes</td>
   </tr>
+
   <tr>
     <td>2026-01-20</td>
     <td>Asus</td>
@@ -4659,6 +4660,22 @@ such as the auto update until date, first release, and more.
     <td>aarch64</td>
     <td>MT8189</td>
     <td>Convertible</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+
+  <tr>
+    <td>2026-04-17</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cm32-detachable-cm3206/">ASUS Chromebook CM32 Detachable / ASUS Chromebook CL32 Detachable</a></td>
+    <td>Padme</td>
+    <td>Jedi</td>
+    <td>Jedi</td>
+    <td>aarch64</td>
+    <td>6.6</td>
+    <td>aarch64</td>
+    <td>MT8189</td>
+    <td>Detachable</td>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
