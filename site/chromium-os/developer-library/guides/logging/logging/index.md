@@ -46,7 +46,7 @@ when running tests by adding args
 like so:
 
 ```shell
-$ ./out/Default/extensions_browsertests --gtest_filter=*BluetoothSocket* --vmodule=*bluetooth*=1,*dbus*=1,*bluez*=2
+$ ./out/Default/extensions_unittests --gtest_filter=*BluetoothSocket* --vmodule=*bluetooth*=1,*dbus*=1,*bluez*=2
 ```
 
 ## Viewing logs

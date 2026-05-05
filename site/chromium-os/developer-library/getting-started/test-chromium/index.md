@@ -30,8 +30,8 @@ tests.
 Use `autotest.py` to run all tests in a file or directory. For example:
 
 ```shell
-# Run all tests in the bluetooth_socket_apitest.cc file
-$ tools/autotest.py -C out/Default --run_all ./extensions/browser/api/bluetooth_socket/bluetooth_socket_apitest.cc
+# Run all tests in the bluetooth_socket_api_unittest.cc file
+$ tools/autotest.py -C out/Default --run_all ./extensions/browser/api/bluetooth_socket/bluetooth_socket_api_unittest.cc
 
 # Run all tests in the bluetooth_socket directory
 $ tools/autotest.py -C out/Default --run_all ./extensions/browser/api/bluetooth_socket
@@ -40,36 +40,37 @@ $ tools/autotest.py -C out/Default --run_all ./extensions/browser/api/bluetooth_
 Alternatively, find the target your test resides in and invoke that directly.
 You can most easily do this by plugging your test file path into `gn refs`. For
 example, plugging in the test file
-`//extensions/browser/api/bluetooth_socket/bluetooth_socket_apitest.cc` like so:
+`//extensions/browser/api/bluetooth_socket/bluetooth_socket_api_unittest.cc`
+like so:
 
 ```shell
-$ gn refs out/Default //extensions/browser/api/bluetooth_socket/bluetooth_socket_apitest.cc --all --testonly=true --type=executable
+$ gn refs out/Default //extensions/browser/api/bluetooth_socket/bluetooth_socket_api_unittest.cc --all --testonly=true --type=executable
 ```
 
-provides `//extensions:extensions_browsertests`. You can then build this test
+provides `//extensions:extensions_unittests`. You can then build this test
 target like so:
 
 ```shell
-$ autoninja -C out/Default/ extensions_browsertests
+$ autoninja -C out/Default/ extensions_unittests
 ```
 
-Then, to run all the tests under `extensions_browsertests`, you can run
+Then, to run all the tests under `extensions_unittests`, you can run
 
 ```shell
-$ ./out/Default/extensions_browsertests
+$ ./out/Default/extensions_unittests
 ```
 
 To specifically run a given test or set of tests, use the --gtest_filter
 argument (allows wildcard matching to capture multiple tests):
 
 ```shell
-$ ./out/Default/extensions_browsertests --gtest_filter=*BluetoothSocket*
+$ ./out/Default/extensions_unittests --gtest_filter=*BluetoothSocket*
 ```
 
 Or even specify a specific test method:
 
 ```shell
-$ ./out/Default/extensions_browsertests --gtest_filter=BluetoothSocketApiTest.Listen
+$ ./out/Default/extensions_unittests --gtest_filter=BluetoothSocketApiUnittest.Permission
 ```
 
 To enable verbose logging during a test, add the
@@ -77,14 +78,14 @@ To enable verbose logging during a test, add the
 for the desired module and logging level like so:
 
 ```shell
-$ ./out/Default/extensions_browsertests --gtest_filter=*BluetoothSocket* --vmodule=*bluetooth*=1,*dbus*=1,*bluez*=2
+$ ./out/Default/extensions_unittests --gtest_filter=*BluetoothSocket* --vmodule=*bluetooth*=1,*dbus*=1,*bluez*=2
 ```
 
 To run browser tests over an SSH connection, an additional script is required to
 simulate an attached display for the browser window to draw on.
 
 ```shell
-$ testing/xvfb.py ./out/Default/extensions_browsertests --gtest_filter=*BluetoothSocket*
+$ testing/xvfb.py ./out/Default/extensions_unittests --gtest_filter=*BluetoothSocket*
 ```
 
 For help with writing unit tests see:

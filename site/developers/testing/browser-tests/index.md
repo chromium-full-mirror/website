@@ -42,7 +42,6 @@ These are the current browser test binaries:
             for testing features that are at the [Content
             module](/developers/content-module) layer. It's based on Content
             Shell instead of Chrome.
-*   `extensions_browsertests`: for code in //extensions
 *   `performance_browser_tests`: these are perf tests that run on bots
             with hardware GPUs for more realistic performance characteristics.
             These are not sharded.

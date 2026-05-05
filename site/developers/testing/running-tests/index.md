@@ -39,10 +39,10 @@ build directory with target_os="chromeos".
 1.  gn gen out/Debug_chromeos/ -args='is_debug=true
             target_os="chromeos"'
 2.  autoninja -C out/Debug_chromeos/&lt;test target&gt; (for instance,
-            &lt;test target&gt; might be extensions_browsertests or
+            &lt;test target&gt; might be extensions_unittests or
             base_unittests)
 3.  out/Debug_chromeos/&lt;test target&gt; (for instance,
-            out/Debug_chromeos/extensions_browsertests)
+            out/Debug_chromeos/extensions_unittests)
 
 ### Mac
 
