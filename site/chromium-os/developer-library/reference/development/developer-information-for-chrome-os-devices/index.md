@@ -4680,5 +4680,35 @@ such as the auto update until date, first release, and more.
     <td>Yes</td>
   </tr>
 
+  <tr>
+    <td>2026-03-15</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cm14-cm1405/techspec/">ASUS Chromebook CM14 (CM1405)</a></td>
+    <td>Tarkin</td>
+    <td>Skywalker</td>
+    <td>Skywalker</td>
+    <td>aarch64</td>
+    <td>6.6</td>
+    <td>aarch64</td>
+    <td>MT8189</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>2026-03-15</td>
+    <td>Asus</td>
+    <td><a href="https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cm15-cm1505/techspec/">ASUS Chromebook CM15 (CM1505)</a></td>
+    <td>Phasma</td>
+    <td>Skywalker</td>
+    <td>Skywalker</td>
+    <td>aarch64</td>
+    <td>6.6</td>
+    <td>aarch64</td>
+    <td>MT8189</td>
+    <td>Clamshell</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
 
 </table>
