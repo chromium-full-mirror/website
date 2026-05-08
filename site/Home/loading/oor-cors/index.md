@@ -136,7 +136,7 @@ your installed Chrome Extensions may cause the issue. You can disable each
 Chrome Extensions at chrome://extensions/ step by step to find the problematic
 one. Once you find the one, please report the issue to the Chrome Extensions
 developers. For enterprise users, there is a workaround,
-[CorsMitigationList](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=CorsMitigationList).
+[CorsMitigationList](https://chromeenterprise.google/policies/?policy=CorsMitigationList).
 If you set this policy (empty list is also fine), all Chrome Extensions run in a
 compatible mode. This will cause small negative performance impact, but it will
 work.
@@ -145,17 +145,17 @@ If you are a bit familiar with CORS, you can do further debugging to have a
 crafted workaround or to find a solution. If you see CORS preflight failures in
 the logs, and you are sure that the target server does not handle CORS preflight
 correctly, you can craft the
-[CorsMitigationList](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=CorsMitigationList)
+[CorsMitigationList](https://chromeenterprise.google/policies/?policy=CorsMitigationList)
 not to send a preflight request for such condition. You will put your seeing
 non-standard HTTP header name into the
-[CorsMitigationList](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=CorsMitigationList).
+[CorsMitigationList](https://chromeenterprise.google/policies/?policy=CorsMitigationList).
 For instance, if the CORS preflight has the following line in the request
 header:
 
 > Access-Control-Request-Headers: my-auth,my-account
 
 adding "my-auth" and "my-account" into the
-[CorsMitigationList](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=CorsMitigationList)
+[CorsMitigationList](https://chromeenterprise.google/policies/?policy=CorsMitigationList)
 will stop sending the CORS preflight for the case. Registered header names will
 be exempted from the CORS preflight condition checks as [CORS-safelisted request
 headers](https://fetch.spec.whatwg.org/#cors-safelisted-request-header). Note
@@ -172,7 +172,7 @@ Viewer](https://netlog-viewer.appspot.com/#import) is general purpose online
 tools to check details on the dump.
 
 The last resort for enterprise users is
-[CorsLegacyModeEnabled](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=CorsLegacyModeEnabled).
+[CorsLegacyModeEnabled](https://chromeenterprise.google/policies/?policy=CorsLegacyModeEnabled).
 It will allow you to use the legacy CORS instead of OOR-CORS. For other users,
 setting chrome://flags/#out-of-blink-cors to Disabled will have the same effect.
 But this option will be removed at Chrome m83. So please be careful about that.

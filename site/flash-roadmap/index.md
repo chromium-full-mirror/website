@@ -42,10 +42,10 @@ to end support.
 #### Summary
 
 It will no longer be possible to enable Flash Player, via Enterprise policy
-([AllowOutdatedPlugins](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=AllowOutdatedPlugins)),
+([AllowOutdatedPlugins](https://chromeenterprise.google/policies/?policy=AllowOutdatedPlugins)),
 in versions of Chrome before Chrome 88 on Windows, Mac, and Linux. ChromeOS will
 continue to allow the use of the
-[AllowOutdatedPlugins](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=AllowOutdatedPlugins)
+[AllowOutdatedPlugins](https://chromeenterprise.google/policies/?policy=AllowOutdatedPlugins)
 policy.
 
 #### Rationale

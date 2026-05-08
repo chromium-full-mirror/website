@@ -29,7 +29,7 @@ on Chrome OS Login Screen, the user profile associated with the certificate will
 be created on the Chromebook. Subsequent logins of this user may then be handled
 by Chrome OS in the “offline” mode, without reaching out to the IdP (note that
 this can be customized using the
-[SAMLOfflineSigninTimeLimit](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=SAMLOfflineSigninTimeLimit)
+[SAMLOfflineSigninTimeLimit](https://chromeenterprise.google/policies/?policy=SAMLOfflineSigninTimeLimit)
 policy).
 
 Note that the smart card based authentication is NOT implemented for regular

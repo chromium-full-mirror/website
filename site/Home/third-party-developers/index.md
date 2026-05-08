@@ -11,7 +11,7 @@ title: Third Party Developers
 ## Important Notice
 
 The
-[ForceNetworkInProcess](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=ForceNetworkInProcess)
+[ForceNetworkInProcess](https://chromeenterprise.google/policies/?policy=ForceNetworkInProcess)
 will be removed soon. The official announcement will start from [Chrome
 Enterprise release notes](https://support.google.com/chrome/a/answer/7679408)
 for Chrome 80. The original plan was to remove it at Chrome 82, but will be
