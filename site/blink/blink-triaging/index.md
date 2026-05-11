@@ -74,7 +74,7 @@ Component:`UI`, Component:`Internals`.
 **Task 4: monitor stale P0/P1 security bugs (optional)**
 
 *   Review all result from [this
-            search](https://bugs.chromium.org/p/chromium/issues/list?can=2&q=Type%3DBug-Security+component%3Ablink+pri%3D0%2C1+modified%3Ctoday-30&colspec=ID+Pri+M+Stars+ReleaseBlock+Component+Status+Owner+Summary+OS+Modified&x=m&y=releaseblock&cells=ids).
+            search](https://issues.chromium.org/issues?q=status%3Dopen+type%3Dvulnerability+component%3Ablink+priority%3D(p0%7Cp1)+modified%3Ctoday-30).
 *   Check that the bug has an owner, the owner is actively working on
             the issue, and is fixing. Re-assign, re-categorize or ping the bug
             as appropriate.
