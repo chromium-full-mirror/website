@@ -139,6 +139,21 @@ such as the auto update until date, first release, and more.
   </tr>
   <tr>
     <td></td>
+    <td>HP</td>
+    <td><a href="https://www.hp.com/us-en/shop/pdp/elite-6-g2i-14-inch-chromebook-plus-customizable-c51bjav-mb">HP Elite 6 G2i 14-inch Chromebook Plus</a></td>
+    <td>caboc</td>
+    <td>brox</td>
+    <td>brox</td>
+    <td>x86_64</td>
+    <td>6.6</td>
+    <td>x86_64</td>
+    <td>RaptorLake-R</td>
+    <td>Clamshell</td>
+    <td></td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td></td>
     <td>FCCL</td>
     <td><a href="https://www.fujitsu.com/jp/group/fccl/about/resources/news/press-releases/2024/1029.html">FMV Chromebook 11K</a></td>
     <td>kyogre</td>
