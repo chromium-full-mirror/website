@@ -365,8 +365,10 @@ If your trial has a clear need for an exception to this rule, you may request
 Approval of the exception requires 3 LGTMs.
 
 An initial origin trial or experiment for a feature may only run for
-*6 milestones of Chromium*. Each request to extend beyond that limit may only be
-for *3 milestones* at a time, and will not be approved unless substantial
+*6 milestones of Chromium* (12 starting with the
+[two-week release schedule](https://developer.chrome.com/blog/chrome-two-week-release) as of milestone 153).
+Each request to extend beyond that limit may only be
+for *3 milestones* at a time (6 as of milestone 153), and will not be approved unless substantial
 progress is demonstrated in all of these areas:
 * Draft spec (early draft is ok, but must be spec-like and associated with the
   appropriate standardization venue, or WICG)
@@ -700,7 +702,7 @@ details](/blink/origin-trials/running-an-origin-trial#integrate-feature)).
 Once your Deprecation Trial is in place, proceed to the next step.
 
 Deprecation trials are run for up to 6 chromium milestones, and can be
-repeatedly extended for 6 milestones as long as significant progress is
+repeatedly extended for 6 milestones (12 as of milestone 153) as long as significant progress is
 demonstrated in at least one of the following areas:
  * Designing and shipping alternative APIs for the use case, directly addressing
    feedback from developers currently relying on the deprecation trial.
