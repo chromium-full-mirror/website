@@ -511,6 +511,8 @@ repository, the commit message is important. We use the following conventions:
     change. Please include information about the testing that you performed to
     ensure the code is valid.
 *   **Signed-off-by** is required.
+*   Add **Branches:** and **Fixes:** tags for auto-dispatching the fix to other
+    kernel versions. For more details refer to [Kernel CL Dispatching Tags Guide](/chromium-os/developer-library/guides/development/contributing/#kernel-cl-dispatching-tags).
 
 An example subject line is: **CHROMIUM: ARM: tegra: Add initial support for
 aebl**
