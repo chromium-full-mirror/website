@@ -588,4 +588,4 @@ this remains a non-issue.
 [Manifest]: https://devmanual.gentoo.org/general-concepts/manifest/index.html
 [mirrors]: #mirrors
 [Object Versioning]: https://cloud.google.com/storage/docs/object-versioning
-[Security for archive mirror GS buckets]: #Security-for-archive-mirror-GS-buckets
+[Security for archive mirror GS buckets]: #security-for-archive-mirror-gs-buckets
