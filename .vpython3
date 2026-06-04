@@ -38,11 +38,6 @@ verify_pep425_tag: [
     {python: "cp38", abi: "cp38", platform: "win_amd64"}
 ]
 
-wheel <
-  name: "infra/python/wheels/pyyaml/${vpython_platform}"
-  version: "version:5.4.1.chromium.2"
->
-
 # Used by //scripts/fetch_lobs to fetch stuff over HTTPS using connection pools.
 wheel: <
   name: "infra/python/wheels/requests-py3"
