@@ -93,27 +93,6 @@ full name for you.
 Multiple CLs can be specified, but they will be cherry-picked independently.
 This tool cannot be used to cherry-pick stacks of CLs that depend on each other.
 
-## Use cros\_merge\_to\_branch tool
-
-The next easiest way to create a change from a change you already committed on
-[ToT] in ChromeOS is using `cros_merge_to_branch`.
-
-Example usage:
-
-```
-cros_merge_to_branch 1376991 release-R76-12239.B
-```
-
-This creates Gerrit changes for R76 from CL 1376991 in less than 10 seconds.
-After running, you can check Gerrit to actually commit the changes (search your
-open CLs for R76-\* branch).
-For more advanced usage information, use `--help`.
-
-You should run with `--dry-run` the first time around to not actually upload
-your change until you are sure about how to use the tool. Note this tool accepts
-either gerrit change numbers or Change-Id's. However, since the former is
-guaranteed to be unique, it is advised you use those instead.
-
 ## Check out the whole tree (with repo)
 
 You must have different checkouts (yes, new chroots in a completely new
@@ -164,9 +143,9 @@ repo init \
     -g buildtools
 ```
 
-This will get you chromite and all the tools it includes i.e.
-`cros_merge_to_branch`. Make sure you pass the `--no-mirror` option so it will
-fetch the single git repo needed to cherry-pick & upload the CL.
+This will get you chromite and all the tools it includes. Make sure you pass
+the `--no-mirror` option so it will fetch the single git repo needed to
+cherry-pick & upload the CL.
 
 ## Checking out a single repository (with git)
 
