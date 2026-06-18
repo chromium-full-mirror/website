@@ -261,7 +261,7 @@ From this table, we can tell the unwind tables take up ~21MB (197MB -
 #8 0x5788e41279fa _start
 ```
 
-# Symbolizing minidumps with tast symbolize
+## Symbolizing minidumps with tast symbolize
 
 When Chrome or other programs, such as system daemons, crash on ChromeOS, they
 save their memory in minidump format. This is where `tast symbolize` comes in
@@ -281,7 +281,7 @@ in ChromeOS chroot (this is different to simple chrome workflow discussed
 above). Should you encounter any problems, try using
 `tast --verbose symbolize <crash.dmp>` to see diagnostic information.
 
-## How it works
+### How it works
 
 This section describes how tast symbolize works. If you just want to get a stack
 trace, you can stop reading here.
@@ -310,11 +310,11 @@ Under the hood, `tast symbolize` runs minidump_stackwalk twice.
    (in the local chroot). Symbols are cached in `/tmp/breakpad_symbols`.
  - Finally, it runs minidump_stackwalk the second time and prints the output.
 
-# Other resources
+## Other resources
 
  - [Symbol Life Cycle](https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/crash-reporter/docs/symbols.md)
 
-## Googler only:
+### Googler only:
 
  - [go/cros-stack-traces](http://go/cros-stack-traces) - information about
    getting stack traces on DUTs
