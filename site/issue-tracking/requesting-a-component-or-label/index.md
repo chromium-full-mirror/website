@@ -13,7 +13,7 @@ title: Requesting a Component or Label
 Project members can request the creation of new components by simply filing an issue:
 
 *   [Component
-            Request](https://issues.chromium.org/p/chromium/issues/entry?template=Component%20Request)
+            Request](https://issues.chromium.org/issues/new?component=1456458&template=1923139)
             (Template)
 
 ## Component versus Hotlist
