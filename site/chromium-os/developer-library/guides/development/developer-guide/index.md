@@ -366,16 +366,13 @@ https://www.chromium.org/chromium-os/licensing/building-a-distro/
 ***
 
 **Googlers/internal manifest:**
-```shell
-(outside)
-$ cd ~/chromiumos
-$ repo init -u https://chrome-internal.googlesource.com/chromeos/manifest-internal -b stable
-$ repo sync -j4
-```
 
 Gerrit Review-Enforcement has been enabled on the Chromium/Chrome gerrit hosts.
-In order to only require one CR+2 from another Googler you need to use the
-`sso://` URLs when uploading a CL. Add the following to  your `.git/config`:
+In order to use the internal manifest and to only require one CR+2 from another
+Googler you need to use the `sso://` URLs when uploading a CL.
+
+Add the following to your `.git/config`:
+
 ```
 [url "sso://chromium"]
 	insteadof = https://chromium.googlesource.com
@@ -384,6 +381,15 @@ In order to only require one CR+2 from another Googler you need to use the
 	insteadof = https://chrome-internal.googlesource.com
 	insteadof = https://chrome-internal-review.googlesource.com
 
+```
+
+Then run
+
+```shell
+(outside)
+$ cd ~/chromiumos
+$ repo init -u https://chrome-internal.googlesource.com/chromeos/manifest-internal -b stable
+$ repo sync -j4
 ```
 
 *** note
