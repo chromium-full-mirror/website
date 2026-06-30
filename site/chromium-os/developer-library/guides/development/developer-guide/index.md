@@ -195,7 +195,7 @@ environment, and run preupload hooks later on.
 (outside)
 # On Ubuntu, make sure to enable the universe repository.
 $ sudo add-apt-repository universe
-$ sudo apt-get install git gitk git-gui curl
+$ sudo apt-get install git gitk git-gui curl util-linux util-linux-extra
 ```
 
 These commands also installs git's graphical front end (`git gui`) and revision
