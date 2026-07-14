@@ -16,6 +16,43 @@ if you're interested in updates, discussion, or feisty rants related to Chromium
 security.
 
 
+## Q2 2026
+
+# Chrome Security **2026 Q2** Update
+
+
+Hello everyone,
+
+Here's an update on what Chrome Security was up to in Q2 of 2026.
+
+The Chrome Counter Abuse team launched Report an Unsafe Site on Desktop, accessible under Help from the three-dot menu. This allows you to report a potentially dangerous site to Google. By reporting sites you suspect are engaging in malicious behavior such as distributing malware, phishing sensitive credentials, or impersonating a legitimate site, you can help protect future users from dangerous web pages.
+
+The Secure Web and Network team continued to make progress on Merkle Tree Certificates (MTCs), an integrated issuance and transparency system for size-efficient quantum-resistant HTTPS certificates, aligning with accelerated Google and cross-industry timelines based on recent progress in quantum computing research. We ran a proof-of-concept experiment with Cloudflare, began circulating a draft MTC CA policy for feedback, and announced an early testing program (expect more details to be published this month). We also rolled out more Local Network Access protections for WebTransport and WebSockets. Finally, note that starting in Chrome 150, Enhanced Safe Browsing users have Ask-Before-HTTP enabled by default, protecting their network connections from tampering or eavesdropping; in October 2026, we will roll this protection out to [all users](https://blog.google/security/https-by-defau/).
+
+On the Chrome AI Security team, we published some [best practices for agents](https://developer.chrome.com/docs/agents/security) and [for sites](https://developer.chrome.com/docs/ai/webmcp/secure-tools) using [WebMCP](https://github.com/webmachinelearning/webmcp). Those guidelines are based on techniques we've developed while further securing Gemini in Chrome, and based on our internal red teaming of WebMCP. We are also looking into solutions to lower CAPTCHA-style friction for users, while websites try to defend themselves against increasing bot traffic. [Private Verification Tokens](https://github.com/explainers-by-googlers/private-verification-tokens) is a proposed low-entropy mechanism for users to transfer the trust they have established in regular browsing into private browsing mode to reduce their experienced friction. We are also partnering with other browsers and CDNs on Private Access Control Tokens; see [this Mozilla blogpost](https://hacks.mozilla.org/2026/06/pact-anonymous-credentials-for-the-web/) for details.
+
+The Exploit Defense teams have been making solid progress in the memory safety space. The Rust in Chrome team has expanded the [Rust ChildProcessSecurityPolicy experiment](https://crbug.com/482216433) to cover several more security-relevant data structures, with early access to the feature available at chrome://flags/#child-process-security-policy-rust.  We now provide Rust equivalents for foundational Chromium APIs (e.g. for [running Finch trials](https://crbug.com/507165212), passing [file paths](https://crbug.com/328278701), and [accessing the command-line](https://crbug.com/521560758)), with further API support on the way, and run [Clippy on Rust code in Chromium](https://groups.google.com/a/chromium.org/g/rust-dev/c/1UINToK0HW0/m/PoYvtx19AAAJ).  Microsoft Edge Security contributed [Rust BMP which is now launched to 100% Stable](https://docs.google.com/document/d/1fc7KI1AhvCOLZhAStg_jIQLlCA3aCZP4vhgFlLn1ZTk/edit?usp=sharing).  The Rust validator for [Pix](https://www.bcb.gov.br/en/financialstability/pix_en) will be [enabled by default](https://chromium-review.googlesource.com/c/chromium/src/+/8032363) starting with Chrome 152.
+
+On the C++ hardening side of things -- in Chrome 151, C++ `base::span` now ensures that PartitionAlloc provided memory cannot have an OOB affecting another live object, even if the passed in bounds are incorrect. We've also expanded our quarantining of pointers on the browser main thread in Chrome 150, hardening against UaFs inside a Chromium task.
+
+In the Windows world, we continued to iterate on the Process Isolation feature, which aims to protect Chrome's encrypted data from malware that might try to inject or tamper with Chrome's processes. This is now available in chrome://settings/system after enabling the switch in chrome://flags/#enable-process-isolation-ui so please do try it out! In collaboration with Microsoft, we are also pleased to share that work has now commenced on a major [new sandboxing model](https://issues.chromium.org/issues/533049438) called 'basic sandbox' which will dramatically improve the strength of the renderer process sandbox. This is a major multi-quarter project so expect more updates to come in the future. The Chromium security team would like to express their deep thanks to the Windows Kernel and Microsoft Edge teams on the collaboration that has led to this point.
+
+Finally, Exploit Defense has also added files like [content/SECURITY.md](https://chromium.googlesource.com/chromium/src/+/main/content/SECURITY.md) to help guide the filing of new security bugs, alongside ongoing efforts to triage, fix, and propose architectural defenses for such issues.
+
+The Chrome VRP [adjusted](https://bughunters.google.com/blog/evolving-the-android-chrome-vrps-for-the-ai-era) its reward structure and reward amounts to reflect the volume of reports being discovered and fixed using internal AI tooling. Our investment in tooling now allows us to use a combination of deterministic and AI tooling to triage incoming security bugs. It uses isolated infrastructure to reproduce and enrich bug reports before they are automatically analyzed for severity and routed to the appropriate developers. We are moving to more frequently rejecting reports that are not compliant with our [reporting guidelines](https://bughunters.google.com/about/rules/chrome-friends/chrome-vulnerability-reward-program-rules#report-quality). There is ongoing work to also improve our CVE and release notes issuance processes to scale appropriately with the increased volume we are observing.
+
+In accordance with updated VRP structure V8 now provides better modes for determining where crashes happen. In particular, new testing modes help differentiate experimental from production issues to classify issues. All of these helper modes are documented in V8's [SECURITY.md](https://chromium.googlesource.com/v8/v8/+/HEAD/SECURITY.md) file. This also allows our internal bug finding agents to automatically validate all discoveries, ensuring that they only report real bugs. As a result, the [Big Sleep](https://googleprojectzero.blogspot.com/2024/10/from-naptime-to-big-sleep.html) agent now operates as a fully automated pipeline, helping secure V8.
+
+Chrome ships around 1700 third party dependencies across all its platforms, and keeping them up to date is a huge task. All owners of 3P dependencies in Chrome are expected to select and adopt a well-lit import and update path this year. Keeping dependencies up to date ensures that Chrome has a small patch gap with the upstream and makes it easier to respond to vulnerabilities or apply security fixes. The [Skia Autoroller](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/managing-third-party/skia-autoroller.md#Keeping-the-dependency-fresh) already supports rolling pristine git submodules when upstream releases are made, but many Chrome dependencies do not fit this use pattern. To close this gap, Chrome Ops Security has been working on [Crowbar](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/managing-third-party/crowbar-workflow.md); tooling that will enable owners to onboard their patched 3P dependencies or partial checkouts to automated updates.
+
+We've also filed bugs against owners who are required to onboard their dependencies to managed update paths. If you are a dependency owner who has received a "[3p Freshness]" bug, please action it as a priority to help us minimize the patch gap with upstream.
+
+Thank you for reading!
+
+Jasika
+
+On behalf of Chrome Security
+
 ## Q1 2026
 
 # Chrome Security **2026 Q1** Update
