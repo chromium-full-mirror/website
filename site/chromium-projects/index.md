@@ -6,10 +6,11 @@ use_title_as_h1: false
 ---
 
 The Chromium projects include Chromium and ChromiumOS, the open-source projects
-behind the [Google Chrome](https://www.google.com/chrome) browser and Google
-ChromeOS, respectively. This site houses the documentation and code related to
-the Chromium projects and is intended for developers interested in learning
-about and contributing to the open-source projects.
+behind the [Google Chrome](https://www.google.com/chrome) browser and
+[Google ChromeOS](https://chromeos.google/), respectively. This site houses the
+documentation and code related tothe Chromium projects and is intended for
+developers interested in learning about and contributing to the open-source
+projects.
 
 <div class="two-column-container">
 <div class="column">
@@ -39,11 +40,11 @@ goals](https://googleblog.blogspot.com/2009/11/releasing-chromium-os-open-source
 obtain the latest build, and learn how you can get involved, submit code, and
 file bugs.
 
-[![](/chromium-projects/logo_chrome_color_1x_web_32dp.png)](https://www.google.com/chrome)
+[![](/chromium-projects/logo_chrome_color_1x_web_32dp.png)](https://chromeos.google/)
 
-Looking for Google ChromeOS devices?
+Looking for Google ChromeOS?
 
-[Visit the Google ChromeOS site](https://www.google.com/chromeos)
+[Visit the Google ChromeOS site](https://chromeos.google/)
 
 </div>
 </div>
