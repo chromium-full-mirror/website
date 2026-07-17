@@ -201,7 +201,7 @@ We'll document their alternatives.
 
 * `arch` (RO): Shell code could use `uname -a` to get the kernel architecture.
   Userland code generally shouldn't be changing behavior based on the arch.
-* `hwid` (RO): See the [board/device detection FAQ](#detect-device).
+* `hwid` (RO): See the [board/device detection FAQ][detect-device].
 
 ### Examples
 
@@ -297,14 +297,14 @@ Thus it should be safe to use from a security perspective.
 If you only want to set a default value, do not write `/proc/sys/` directly.
 Only use config files under `/etc/sysctl.d/`.
 
-Some kernel parameters might be set via [kernel commandline](#kernel-cmdline)
+Some kernel parameters might be set via [kernel commandline][kernel-cmdline]
 options, including verbose names like `sysctl.foo.bar=value` (which would
 effectively write `value` to `/proc/sys/foo/bar`), but that should be avoided
 unless strictly necessary during early boot (before init/userspace runs).
-Every option in the [kernel commandline](#kernel-cmdline) requires [review and
-approval by security](#kernel-cmdline-security) in order to pass signing, and
+Every option in the [kernel commandline][kernel-cmdline] requires [review and
+approval by security][kernel-cmdline-security] in order to pass signing, and
 takes a while to be available to released images.
-Further, the [size of the kernel commandline is limited](#kernel-cmdline-size),
+Further, the [size of the kernel commandline is limited][kernel-cmdline-size],
 going as low as only 512 bytes for some architectures.
 
 ### Config Files
@@ -331,7 +331,7 @@ initial environment, and in general can be parsed by any userland program.
 This string basically acts as a global variable that anyone can read.
 This is not a good thing.
 
-Due to its [limited size](#kernel-cmdline-size), use of this should be reserved
+Due to its [limited size][kernel-cmdline-size], use of this should be reserved
 for when there are no other alternatives.  If a setting must be configured
 before userland boots (e.g. the `console=` or `root=` options) or if the
 firmware needs to modify it (e.g. [depthcharge rewrites `%U` for the active
@@ -442,7 +442,7 @@ These flags can be passed to the runtime as well via [libchromeos-use-flags].
 This is explained in more detail in the [login_manager documentation].
 
 USE flags must not be used to set board names (e.g. `kevin` or `link`).
-See the [board/device behavior FAQ](#device-behavior) for alternatives.
+See the [board/device behavior FAQ][device-behavior] for alternatives.
 
 [libchromeos-use-flags]: https://chromium.googlesource.com/chromiumos/overlays/chromiumos-overlay/+/HEAD/chromeos-base/libchromeos-use-flags/
 
@@ -514,7 +514,7 @@ few options:
 
 * If a USE flag is already available, [key off of that](#use-flags).
 * Update the board's bsp ebuild to install custom init scripts or config files.
-* [Query the board name](#detect-device).
+* [Query the board name][detect-device].
 
 ### How do I find the current board/device?
 
@@ -545,13 +545,18 @@ early dogfood testing with users.
 
 Use some other knob to control behavior (such as [Finch]).
 
-[chromeos-config section]: #chromeos_config
+[chromeos-config section]: #chromeos-config
 [chromeos-config project]: https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/chromeos-config
 [crossystem]: https://chromium.googlesource.com/chromiumos/platform/vboot_reference/+/HEAD/utility/crossystem.c
+[detect-device]: #how-do-i-find-the-current-boarddevice
+[device-behavior]: #how-do-i-change-behavior-based-on-boarddevice
 [Finch]: http://go/finch-guide
+[kernel-cmdline]: #kernel-commandline
+[kernel-cmdline-security]: #security
+[kernel-cmdline-size]: #size-limits
 [login_manager documentation]: https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/login_manager/docs/flags.md
-[lsb-release]: #LSB
-[os-release]: #os-release
+[lsb-release]: #etclsb-release
+[os-release]: #etcos-release
 [sysctl(8)]: https://man7.org/linux/man-pages/man8/sysctl.8.html
 [sysctl.conf(5)]: https://man7.org/linux/man-pages/man5/sysctl.conf.5.html
 [rewrite-shell]: /chromium-os/developer-library/guides/development/development-basics/#shell
