@@ -43,6 +43,61 @@ s.src = 'https://www.gstatic.com/brandstudio/kato/cookie_choice_component/cookie
 s.dataset.autoloadCookieConsentBar = true;
 s.dataset.autoloadCookieContentBarIntlCode = '';
 document.head.append(s);
+
+// Configure the mobile navigation drawer.
+// Keep in sync with $mobile-nav-breakpoint in default.scss.
+const mobileNavBreakpoint = 768;
+const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+const mobileNav = document.getElementById('sidebar-left');
+const mobileNavClose = document.getElementById('mobile-nav-close');
+const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
+
+if (mobileNavToggle && mobileNav && mobileNavClose && mobileNavBackdrop) {
+  const setMobileNavState = (isOpen) => {
+    mobileNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.classList.toggle('mobile-nav-open', isOpen);
+  };
+
+  const closeMobileNav = (returnFocus = false) => {
+    setMobileNavState(false);
+    if (returnFocus) {
+      mobileNavToggle.focus();
+    }
+  };
+
+  const openMobileNav = () => {
+    setMobileNavState(true);
+    mobileNav.scrollTop = 0;
+    mobileNavClose.focus();
+  };
+
+  mobileNavToggle.addEventListener('click', () => {
+    if (document.body.classList.contains('mobile-nav-open')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  });
+
+  mobileNavClose.addEventListener('click', () => closeMobileNav(true));
+  mobileNavBackdrop.addEventListener('click', () => closeMobileNav(true));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMobileNav(true);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > mobileNavBreakpoint) {
+      closeMobileNav();
+    }
+  });
+
+  mobileNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMobileNav);
+  });
+}
 {%- endset -%}
 
 <!DOCTYPE html>
@@ -64,31 +119,44 @@ document.head.append(s);
 </head>
 
 <header>
-  <a href="/">
+  <button id="mobile-nav-toggle" class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="sidebar-left" aria-expanded="false">
+    <span class="mobile-nav-toggle-bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+  <a class="header-brand" href="/">
     <img alt="the Chromium logo" src="/_assets/icon-chromium-96.png" width="48" height="48">
     <h2>The Chromium Projects</h2>
   </a>
   <div id="search"></div>
 </header>
 
+<div id="mobile-nav-backdrop" aria-hidden="true"></div>
+
 <div id="main-wrapper">
-  <nav id="sidebar-left">
-    <section>
+  <nav id="sidebar-left" class="sidebar-nav" aria-label="Site navigation">
+    <div class="mobile-nav-header">
+      <h3>Menu</h3>
+      <button id="mobile-nav-close" class="mobile-nav-close" type="button" aria-label="Close navigation menu">&times;</button>
+    </div>
+    <section class="sidebar-primary">
       <a {{ selected_href("/chromium-projects") }}>Home</a>
       <a {{ selected_href("/Home") }}>Chromium</a>
       <a {{ selected_href("/chromium-os") }}>ChromiumOS</a>
     </section>
-    <section>
+    <section class="sidebar-quick-links">
       <h4>Quick links</h4>
       <a href="/for-testers/bug-reporting-guidelines">Report bugs</a>
       <a href="/developers/discussion-groups">Discuss</a>
     </section>
-    <section>
+    <section class="sidebar-other-sites">
       <h4>Other sites</h4>
       <a href="https://blog.chromium.org/">Chromium Blog</a>
       <a href="https://developer.chrome.com/extensions">Google Chrome Extensions</a>
     </section>
-    <section id="license" role="complementary">
+    <section class="sidebar-license" role="complementary">
       Except as otherwise
       <a href="https://developers.google.com/site-policies.html#restrictions">noted</a>,
       the content of this page is licensed under a
@@ -96,10 +164,10 @@ document.head.append(s);
       and examples are licensed under the
       <a href="https://chromium.googlesource.com/chromium/src/+/HEAD/LICENSE">BSD License</a>.
     </section>
-    <section id="privacy" role="complementary">
+    <section class="sidebar-privacy" role="complementary">
       <a href="https://policies.google.com/privacy">Privacy</a>
     </section>
-    <a id="edit-this-page" href="https://edit.chromium.org/edit?repo=chromium/website/main&file=site{{page.url}}index.md&cloneRepo=chromium/website:refs/heads/main&fullPath=chromium/site{{page.url}}index.md">Edit</a>
+    <a class="edit-this-page" href="https://edit.chromium.org/edit?repo=chromium/website/main&file=site{{page.url}}index.md&cloneRepo=chromium/website:refs/heads/main&fullPath=chromium/site{{page.url}}index.md">Edit</a>
   </nav>
   <main>
   {%- if breadcrumbs %}
