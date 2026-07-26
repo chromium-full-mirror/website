@@ -621,3 +621,19 @@ main {
     padding: 16px;
   }
 }
+
+// Below 400px, the full-size logo and title no longer fit beside the
+// search and navigation buttons without wrapping.
+@media (max-width: 400px) {
+  .header-brand {
+    img {
+      height: 36px;
+      margin-right: 8px;
+      width: auto;
+    }
+
+    h2 {
+      font-size: 17px;
+    }
+  }
+}
