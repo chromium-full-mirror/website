@@ -4,7 +4,7 @@
     "build:eleventy": "eleventy --quiet",
     "build:sass": "sass site/_stylesheets:build/_stylesheets",
     "deploy:login": "firebase login",
-    "deploy:preview": "firebase hosting:channel:deploy --project prod --expires 7d",
+    "deploy:preview": "firebase hosting:channel:deploy --project staging --expires 7d",
     "deploy:prod": "firebase deploy --only hosting --project prod",
     "deploy:staging": "firebase deploy --only hosting --project staging",
     "start": "npm-run-all build:sass --parallel watch:*",
