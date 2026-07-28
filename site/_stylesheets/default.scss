@@ -483,6 +483,21 @@ main {
   }
 }
 
+@media (min-width: ($mobile-nav-breakpoint + 1px)) {
+  // Keep the sidebar visible while scrolling. Top padding keeps its content
+  // off the viewport edge when sticky and adds a little more space below
+  // the nearby header in its initial position.
+  #sidebar-left {
+    align-self: flex-start;
+    box-sizing: border-box;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding-top: 10px;
+    position: sticky;
+    top: 0;
+  }
+}
+
 @media (max-width: $mobile-nav-breakpoint) {
   header {
     flex-wrap: nowrap;
