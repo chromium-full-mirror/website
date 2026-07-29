@@ -635,6 +635,17 @@ main {
   main {
     margin: 0 5px 5px 5px;
     padding: 16px;
+
+    // Stack the two content columns vertically at the mobile breakpoint so
+    // each column has enough horizontal space to remain readable.
+    .two-column-container {
+      display: block;
+
+      > div.column {
+        margin-bottom: 20px;
+        padding-right: 0;
+      }
+    }
   }
 }
 
