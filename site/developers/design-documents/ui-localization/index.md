@@ -70,12 +70,13 @@ If you're developing for Mac, also see notes on [how to add strings for Chrome o
 6.  The next time you build the solution, this will automatically add
     the en-US string.
 7.  In your code, include `ui/base/l10n/l10n_util.h` and
-    `chrome/grit/generated_resources.h`.
-8.  To get the string, use `l10n_util::GetStringUTF16`. Alternately, you
-    can use `l10n_util::GetStringFUTF16` which will replace placeholders
-    $1 through $4 with the extra arguments of GetStringFUTF16. Note that
+    `chrome/grit/generated_resources.h` (on iOS where you must include `ui/base/l10n/l10n_util.h`
+    and `ios/chrome/grit/ios_strings.h`).
+8.  To get the string, use `l10n_util::GetStringUTF16` (or `l10n_util::GetNSString` on iOS).
+    Alternately, you can use `l10n_util::GetStringFUTF16` (or `l10n_util::GetNSStringF` on iOS)
+    which will replace placeholders $1 through $4 with the extra arguments. Note that
     we generally prefer to use UTF-16 encoded strings for user-visible
-    text.
+    text (except on iOS were we need to use `NSString`).
 9.  Deal with message placeholder content. Example:
 
     ```
@@ -247,7 +248,8 @@ the translator would only see:
 **How?** Add as much of the info below in the message description as would be
 useful:
 
-*   Location: Button, title, link, drop-down menu, etc.
+*   Location: Button, title, link, drop-down menu, etc. Whether the string
+    only appears on a specific OS.
 *   Grammar: Is this a noun or a verb? If it's an adjective, what is it
     describing?
 *   Audience: Who is the intended audience?
