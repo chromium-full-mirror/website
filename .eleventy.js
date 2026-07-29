@@ -12,6 +12,77 @@ function getLobExtensions() {
     .map((x) => x.slice(1));
 }
 
+/**
+ * Add optional line break opportunities after slashes in normal text to
+ * prevent overflow and let long strings wrap at natural boundaries.
+ */
+function addSlashBreakOpportunities(mdlib) {
+  // Match slash boundaries between non-whitespace characters so paths and
+  // similar strings can wrap without adding breaks around standalone slashes.
+  const slashBreakPattern = /(?<=[^\s\/]\/)(?=[^\s\/])/;
+
+  // Track entry into and exit from HTML elements whose contents must remain
+  // verbatim so we don't insert <wbr> inside code or raw-text content.
+  function getVerbatimDepthChange(html) {
+    const tag = html.match(
+      /^<\s*(\/?)\s*(code|pre|script|style|textarea)(?=[\s\/>])/i);
+    if (!tag) {
+      return 0;
+    }
+    return tag[1] ? -1 : 1;
+  }
+
+  function splitTextToken(state, token) {
+    const pieces = token.content.split(slashBreakPattern);
+    if (pieces.length === 1) {
+      return [token];
+    }
+
+    // Rebuild the text token as alternating text and <wbr> tokens at eligible
+    // slash boundaries.
+    return pieces.flatMap((content, index) => {
+      const text = new state.Token('text', '', 0);
+      text.content = content;
+      text.level = token.level;
+      let tokens = [text];
+
+      if (index < pieces.length - 1) {
+        const wordBreak = new state.Token('html_inline', '', 0);
+        wordBreak.content = '<wbr>';
+        wordBreak.level = token.level;
+        tokens.push(wordBreak);
+      }
+
+      return tokens;
+    });
+  }
+
+  mdlib.core.ruler.push('slash_break_opportunities', state => {
+    for (const blockToken of state.tokens) {
+      if (!blockToken.children) {
+        continue;
+      }
+
+      const children = [];
+      let verbatimDepth = 0;
+      // Rewrite ordinary text tokens while preserving HTML tokens and any text
+      // inside verbatim elements.
+      for (const token of blockToken.children) {
+        if (token.type === 'html_inline') {
+          children.push(token);
+          verbatimDepth = Math.max(
+            0, verbatimDepth + getVerbatimDepthChange(token.content));
+        } else if (token.type === 'text' && verbatimDepth === 0) {
+          children.push(...splitTextToken(state, token));
+        } else {
+          children.push(token);
+        }
+      }
+      blockToken.children = children;
+    }
+  });
+}
+
 module.exports = config => {
   config.addWatchTarget('./site/_stylesheets/');
 
@@ -92,7 +163,7 @@ module.exports = config => {
     tocClassName: 'toc',
     tocFirstLevel: 2,
     tocPattern: /\[TOC\]/,
-  });
+  }).use(addSlashBreakOpportunities);
 
   config.setLibrary('md', mdlib);
 
