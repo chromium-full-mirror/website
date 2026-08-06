@@ -22,8 +22,13 @@ If you're running over chromoting run:
 
 `ninja -C out/Debug osmesa`
 
-`DISPLAY=:20 out/Debug/`mandoline [`https://google.com`](https://google.com/)
+`out/Debug/`mandoline [`https://google.com`](https://google.com/)
 --override-use-gl-with-osmesa-for-tests
+
+Note: If you run this from an SSH session rather than from a terminal inside the
+Chrome Remote Desktop session, make sure your display environment variables are
+set (see
+[Running graphical applications remotely](/chromium-os/developer-library/guides/development/running-graphical-applications-remotely)).
 
 ### Android:
 

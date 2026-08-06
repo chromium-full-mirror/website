@@ -18,18 +18,21 @@ default case over SSH.
 ## Using the remote desktop display
 
 When [Chrome Remote Desktop](https://remotedesktop.corp.google.com/) is
-installed it will create an X display, `:20`, which is what you see when you
-connect to your workstation or cloudtop. This display can be targeted by
-binaries run from the command line, even over SSH. For example:
+installed it will create a display, which is what you see when you connect to
+your workstation or cloudtop. This display can be targeted by binaries run from
+the command line, even over SSH. Add this to your ~/.bashrc:
 
 ```shell
-DISPLAY=:20 ./out/Default/chrome
+if [[ -n "${SSH_CLIENT}" || -n "${SSH_TTY}" ]]; then
+  eval "$(systemctl --user show-environment | \
+    sed -En '/^(DISPLAY|WAYLAND_DISPLAY|XAUTHORITY|XDG_RUNTIME_DIR)=/{
+      s:^:export :;p
+    }')"
+fi
 ```
 
-This will set the `DISPLAY` environment variable to `:20` for the duration of
-the command, causing the `chrome` binary to run using `:20` as the targeted
-display. This results in the ChromeOS window opening on the remote desktop
-display despite being run over SSH, or elsewhere.
+If you do that, running `out/Default/chrome` over SSH will open the ChromeOS
+window on the remote desktop display.
 
 ## Forwarding the display using xpra
 
