@@ -30,6 +30,9 @@ certificates, network protocols, and common enterprise configurations
 - Changes to web technologies and implementation of specs, especially
 interventions ([example](https://www.chromestatus.com/feature/6172836527865856))
 and deprecations
+- Changes that introduces new network endpoints or alters traffic patterns
+  - Ensure you adhere to [chrome-enterprise-hosts](https://knowledge.workspace.google.com/admin/security/firewall-and-proxy-settings)
+    to prevent unexpected disruptions for enterprise users.
 
 Any change that's likely to affect enterprises should follow these guidelines,
 easing the burden for IT admins managing their fleets, and reducing the number
