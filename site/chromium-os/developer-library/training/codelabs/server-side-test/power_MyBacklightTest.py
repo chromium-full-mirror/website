@@ -13,6 +13,7 @@ from autotest_lib.server import utils
 
 class power_MyBacklightTest(test.test):
     """Test to check backlight brightness restored after various actions."""
+
     version = 1
 
     def _client_cmd(self, cmd):
@@ -38,8 +39,9 @@ class power_MyBacklightTest(test.test):
         return int(result.stdout.rstrip())
 
     def _set_brightness_percent(self, brightness=100):
-        result = self._client_cmd('backlight_tool --set_brightness_percent %d' %
-                                  brightness)
+        result = self._client_cmd(
+            'backlight_tool --set_brightness_percent %d' % brightness
+        )
 
     def _check_power_status(self):
         cmd_result = self._client_cmd('status powerd')
@@ -84,8 +86,10 @@ class power_MyBacklightTest(test.test):
         Saves the old has_ambient_light_sensor flag if it exists.
         """
         als_path = '/var/lib/power_manager/has_ambient_light_sensor'
-        self._client_cmd('if [ -e %s ]; then mv %s %s_backup; fi' %
-                         (als_path, als_path, als_path))
+        self._client_cmd(
+            'if [ -e %s ]; then mv %s %s_backup; fi'
+            % (als_path, als_path, als_path)
+        )
         self._client_cmd('echo 0 > %s' % als_path)
         self._client_cmd('restart powerd')
         self._als_disabled = True
@@ -96,8 +100,10 @@ class power_MyBacklightTest(test.test):
         Saves the old has_ambient_light_sensor flag if it exists.
         """
         als_path = '/var/lib/power_manager/has_ambient_light_sensor'
-        self._client_cmd('if [ -e %s ]; then mv %s %s_backup; fi' %
-                         (als_path, als_path, als_path))
+        self._client_cmd(
+            'if [ -e %s ]; then mv %s %s_backup; fi'
+            % (als_path, als_path, als_path)
+        )
         self._client_cmd('echo 0 > %s' % als_path)
         self._client_cmd('restart powerd')
         self._als_disabled = True
@@ -111,8 +117,10 @@ class power_MyBacklightTest(test.test):
             return
         als_path = '/var/lib/power_manager/has_ambient_light_sensor'
         self._client_cmd('rm %s' % als_path)
-        self._client_cmd('if [ -e %s_backup ]; then mv %s_backup %s; fi' %
-                         (als_path, als_path, als_path))
+        self._client_cmd(
+            'if [ -e %s_backup ]; then mv %s_backup %s; fi'
+            % (als_path, als_path, als_path)
+        )
         self._client_cmd('restart powerd')
 
     def run_once(self, client_ip):
@@ -155,7 +163,7 @@ class power_MyBacklightTest(test.test):
             # Save the before and after backlight values.
             self._results[test_name] = {
                 'old': self._old_brightness,
-                'new': self._get_brightness()
+                'new': self._get_brightness(),
             }
 
     def cleanup(self):
@@ -174,10 +182,15 @@ class power_MyBacklightTest(test.test):
                 logging.info('Transition event [  PASSED  ]: %s', test_name)
             else:
                 logging.info('Transition event [  FAILED  ]: %s', test_name)
-                logging.info('   Brightness changed: %d -> %d', old_brightness,
-                             new_brightness)
+                logging.info(
+                    '   Brightness changed: %d -> %d',
+                    old_brightness,
+                    new_brightness,
+                )
                 num_failed += 1
 
         if num_failed > 0:
-            raise error.TestFail(('Failed to preserve backlight over %d '
-                                  'transition event(s).') % num_failed)
+            raise error.TestFail(
+                ('Failed to preserve backlight over %d transition event(s).')
+                % num_failed
+            )

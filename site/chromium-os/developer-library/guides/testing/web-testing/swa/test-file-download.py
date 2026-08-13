@@ -92,7 +92,8 @@ _ENCODED_CONTENT = parse.quote(_FILE_CONTENT)
 _DOWNLOAD_PAGE_URL = (
     f'data:text/html,<a id="downloadLink" '
     f'href="data:text/plain;charset=utf-8,{_ENCODED_CONTENT}" '
-    f'download="{_FILE_NAME}">Download Test File</a>')
+    f'download="{_FILE_NAME}">Download Test File</a>'
+)
 _FILES_APP_URL = "chrome://file-manager"
 _TIMEOUT = 20
 
@@ -115,8 +116,9 @@ def run_file_download_test(driver_path: str, port: int) -> bool:
     chrome_svc = service.Service(executable_path=driver_path)
 
     try:
-        with webdriver.Chrome(service=chrome_svc,
-                              options=chrome_opts) as driver:
+        with webdriver.Chrome(
+            service=chrome_svc, options=chrome_opts
+        ) as driver:
             logging.info("Successfully connected.")
             original_window = driver.current_window_handle
             wait = ui.WebDriverWait(driver, _TIMEOUT)
@@ -127,7 +129,9 @@ def run_file_download_test(driver_path: str, port: int) -> bool:
 
             wait.until(
                 expected_conditions.element_to_be_clickable(
-                    (by.By.ID, "downloadLink"))).click()
+                    (by.By.ID, "downloadLink")
+                )
+            ).click()
             logging.info('Clicked download link for "%s".', _FILE_NAME)
             # Short wait for download to start.
             time.sleep(2)
@@ -147,7 +151,8 @@ def run_file_download_test(driver_path: str, port: int) -> bool:
 
             # Find and click "Downloads" folder.
             downloads_folder = wait.until(
-                lambda d: d.execute_script(_JS_FIND_DOWNLOADS_FOLDER))
+                lambda d: d.execute_script(_JS_FIND_DOWNLOADS_FOLDER)
+            )
             downloads_folder.click()
             logging.info('Clicked "Downloads" folder.')
 
@@ -156,19 +161,22 @@ def run_file_download_test(driver_path: str, port: int) -> bool:
                 f'li.table-row[file-name="{_FILE_NAME}"]',
             )
             file_element = wait.until(
-                expected_conditions.presence_of_element_located(file_selector))
+                expected_conditions.presence_of_element_located(file_selector)
+            )
             logging.info('Found "%s" in Files app.', _FILE_NAME)
 
             # Step 3: Open file and verify content.
             logging.info("Double-clicking file to open Text/Media app...")
             action_chains.ActionChains(driver).double_click(
-                file_element).perform()
+                file_element
+            ).perform()
 
             # Wait for Media App window.
             wait.until(lambda d: len(d.window_handles) > 2)
 
             media_app_window = [
-                h for h in driver.window_handles
+                h
+                for h in driver.window_handles
                 if h not in [original_window, files_app_window]
             ][0]
             driver.switch_to.window(media_app_window)
@@ -183,7 +191,8 @@ def run_file_download_test(driver_path: str, port: int) -> bool:
             if content.strip() != _FILE_CONTENT:
                 raise ValueError(
                     f'File content mismatch! Expected "{_FILE_CONTENT}", '
-                    f'got "{content.strip()}"')
+                    f'got "{content.strip()}"'
+                )
             logging.info("File content verified successfully.")
 
             # Step 4: Cleanup.
@@ -192,30 +201,37 @@ def run_file_download_test(driver_path: str, port: int) -> bool:
             logging.info('Cleaning up: Deleting "%s"...', _FILE_NAME)
 
             file_to_del = wait.until(
-                expected_conditions.presence_of_element_located(file_selector))
+                expected_conditions.presence_of_element_located(file_selector)
+            )
             action_chains.ActionChains(driver).click(file_to_del).key_down(
-                keys.Keys.DELETE).key_up(keys.Keys.DELETE).perform()
+                keys.Keys.DELETE
+            ).key_up(keys.Keys.DELETE).perform()
 
             try:
                 confirm_btn = ui.WebDriverWait(driver, 3).until(
                     expected_conditions.element_to_be_clickable(
-                        (by.By.CSS_SELECTOR, ".cr-dialog-ok")))
+                        (by.By.CSS_SELECTOR, ".cr-dialog-ok")
+                    )
+                )
                 confirm_btn.click()
                 logging.info("Confirmation dialog clicked.")
             except Exception:
                 logging.info(
-                    "No confirmation dialog (moved to Trash directly).")
+                    "No confirmation dialog (moved to Trash directly)."
+                )
 
             wait.until(
                 expected_conditions.invisibility_of_element_located(
-                    file_selector))
+                    file_selector
+                )
+            )
             logging.info("File deletion confirmed. Test passed!")
             return True
 
     except Exception as e:
-        logging.error("An error occurred during file download test: %s",
-                      e,
-                      exc_info=True)
+        logging.error(
+            "An error occurred during file download test: %s", e, exc_info=True
+        )
         return False
 
 

@@ -56,17 +56,20 @@ def run_test(driver_path: str, port: int) -> bool:
     try:
         # The webdriver.Chrome instance is a context manager.
         # It will automatically close the session (detach) when exiting.
-        with webdriver.Chrome(service=chrome_svc,
-                              options=chrome_opts) as driver:
+        with webdriver.Chrome(
+            service=chrome_svc, options=chrome_opts
+        ) as driver:
             logging.info("Connected. Navigating to chrome://version...")
             driver.get("chrome://version")
 
             # Scrape data using native Selenium functions.
             data = {
-                "Google Chrome":
-                driver.find_element(by.By.ID, _VERSION_ID).text,
-                "Command Line":
-                driver.find_element(by.By.ID, _COMMAND_LINE_ID).text,
+                "Google Chrome": driver.find_element(
+                    by.By.ID, _VERSION_ID
+                ).text,
+                "Command Line": driver.find_element(
+                    by.By.ID, _COMMAND_LINE_ID
+                ).text,
             }
     except exceptions.WebDriverException as e:
         logging.error("A WebDriver error occurred: %s", e)

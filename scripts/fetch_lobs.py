@@ -37,7 +37,8 @@ def main():
     args = parser.parse_args()
     q = common.JobQueue(_download, args.jobs)
     paths = [
-        path.replace('.sha1', '') for path in common.walk(common.SITE_DIR)
+        path.replace('.sha1', '')
+        for path in common.walk(common.SITE_DIR)
         if path.endswith('.sha1')
     ]
 
@@ -45,8 +46,9 @@ def main():
         with open(os.path.join(common.SITE_DIR, path + '.sha1'), 'r') as fp:
             expected_sha1 = fp.read().strip()
 
-        if not args.force and os.path.exists(os.path.join(
-                common.SITE_DIR, path)):
+        if not args.force and os.path.exists(
+            os.path.join(common.SITE_DIR, path)
+        ):
             with open(os.path.join(common.SITE_DIR, path), 'rb') as fp:
                 s = hashlib.sha1()
                 s.update(fp.read())
@@ -73,15 +75,23 @@ def main():
         total_bytes += num_bytes
     end = time.time()
 
-    print('Fetched %d LOBs (%.1fMB) in %.3f seconds (%.1fMbps).' %
-          (updated, (total_bytes / 1_000_000), (end - start),
-           (total_bytes * 8 / (end - start) / 1_000_000)))
+    print(
+        'Fetched %d LOBs (%.1fMB) in %.3f seconds (%.1fMbps).'
+        % (
+            updated,
+            (total_bytes / 1_000_000),
+            (end - start),
+            (total_bytes * 8 / (end - start) / 1_000_000),
+        )
+    )
     return 1 if failed else 0
 
 
 def _url(expected_sha1):
     return 'https://storage.googleapis.com/%s/%s' % (
-        'chromium-website-lob-storage', expected_sha1)
+        'chromium-website-lob-storage',
+        expected_sha1,
+    )
 
 
 def _download(path, expected_sha1):
@@ -102,19 +112,26 @@ def _download(path, expected_sha1):
         try:
             resp = http_session.get(url)
             if resp.status_code != requests.codes.ok:
-                return (f'download failed with HTTP/{resp.status_code}',
-                        (False, len(resp.content)))
+                return (
+                    f'download failed with HTTP/{resp.status_code}',
+                    (False, len(resp.content)),
+                )
             s = hashlib.sha1()
             s.update(resp.content)
             actual_sha1 = s.hexdigest()
             if actual_sha1 != expected_sha1:
-                return ('sha1 mismatch: expected %s, got %s' %
-                        (expected_sha1, actual_sha1), (False,
-                                                       len(resp.content)))
+                return (
+                    'sha1 mismatch: expected %s, got %s'
+                    % (expected_sha1, actual_sha1),
+                    (False, len(resp.content)),
+                )
             with open(os.path.join(common.SITE_DIR, path), 'wb') as fp:
                 fp.write(resp.content)
-        except (requests.HTTPError, requests.ConnectionError,
-                requests.Timeout) as e:
+        except (
+            requests.HTTPError,
+            requests.ConnectionError,
+            requests.Timeout,
+        ) as e:
             if i < 4:
                 time.sleep(1)
             else:

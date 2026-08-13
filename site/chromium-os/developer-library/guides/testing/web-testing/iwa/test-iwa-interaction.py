@@ -37,16 +37,19 @@ logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
 # IWA specific constants.
 _WEB_BUNDLE_ID = "aiv4bxauvcu3zvbu6r5yynoh4atkzqqaoeof5mwz54b4zfywcrjuoaacai"
 _IWA_VERSION = "0.18.0"
-_WEB_BUNDLE_URL = ("https://github.com/chromeos/iwa-sink/releases/download/"
-                   f"v{_IWA_VERSION}/iwa-sink.swbn")
+_WEB_BUNDLE_URL = (
+    "https://github.com/chromeos/iwa-sink/releases/download/"
+    f"v{_IWA_VERSION}/iwa-sink.swbn"
+)
 _MANIFEST_ID = f"isolated-app://{_WEB_BUNDLE_ID}/"
 
 _MSG_LEFT = "Sing me a song!"
 _MSG_RIGHT = "Hello from the right side!"
 
 
-def get_shadow_root(driver: webdriver.Chrome,
-                    host_element: webelement.WebElement) -> object:
+def get_shadow_root(
+    driver: webdriver.Chrome, host_element: webelement.WebElement
+) -> object:
     """Retrieves the shadow root of a given web element."""
     return driver.execute_script("return arguments[0].shadowRoot", host_element)
 
@@ -69,8 +72,9 @@ def run_iwa_interaction_test(driver_path: str, port: int) -> bool:
     chrome_svc = service.Service(executable_path=driver_path)
 
     try:
-        with webdriver.Chrome(service=chrome_svc,
-                              options=chrome_opts) as driver:
+        with webdriver.Chrome(
+            service=chrome_svc, options=chrome_opts
+        ) as driver:
             logging.info("Successfully connected to the browser.")
             original_window = driver.current_window_handle
 
@@ -107,54 +111,73 @@ def run_iwa_interaction_test(driver_path: str, port: int) -> bool:
             logging.info("Waiting for 'Create new socket connection' button...")
             add_socket_button = wait_long.until(
                 expected_conditions.presence_of_element_located(
-                    (by.By.ID, "addSocketButton")))
+                    (by.By.ID, "addSocketButton")
+                )
+            )
             add_socket_button.click()
             logging.info("Clicked 'Create new socket connection' button.")
 
             # Interact with Shadow DOM.
             left_comp = wait_long.until(
                 expected_conditions.presence_of_element_located(
-                    (by.By.TAG_NAME, "socket-connection")))
+                    (by.By.TAG_NAME, "socket-connection")
+                )
+            )
             right_comp = wait_long.until(
                 expected_conditions.presence_of_element_located(
-                    (by.By.TAG_NAME, "socket-server")))
+                    (by.By.TAG_NAME, "socket-server")
+                )
+            )
 
             left_root = get_shadow_root(driver, left_comp)
             right_root = get_shadow_root(driver, right_comp)
 
             # Message: Left -> Right.
             logging.info("Sending message from Left to Right...")
-            left_input = left_root.find_element(by.By.CSS_SELECTOR,
-                                                "input#messageInput")
-            left_send_btn = left_root.find_element(by.By.CSS_SELECTOR,
-                                                   "button#sendButton")
+            left_input = left_root.find_element(
+                by.By.CSS_SELECTOR, "input#messageInput"
+            )
+            left_send_btn = left_root.find_element(
+                by.By.CSS_SELECTOR, "button#sendButton"
+            )
 
             left_input.send_keys(_MSG_LEFT)
             left_send_btn.click()
 
-            wait.until(lambda d: _MSG_LEFT in right_root.find_element(
-                by.By.CSS_SELECTOR, "#log").text)
+            wait.until(
+                lambda d: (
+                    _MSG_LEFT
+                    in right_root.find_element(by.By.CSS_SELECTOR, "#log").text
+                )
+            )
             logging.info("Verified '%s' appeared on the right side.", _MSG_LEFT)
 
             # Message: Right -> Left.
             logging.info("Sending message from Right to Left...")
-            right_input = right_root.find_element(by.By.CSS_SELECTOR,
-                                                  "input#messageInput")
-            right_send_btn = right_root.find_element(by.By.CSS_SELECTOR,
-                                                     "button#sendButton")
+            right_input = right_root.find_element(
+                by.By.CSS_SELECTOR, "input#messageInput"
+            )
+            right_send_btn = right_root.find_element(
+                by.By.CSS_SELECTOR, "button#sendButton"
+            )
 
             right_input.send_keys(_MSG_RIGHT)
             right_send_btn.click()
 
-            wait.until(lambda d: _MSG_RIGHT in left_root.find_element(
-                by.By.CSS_SELECTOR, "#log").text)
+            wait.until(
+                lambda d: (
+                    _MSG_RIGHT
+                    in left_root.find_element(by.By.CSS_SELECTOR, "#log").text
+                )
+            )
             logging.info("Verified '%s' appeared on the left side.", _MSG_RIGHT)
 
             # Cleanup within the context.
             try:
                 logging.info("Uninstalling IWA: %s", _MANIFEST_ID)
-                driver.execute_cdp_cmd("PWA.uninstall",
-                                       {"manifestId": _MANIFEST_ID})
+                driver.execute_cdp_cmd(
+                    "PWA.uninstall", {"manifestId": _MANIFEST_ID}
+                )
             except exceptions.WebDriverException as e:
                 logging.warning("Could not uninstall IWA during cleanup: %s", e)
 
@@ -162,9 +185,11 @@ def run_iwa_interaction_test(driver_path: str, port: int) -> bool:
             return True
 
     except exceptions.WebDriverException as e:
-        logging.error("An error occurred during IWA interaction test: %s",
-                      e,
-                      exc_info=True)
+        logging.error(
+            "An error occurred during IWA interaction test: %s",
+            e,
+            exc_info=True,
+        )
         return False
 
 

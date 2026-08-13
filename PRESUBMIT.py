@@ -20,8 +20,9 @@ USE_PYTHON3 = True
 
 def get_lob_extensions(input_api) -> Iterator[str]:
     """Get the list of known LOB extensions."""
-    path = input_api.os_path.join(input_api.PresubmitLocalPath(), 'site',
-                                  '.gitignore')
+    path = input_api.os_path.join(
+        input_api.PresubmitLocalPath(), 'site', '.gitignore'
+    )
     ilines = input_api.ReadFile(path).splitlines()
     for line in ilines:
         if line != '# start_lob_ignore':
@@ -41,8 +42,10 @@ def CheckChangeHasOnlyOneEol(input_api, output_api):
     return input_api.canned_checks.CheckChangeHasOnlyOneEol(
         input_api,
         output_api,
-        source_file_filter=lambda x: x.LocalPath().endswith(
-            '.md') or x.LocalPath().endswith('.py'))
+        source_file_filter=lambda x: (
+            x.LocalPath().endswith('.md') or x.LocalPath().endswith('.py')
+        ),
+    )
 
 
 def CheckPatchFormatted(input_api, output_api):
@@ -52,7 +55,8 @@ def CheckPatchFormatted(input_api, output_api):
 
 def CheckChangeHasDescription(input_api, output_api):
     return input_api.canned_checks.CheckChangeHasDescription(
-        input_api, output_api)
+        input_api, output_api
+    )
 
 
 def CheckForLobs(input_api, output_api):
@@ -69,7 +73,9 @@ def CheckForLobs(input_api, output_api):
                     '"{file_name}"\nand commit {file_name}.sha1 instead\n'
                     'Run:\n\tgit rm --cached "{file_name}"\n'
                     'to remove the lob from git'.format(
-                        file_name=file.LocalPath()))
+                        file_name=file.LocalPath()
+                    )
+                )
 
                 error = output_api.PresubmitError(error_msg)
                 output_status.append(error)
@@ -143,8 +149,9 @@ _MD_HTTP_HOSTS = {
 }
 
 
-def _extract_markdown_links(results, input_api, output_api,
-                            affected_file) -> List[_MdLink]:
+def _extract_markdown_links(
+    results, input_api, output_api, affected_file
+) -> List[_MdLink]:
     """Walk `affected_file` and extract links.
 
     This parser is not complete relative to the spec our website supports, but
@@ -176,8 +183,9 @@ def _extract_markdown_links(results, input_api, output_api,
         # ```
         # ```language
         # ```this is triple ` quotes inline```
-        if sline.startswith('```') and (len(sline) == 3
-                                        or not sline.endswith('```')):
+        if sline.startswith('```') and (
+            len(sline) == 3 or not sline.endswith('```')
+        ):
             while True:
                 # Add stub lines to keep line numbers accurate.
                 filtered_lines.append('')
@@ -186,7 +194,9 @@ def _extract_markdown_links(results, input_api, output_api,
                 except StopIteration:
                     results.append(
                         output_api.PresubmitError(
-                            f'{file}:{i}: Missing closing ``` blocks'))
+                            f'{file}:{i}: Missing closing ``` blocks'
+                        )
+                    )
                     line = '```'
                 if line.lstrip().startswith('```'):
                     break
@@ -201,7 +211,7 @@ def _extract_markdown_links(results, input_api, output_api,
         link = m.group(2)
         # This is not efficient, but seems to be simple & fast enough to not
         # warrant an intelligent algorithm.
-        linenum = content[0:m.start()].count('\n') + 1
+        linenum = content[0 : m.start()].count('\n') + 1
         return (text, link, linenum)
 
     ret = []
@@ -231,91 +241,121 @@ def CheckLinks(input_api, output_api):
     """Check links used in markdown."""
     # Build up the files to analyze.
     affected_files = input_api.AffectedFiles(
-        file_filter=lambda x: x.LocalPath().endswith('.md'))
+        file_filter=lambda x: x.LocalPath().endswith('.md')
+    )
 
     results = []
 
     # Extract the links from the files.
     links = []
     for affected_file in affected_files:
-        links += _extract_markdown_links(results, input_api, output_api,
-                                         affected_file)
+        links += _extract_markdown_links(
+            results, input_api, output_api, affected_file
+        )
 
     # Check links.
 
     def _create_result(link, msg, want_uri) -> None:
         want_link = urllib.parse.urlunparse(want_uri)
         results.append(
-            output_api.PresubmitError(f'{link.file}:{link.line_num}: {msg}',
-                                      long_text=f'- {link.uri}\n+ {want_link}'))
+            output_api.PresubmitError(
+                f'{link.file}:{link.line_num}: {msg}',
+                long_text=f'- {link.uri}\n+ {want_link}',
+            )
+        )
 
     for link in links:
         o = urllib.parse.urlparse(link.uri)
 
         # Check bad http:// usage.
         if o.scheme == 'http' and o.netloc in _MD_HTTPS_HOSTS:
-            _create_result(link, 'Always use https:// with this host',
-                           o._replace(scheme='https'))
+            _create_result(
+                link,
+                'Always use https:// with this host',
+                o._replace(scheme='https'),
+            )
 
         # Check bad https:// usage.
         if o.scheme == 'https' and o.netloc in _MD_HTTP_HOSTS:
-            _create_result(link, 'Always use http:// with this host',
-                           o._replace(scheme='http'))
+            _create_result(
+                link,
+                'Always use http:// with this host',
+                o._replace(scheme='http'),
+            )
 
         # Check host aliases.
         for oldhost, newhost in _MD_HOST_ALIASES.items():
             if o.netloc == oldhost:
-                _create_result(link, f'Use {newhost} in links',
-                               o._replace(netloc=newhost))
+                _create_result(
+                    link, f'Use {newhost} in links', o._replace(netloc=newhost)
+                )
 
         # Have people use relative /foo/bar links instead of
         # https//www.chromium.org/foo/bar so we can check target links, and so
         # navigating via the sandbox website works correctly.
-        if (link.relative_ok and o.netloc == 'www.chromium.org'
-                and link.file.startswith('site/')):
+        if (
+            link.relative_ok
+            and o.netloc == 'www.chromium.org'
+            and link.file.startswith('site/')
+        ):
             _create_result(
-                link, 'Use local paths instead of www.chromium.org in links',
-                o._replace(scheme='', netloc='', path=o.path or '/'))
+                link,
+                'Use local paths instead of www.chromium.org in links',
+                o._replace(scheme='', netloc='', path=o.path or '/'),
+            )
 
         # People shouldn't link to chromium.org markdown pages via gitiles.
         if o.netloc == 'chromium.googlesource.com' and o.path.startswith(
-                '/website/+/HEAD/site/'):
+            '/website/+/HEAD/site/'
+        ):
             path = o.path[20:]
             if path.endswith('/index.md'):
                 path = path[:-9]
             _create_result(
-                link, 'Use local paths instead of chromium.googlesource.com',
-                o._replace(scheme='', netloc='', path=path))
+                link,
+                'Use local paths instead of chromium.googlesource.com',
+                o._replace(scheme='', netloc='', path=path),
+            )
 
         # Check relative links for generated docs (under site/).
         if o.scheme == o.netloc == '' and link.file.startswith('site/'):
             # Relative links to markdown files don't work in generated pages.
-            if (o.path.startswith('/')
-                    or o.path.startswith('.')) and o.path.endswith('.md'):
+            if (
+                o.path.startswith('/') or o.path.startswith('.')
+            ) and o.path.endswith('.md'):
                 _create_result(
-                    link, 'Do not link directly to markdown files',
-                    o._replace(path='/'.join(o.path.split('/')[:-1])))
+                    link,
+                    'Do not link directly to markdown files',
+                    o._replace(path='/'.join(o.path.split('/')[:-1])),
+                )
 
             # The /site/ prefix is removed in generated content, but works when
             # viewing under gitiles, so sometimes people test the wrong page.
             if o.path.startswith('/site/'):
-                _create_result(link, 'Omit the /site/ prefix in local paths',
-                               o._replace(path=o.path[5:]))
+                _create_result(
+                    link,
+                    'Omit the /site/ prefix in local paths',
+                    o._replace(path=o.path[5:]),
+                )
 
             # Verify local paths exist.
             if o.path:
                 # Anchor absolute paths under site/, otherwise it's relative to
                 # the document.
                 local_path = input_api.os_path.join(
-                    'site' if o.path.startswith('/') else
-                    input_api.os_path.dirname(link.file),
-                    urllib.parse.unquote(o.path.lstrip('/')))
+                    'site'
+                    if o.path.startswith('/')
+                    else input_api.os_path.dirname(link.file),
+                    urllib.parse.unquote(o.path.lstrip('/')),
+                )
 
                 if o.path == '/system/errors/NodeNotFound' and not link.new:
                     results.append(
                         output_api.PresubmitPromptWarning(
                             f'{link.file}:{link.line_num}: '
-                            f'Missing link: {o.path}'))
+                            f'Missing link: {o.path}'
+                        )
+                    )
 
                 # Links can point to:
                 # * Directory (with implicit /index.md).
@@ -327,20 +367,29 @@ def CheckLinks(input_api, output_api):
                 # Links can also point to specific md files, but we don't use
                 # that style, so don't support it.  We prefer to use dirs and
                 # index.md files exclusively.
-                elif not (input_api.os_path.exists(
-                        input_api.os_path.join(local_path, 'index.md'))
-                          or input_api.os_path.exists(
-                              input_api.os_path.join(local_path, 'index.html'))
-                          or input_api.os_path.exists(local_path + '.sha1')
-                          or input_api.os_path.isfile(local_path)):
+                elif not (
+                    input_api.os_path.exists(
+                        input_api.os_path.join(local_path, 'index.md')
+                    )
+                    or input_api.os_path.exists(
+                        input_api.os_path.join(local_path, 'index.html')
+                    )
+                    or input_api.os_path.exists(local_path + '.sha1')
+                    or input_api.os_path.isfile(local_path)
+                ):
                     # TODO(vapier): Make these fatal.
                     if '.' not in local_path and not link.new:
                         results.append(
                             output_api.PresubmitPromptWarning(
                                 f'{link.file}:{link.line_num}: '
-                                f'Missing link: {o.path}'))
+                                f'Missing link: {o.path}'
+                            )
+                        )
                     else:
-                        _create_result(link, 'Link appears to be broken',
-                                       o._replace(path='???', fragment=''))
+                        _create_result(
+                            link,
+                            'Link appears to be broken',
+                            o._replace(path='???', fragment=''),
+                        )
 
     return results

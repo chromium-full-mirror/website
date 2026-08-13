@@ -3,6 +3,7 @@ __pycache__
 /.gclient_entries
 /.gclient_previous_sync_commits
 /.gcs_entries
+/.ruff_cache
 *.pyc
 *.swo
 *.swp

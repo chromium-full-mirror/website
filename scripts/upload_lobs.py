@@ -29,49 +29,66 @@ import common
 
 def main():
     parser = optparse.OptionParser(upload_to_google_storage.USAGE_STRING)
-    parser.add_option('-b',
-                      '--bucket',
-                      default='chromium-website-lob-storage',
-                      help='Google Storage bucket to upload to.')
+    parser.add_option(
+        '-b',
+        '--bucket',
+        default='chromium-website-lob-storage',
+        help='Google Storage bucket to upload to.',
+    )
     parser.add_option('-e', '--boto', help='Specify a custom boto file.')
-    parser.add_option('-f',
-                      '--force',
-                      action='store_true',
-                      help='Force upload even if remote file exists.')
-    parser.add_option('-g',
-                      '--gsutil_path',
-                      default=upload_to_google_storage.GSUTIL_DEFAULT_PATH,
-                      help='Path to the gsutil script.')
-    parser.add_option('-m',
-                      '--use_md5',
-                      action='store_true',
-                      help='Generate MD5 files when scanning, and don\'t check '
-                      'the MD5 checksum if a .md5 file is found.')
-    parser.add_option('-t',
-                      '--num_threads',
-                      default=1,
-                      type='int',
-                      help='Number of uploader threads to run.')
-    parser.add_option('-s',
-                      '--skip_hashing',
-                      action='store_true',
-                      help='Skip hashing if .sha1 file exists.')
-    parser.add_option('-0',
-                      '--use_null_terminator',
-                      action='store_true',
-                      help='Use \\0 instead of \\n when parsing '
-                      'the file list from stdin.  This is useful if the input '
-                      'is coming from "find ... -print0".')
-    parser.add_option('-z',
-                      '--gzip',
-                      metavar='ext',
-                      help='Gzip files which end in ext. '
-                      'ext is a comma-separated list')
+    parser.add_option(
+        '-f',
+        '--force',
+        action='store_true',
+        help='Force upload even if remote file exists.',
+    )
+    parser.add_option(
+        '-g',
+        '--gsutil_path',
+        default=upload_to_google_storage.GSUTIL_DEFAULT_PATH,
+        help='Path to the gsutil script.',
+    )
+    parser.add_option(
+        '-m',
+        '--use_md5',
+        action='store_true',
+        help='Generate MD5 files when scanning, and don\'t check '
+        'the MD5 checksum if a .md5 file is found.',
+    )
+    parser.add_option(
+        '-t',
+        '--num_threads',
+        default=1,
+        type='int',
+        help='Number of uploader threads to run.',
+    )
+    parser.add_option(
+        '-s',
+        '--skip_hashing',
+        action='store_true',
+        help='Skip hashing if .sha1 file exists.',
+    )
+    parser.add_option(
+        '-0',
+        '--use_null_terminator',
+        action='store_true',
+        help='Use \\0 instead of \\n when parsing '
+        'the file list from stdin.  This is useful if the input '
+        'is coming from "find ... -print0".',
+    )
+    parser.add_option(
+        '-z',
+        '--gzip',
+        metavar='ext',
+        help='Gzip files which end in ext. ext is a comma-separated list',
+    )
     parser.add_option('-d', '--directory', help='The target is a directory.  ')
-    parser.add_option('-r',
-                      '--remove',
-                      action='store_true',
-                      help='Removes the file that was uploaded to storage.  ')
+    parser.add_option(
+        '-r',
+        '--remove',
+        action='store_true',
+        help='Removes the file that was uploaded to storage.  ',
+    )
     (options, args) = parser.parse_args()
 
     if options.directory:
@@ -82,22 +99,32 @@ def main():
     else:
         # Enumerate our inputs.
         input_filenames = upload_to_google_storage.get_targets(
-            args, parser, options.use_null_terminator)
+            args, parser, options.use_null_terminator
+        )
 
     # Make sure we can find a working instance of gsutil.
     if os.path.exists(upload_to_google_storage.GSUTIL_DEFAULT_PATH):
         gsutil = upload_to_google_storage.Gsutil(
-            upload_to_google_storage.GSUTIL_DEFAULT_PATH,
-            boto_path=options.boto)
+            upload_to_google_storage.GSUTIL_DEFAULT_PATH, boto_path=options.boto
+        )
     else:
-        parser.error('gsutil not found in %s, bad depot_tools checkout?' %
-                     upload_to_google_storage.GSUTIL_DEFAULT_PATH)
+        parser.error(
+            'gsutil not found in %s, bad depot_tools checkout?'
+            % upload_to_google_storage.GSUTIL_DEFAULT_PATH
+        )
 
     base_url = 'gs://%s' % options.bucket
 
     upload_status = upload_to_google_storage.upload_to_google_storage(
-        input_filenames, base_url, gsutil, options.force, options.use_md5,
-        options.num_threads, options.skip_hashing, options.gzip)
+        input_filenames,
+        base_url,
+        gsutil,
+        options.force,
+        options.use_md5,
+        options.num_threads,
+        options.skip_hashing,
+        options.gzip,
+    )
 
     if upload_status:
         return upload_status
@@ -133,7 +160,7 @@ def get_lob_extensions() -> Iterator[str]:
 
 def get_lobs_from_dir(directory):
     lobs = []
-    for (dirpath, _, filenames) in os.walk(directory):
+    for dirpath, _, filenames in os.walk(directory):
         for filename in filenames:
             absolute_filename = os.path.join(dirpath, filename)
             if os.path.isfile(absolute_filename):

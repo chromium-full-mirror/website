@@ -53,8 +53,9 @@ def run_pwa_lifecycle_test(driver_path: str, port: int) -> bool:
     chrome_svc = service.Service(executable_path=driver_path)
 
     try:
-        with webdriver.Chrome(service=chrome_svc,
-                              options=chrome_opts) as driver:
+        with webdriver.Chrome(
+            service=chrome_svc, options=chrome_opts
+        ) as driver:
             logging.info("Successfully connected to the browser.")
             original_window = driver.current_window_handle
             wait = ui.WebDriverWait(driver, 15)
@@ -81,8 +82,8 @@ def run_pwa_lifecycle_test(driver_path: str, port: int) -> bool:
 
             # Find new handle.
             pwa_window_handle = next(
-                (h for h in driver.window_handles if h != original_window),
-                None)
+                (h for h in driver.window_handles if h != original_window), None
+            )
 
             if not pwa_window_handle:
                 raise RuntimeError("PWA window handle not found.")
@@ -94,8 +95,9 @@ def run_pwa_lifecycle_test(driver_path: str, port: int) -> bool:
 
             # Inspect state.
             logging.info("Inspecting PWA's OS state and manifest...")
-            os_app_state = driver.execute_cdp_cmd("PWA.getOsAppState",
-                                                  {"manifestId": _MANIFEST_ID})
+            os_app_state = driver.execute_cdp_cmd(
+                "PWA.getOsAppState", {"manifestId": _MANIFEST_ID}
+            )
             logging.info("PWA OS App State: %s", os_app_state)
 
             manifest = driver.execute_cdp_cmd("Page.getAppManifest", {})
@@ -103,14 +105,16 @@ def run_pwa_lifecycle_test(driver_path: str, port: int) -> bool:
 
             # Test opening current page.
             logging.info("Testing 'openCurrentPageInApp' command...")
-            driver.execute_cdp_cmd("PWA.openCurrentPageInApp",
-                                   {"manifestId": _MANIFEST_ID})
+            driver.execute_cdp_cmd(
+                "PWA.openCurrentPageInApp", {"manifestId": _MANIFEST_ID}
+            )
 
             # Cleanup.
             try:
                 logging.info("Uninstalling PWA: %s", _MANIFEST_ID)
-                driver.execute_cdp_cmd("PWA.uninstall",
-                                       {"manifestId": _MANIFEST_ID})
+                driver.execute_cdp_cmd(
+                    "PWA.uninstall", {"manifestId": _MANIFEST_ID}
+                )
             except Exception as e:
                 logging.warning("Failed to uninstall PWA during cleanup: %s", e)
 
@@ -129,10 +133,9 @@ def main(argv: list[str] | None = None) -> int:
         default="./chromedriver",
         help="Path to the chromedriver binary.",
     )
-    parser.add_argument("--port",
-                        type=int,
-                        default=9222,
-                        help="Remote debugging port.")
+    parser.add_argument(
+        "--port", type=int, default=9222, help="Remote debugging port."
+    )
     opts = parser.parse_args(argv)
 
     return 0 if run_pwa_lifecycle_test(opts.driver_path, opts.port) else 1

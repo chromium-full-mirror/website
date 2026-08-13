@@ -13,10 +13,13 @@ USE_PYTHON3 = True
 
 def CheckLucicfgGenOutputMain(input_api, output_api):
     return input_api.RunTests(
-        input_api.canned_checks.CheckLucicfgGenOutput(input_api, output_api,
-                                                      'main.star'))
+        input_api.canned_checks.CheckLucicfgGenOutput(
+            input_api, output_api, 'main.star'
+        )
+    )
 
 
 def CheckChangedLUCIConfigs(input_api, output_api):
     return input_api.canned_checks.CheckChangedLUCIConfigs(
-        input_api, output_api)
+        input_api, output_api
+    )

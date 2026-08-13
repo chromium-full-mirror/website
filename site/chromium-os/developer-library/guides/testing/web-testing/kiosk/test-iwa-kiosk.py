@@ -33,8 +33,10 @@ from typing import Any
 try:
     import websocket
 except ImportError:
-    sys.exit("Error: This script requires 'websocket-client'.\n"
-             "Please install it: pip install websocket-client")
+    sys.exit(
+        "Error: This script requires 'websocket-client'.\n"
+        "Please install it: pip install websocket-client"
+    )
 
 # Configure logging.
 logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(message)s")
@@ -71,12 +73,14 @@ class FlatCdpSession:
         msg_id = self._msg_id
 
         # In Flat Mode, sessionId is a top-level property.
-        message = json.dumps({
-            "id": msg_id,
-            "method": method,
-            "params": params,
-            "sessionId": self.session_id,
-        })
+        message = json.dumps(
+            {
+                "id": msg_id,
+                "method": method,
+                "params": params,
+                "sessionId": self.session_id,
+            }
+        )
 
         self.ws.send(message)
 
@@ -138,19 +142,20 @@ def wait_for_condition(
 ) -> None:
     """Polls the DOM (including Shadow Root) for a specific string."""
     # JS checks if the element exists, has a shadow root, and contains the text.
-    js = (f"(function() {{ "
-          f"  const r = document.querySelector('{selector}'); "
-          f"  return r && r.shadowRoot && "
-          f"r.shadowRoot.innerHTML.includes('{text}'); "
-          f"}})()")
+    js = (
+        f"(function() {{ "
+        f"  const r = document.querySelector('{selector}'); "
+        f"  return r && r.shadowRoot && "
+        f"r.shadowRoot.innerHTML.includes('{text}'); "
+        f"}})()"
+    )
 
     start_time = datetime.datetime.now()
     end_time = start_time + datetime.timedelta(seconds=timeout)
     while datetime.datetime.now() < end_time:
-        res = session.send("Runtime.evaluate", {
-            "expression": js,
-            "returnByValue": True
-        })
+        res = session.send(
+            "Runtime.evaluate", {"expression": js, "returnByValue": True}
+        )
         if res and res["result"].get("value") is True:
             return
         time.sleep(0.5)
@@ -168,8 +173,10 @@ def run_test(port: int) -> bool:
             with urllib.request.urlopen(url, timeout=5) as response:
                 browser_ws_url = json.load(response)["webSocketDebuggerUrl"]
         except Exception as e:
-            raise Exception(f"Could not connect to Chrome at {url}. "
-                            f"Is it running? Error: {e}")
+            raise Exception(
+                f"Could not connect to Chrome at {url}. "
+                f"Is it running? Error: {e}"
+            )
 
         logging.info("Connecting to browser at %s...", debugger_addr)
         ws = websocket.create_connection(browser_ws_url, suppress_origin=True)
@@ -192,31 +199,40 @@ def run_test(port: int) -> bool:
                 break
 
         iwa_target = next(
-            (t for t in targets if t["url"].startswith(IWA_URL_PATTERN)
-             and t["type"] in {"app", "page", "other"}),
+            (
+                t
+                for t in targets
+                if t["url"].startswith(IWA_URL_PATTERN)
+                and t["type"] in {"app", "page", "other"}
+            ),
             None,
         )
 
         if not iwa_target:
             visible = "\n".join(f"{t['type']}: {t['url']}" for t in targets)
             raise Exception(
-                f"Could not find IWA target. Available targets:\n{visible}")
+                f"Could not find IWA target. Available targets:\n{visible}"
+            )
 
-        logging.info("%sFound IWA Target: %s%s", GREEN, iwa_target['url'],
-                     RESET)
+        logging.info(
+            "%sFound IWA Target: %s%s", GREEN, iwa_target['url'], RESET
+        )
 
         # 3. Attach (Flat Mode).
         # We assume the browser supports "flatten: true".
         attach_id = 1000
         ws.send(
-            json.dumps({
-                "id": attach_id,
-                "method": "Target.attachToTarget",
-                "params": {
-                    "targetId": iwa_target["targetId"],
-                    "flatten": True,
-                },
-            }))
+            json.dumps(
+                {
+                    "id": attach_id,
+                    "method": "Target.attachToTarget",
+                    "params": {
+                        "targetId": iwa_target["targetId"],
+                        "flatten": True,
+                    },
+                }
+            )
+        )
 
         session_id = None
         start_attach = datetime.datetime.now()
@@ -287,17 +303,19 @@ def run_test(port: int) -> bool:
         )["nodeId"]
 
         if not left_id or not right_id:
-            raise Exception("Could not find <socket-connection> or "
-                            "<socket-server> elements.")
+            raise Exception(
+                "Could not find <socket-connection> or "
+                "<socket-server> elements."
+            )
 
         # Get Shadow Roots for internal access.
-        left_shadow = session.send(
-            "DOM.describeNode",
-            {"nodeId": left_id})["node"]["shadowRoots"][0]["nodeId"]
+        left_shadow = session.send("DOM.describeNode", {"nodeId": left_id})[
+            "node"
+        ]["shadowRoots"][0]["nodeId"]
 
-        right_shadow = session.send(
-            "DOM.describeNode",
-            {"nodeId": right_id})["node"]["shadowRoots"][0]["nodeId"]
+        right_shadow = session.send("DOM.describeNode", {"nodeId": right_id})[
+            "node"
+        ]["shadowRoots"][0]["nodeId"]
 
         logging.info("Found shadow roots for socket components.")
 
@@ -346,10 +364,12 @@ def run_test(port: int) -> bool:
         click_element(session, r_btn)
 
         logging.info("Verifying message on LEFT...")
-        wait_for_condition(session, "socket-connection",
-                           "Hello from the right side!")
-        logging.info("%sVerified 'Hello from the right side!' on left.%s",
-                     GREEN, RESET)
+        wait_for_condition(
+            session, "socket-connection", "Hello from the right side!"
+        )
+        logging.info(
+            "%sVerified 'Hello from the right side!' on left.%s", GREEN, RESET
+        )
 
         logging.info("%sTest finished successfully!%s", GREEN, RESET)
         return True

@@ -143,9 +143,9 @@ class JobQueue:
     def _spawn(self):
         args = (self._request_q, self._response_q, self.handler)
         for i in range(self.jobs):
-            proc = multiprocessing.Process(target=_worker,
-                                           name='worker-%d' % i,
-                                           args=args)
+            proc = multiprocessing.Process(
+                target=_worker, name='worker-%d' % i, args=args
+            )
             self._procs.append(proc)
             proc.start()
 
@@ -176,7 +176,7 @@ class JobQueue:
             # very narrow, the output will be nonsense, so just ignore it.
             width = max(20, shutil.get_terminal_size().columns)
             if len(msg) > width:
-                msg = msg[:width - 3] + '...'
+                msg = msg[: width - 3] + '...'
             else:
                 msg += CSI_ERASE_LINE_AFTER
         print('\r' + msg, end='', flush=True)
@@ -187,8 +187,9 @@ def _worker(request_q, response_q, handler):
     while True:
         message, task, obj = request_q.get()
 
-        assert message in ('exit',
-                           'handle'), ("Unknown message type '%s'" % message)
+        assert message in ('exit', 'handle'), (
+            "Unknown message type '%s'" % message
+        )
 
         if message == 'exit':
             break
