@@ -14,14 +14,21 @@ users as well.
 
 ## Cycle / Schedule
 
-ChromeOS operates on a 4 week cycle.
-We largely follow the [Chrome Release
-Cycle](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/process/release_cycle.md),
-so check out that document for a lot more information.
+ChromeOS aligns with Chrome Browser’s 2-week branching cadence (starting
+target: M153) while maintaining a 4-week Stable release cadence:
 
-NB: Before M96 (Dec 2021), CrOS followed a 6 week cycle.
-See the [announcement](https://blog.chromium.org/2021/06/changes-to-chrome-oss-release-cycle.html)
-for more details.
+*   Branching & Pre-Stable Cadence: ChromeOS branches every 2 weeks alongside
+    Chrome Browser, featuring a 2-week Dev channel and a 2-week Beta channel
+    for each milestone.
+*   Stable Releases: Only even-numbered milestones are promoted to the Stable
+    channel (odd-numbered milestones skip Stable). Stable releases remain
+    active for 4 weeks and receive weekly respins with critical bugs and
+    security fixes.
+*   LTS (Long Term Support): LTS releases occur every 12 milestones (maintaining the ~6-month interval).
+*   Historical Cadences:
+    *   M153 onwards: 2-week branching with even-numbered milestones promoted to Stable every 4 weeks.
+    *   M96 (Dec 2021) – M152: 4-week cycle across all channels.
+    *   Prior to M96 (Dec 2021): 6-week cycle.
 
 ## Channels
 
@@ -114,7 +121,7 @@ Considering how often such major upgrade bugs occur (less than once a year, and
 usually most tend to be device/firmware specific), we're OK with this risk.
 
 Ideally stepping stones should be aligned with LTS milestones. These are
-currently planned as M96+6*X (See [Chromium Dash] for current data). Having
+currently planned as M160+12*X following the transition to the new cadence (See [Chromium Dash] for current data). Having
 stepping stones on LTS and LTC milestones allows devices on the respective
 channels to move from one release to the next one without having to go through
 a non-LTS milestone.
