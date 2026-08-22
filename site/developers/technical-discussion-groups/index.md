@@ -26,8 +26,6 @@ title: Technical Discussion Groups
 *   [android-webview-dev](https://groups.google.com/a/chromium.org/forum/#!forum/android-webview-dev)
     *   Technical discussions about the Android WebView
                 (src/android_webview).
-*   [animations-dev](https://groups.google.com/a/chromium.org/forum/#!forum/animations-dev)
-    *   Technical discussions about animations in blink.
 *   [apps-dev](https://groups.google.com/a/chromium.org/forum/#!forum/apps-dev)
     *   Implementation discussions for the Chrome Packaged Apps platform
                 and APIs.

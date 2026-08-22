@@ -50,10 +50,10 @@ our archives](/teams/animations/highlights-archive).
 The team uses a public mailing list for technical discussions, questions, and
 announcements.
 
-Email address: [animations-dev@chromium.org](mailto:animations-dev@chromium.org)
+Email address: [input-dev@chromium.org](mailto:input-dev@chromium.org)
 
 Web archives:
-[animations-dev](https://groups.google.com/a/chromium.org/forum/#!forum/animations-dev)
+[input-dev](https://groups.google.com/a/chromium.org/forum/#!forum/input-dev)
 
 We are also available in #animations on the [Chromium
 Slack](https://docs.google.com/document/d/1nCqDQEF2pW5cUMNBBZPP20DZ7TVCu58ylhCk_Q8LqU4/edit).
