@@ -64,7 +64,7 @@ containing the following information.
 *   your email address. You can also ask to get an @chromium.org email
             address at this time, if you don't already have one (see below).
 *   an explanation of why you should be a committer,
-*   a list of representative landed patches
+*   if applicable, a list of representative landed patches
 
 Two other committers need to second your nomination. One of the three
 nominators must be listed in an OWNERS file in chromium/src.
