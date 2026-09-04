@@ -49,7 +49,7 @@ so no action is required from you yet.
 If your change does not have a Chrome launch bug with an enterprise review,
 describe your planned changes by joining and emailing the
 [chromium-enterprise](https://groups.google.com/a/chromium.org/forum/#!forum/chromium-enterprise)
-technical discussion group, at least 3 milestones (~3 months) prior to launch
+technical discussion group, at least 6 milestones (~3 months) prior to launch
 to stable, and sooner than that for highly disruptive changes.
 
 Include:
