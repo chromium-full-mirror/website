@@ -16,7 +16,7 @@ right to accept the contribution:
 *   Make sure the author is already listed in src/AUTHORS. In some
             cases, the author's company might have a wildcard rule in AUTHORS
             (eg, \*@google.com).
-*   If the author or his/her company is not listed, the CL should
+*   If the author or their company is not listed, the CL should
             include a new AUTHORS entry.
     *   If you don't work for Google, find someone who does to review
                 the new entry.

@@ -178,7 +178,7 @@ outlining the issue and an ability to try translating again.**
 
 # ******A dialog should be used instead of an infobar if...******
 
-# ******1) it will block the user from doing something unless he/she takes
+# ******1) it will block the user from doing something unless they take
 action******
 
 # **2) it is a direct response to a user action**

@@ -27,7 +27,7 @@ The following are absolutely essential:
             indicates when running, provides a window list, and present in
             Cmd-tab list for quick application switching.
 *   The user should be able to treat a shortcut like any other
-            Application, e.g., install it wherever he/she wishes.
+            Application, e.g., install it wherever they wish.
 *   A shortcut must have a customizable name and icon (and of course web
             site); the name must be displayed in the menu bar.
 *   The window displayed by a shortcut must not display the "usual"

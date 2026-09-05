@@ -238,7 +238,7 @@ Anyone can create!
 
 Open Source and extensible:
 
-Anyone can make it his/her own!
+Anyone can make it their own!
 
 Secure (multi-process), fast (v8) and powerful:
 

@@ -65,7 +65,7 @@ stable.
 To support session lock/unlock, offline sign-in and user data encryption, Chrome
 must be able to authenticate a returning user without contacting any servers.
 This is done by deriving a key from the user’s password via a one-way hash
-function during initial authentication. When the user returns and enters his/her
+function during initial authentication. When the user returns and enters their
 password again, the same one-way hash function is applied to this password. If
 the resulting keys match, the password entered was correct and the user is
 authenticated.
@@ -75,7 +75,7 @@ non-SAML users. The same one-way hash function is used when a SAML IdP passes a
 user’s password to Chrome via the API described in this document. Chrome
 discards the password after hashing and does not store it anywhere. An
 alternative is for the IdP to apply a one-way hash function and pass the derived
-key to Chrome. When the user returns and enters his/her password, Chrome must
+key to Chrome. When the user returns and enters their password, Chrome must
 apply the same one-way hash function to determine whether the password entered
 is correct. The IdP must therefore use a one-way hash function supported by
 Chrome and must also pass Chrome any additional metadata required to repeat the
@@ -169,7 +169,7 @@ to be correlated.
 
 > ## add(details, callback)
 
-> This method should be invoked when the user has finished entering his/her
+> This method should be invoked when the user has finished entering their
 > credentials. The details should be a JavaScript object that contains the
 > following fields:
 
@@ -215,7 +215,7 @@ to be correlated.
 > If the credentials entered are incorrect, the IdP will typically end the
 > authentication flow with a SAMLResponse indicating failure. However, an IdP
 > may also redirect back to the IdP’s login form, allowing the user to try
-> entering his/her credentials again. If the IdP implements this flow, the add
+> entering their credentials again. If the IdP implements this flow, the add
 > method should be called whenever new credentials are entered. It is
 > permissible to reuse the same token in this case. When the add method is
 > called with new credentials, any credentials previously passed with the same
@@ -247,7 +247,7 @@ to be correlated.
 > If the credentials provided are incorrect, the IdP must not call the complete
 > method. When the SAML authentication flow completes with a SAMLResponse
 > indicating authentication failure, Chrome will inform the user of the
-> authentication failure and will allow him/her to try again, starting a new
+> authentication failure and will allow them to try again, starting a new
 > authentication flow.
 
 #### Limitations
