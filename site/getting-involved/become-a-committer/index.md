@@ -47,6 +47,12 @@ The purpose of our committers group is to identify people which can be
 trusted to contribute in good-faith to the Chromium open source project goals,
 and not to abuse their access to Chromium infrastructure and community.
 
+Employees of companies and individuals that are on a restricted party list,
+including the U.S. Entity List maintained by the U.S. Department of Commerce's
+Bureau of Industry & Security or Specially Designated Nationals (SDN) List
+administered by the Department of Treasury's Office of Foreign Assets Control,
+are not eligible to be nominated or approved as a committer.
+
 (Becoming a committer used to require a certain number of patches. As of
 Sep 2026, [this is no longer the case](https://groups.google.com/a/chromium.org/g/chromium-dev/c/w4p16_lr6QM).)
 
