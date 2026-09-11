@@ -1,5 +1,5 @@
 ---
-redirect: https://googlechrome.github.io/chromerootprogram/
+redirect: https://googlechrome.github.io/chromerootprogram/crp/policy/
 breadcrumbs:
 - - /Home
   - Chromium
