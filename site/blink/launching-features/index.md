@@ -306,7 +306,7 @@ Now that you think your overall design is relatively settled (or just after
 starting your Origin Trial), if you haven't already, start writing your
 specification. Talk to your [spec mentor](/blink/spec-mentors) about how long
 you should expect this to take. As a very rough guess, estimate at least a month
-of full-time work, but that can take more calendar time than the 12-16 weeks of
+of full-time work, but that can take more calendar time than the 6+ months of
 an Origin Trial. Starting the spec-writing process too late might delay your
 feature launch.
 
@@ -365,10 +365,9 @@ If your trial has a clear need for an exception to this rule, you may request
 Approval of the exception requires 3 LGTMs.
 
 An initial origin trial or experiment for a feature may only run for
-*6 milestones of Chromium* (12 starting with the
-[two-week release schedule](https://developer.chrome.com/blog/chrome-two-week-release) as of milestone 153).
+*12 milestones of Chromium*.
 Each request to extend beyond that limit may only be
-for *3 milestones* at a time (6 as of milestone 153), and will not be approved unless substantial
+for *6 milestones* at a time, and will not be approved unless substantial
 progress is demonstrated in all of these areas:
 * Draft spec (early draft is ok, but must be spec-like and associated with the
   appropriate standardization venue, or WICG)
@@ -702,7 +701,7 @@ details](/blink/origin-trials/running-an-origin-trial#integrate-feature)).
 Once your Deprecation Trial is in place, proceed to the next step.
 
 Deprecation trials are run for up to 6 chromium milestones, and can be
-repeatedly extended for 6 milestones (12 as of milestone 153) as long as significant progress is
+repeatedly extended for 12 milestones as long as significant progress is
 demonstrated in at least one of the following areas:
  * Designing and shipping alternative APIs for the use case, directly addressing
    feedback from developers currently relying on the deprecation trial.
