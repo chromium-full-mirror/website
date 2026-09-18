@@ -59,6 +59,12 @@ def CheckChangeHasDescription(input_api, output_api):
     )
 
 
+def CheckVPythonSpec(input_api, output_api):
+    return input_api.RunTests(
+        input_api.canned_checks.CheckVPythonSpec(input_api, output_api)
+    )
+
+
 def CheckForLobs(input_api, output_api):
     output_status = []
     lob_extensions = list(get_lob_extensions(input_api))
