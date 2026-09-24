@@ -51,11 +51,15 @@ const mobileNavToggle = document.getElementById('mobile-nav-toggle');
 const mobileNav = document.getElementById('sidebar-left');
 const mobileNavClose = document.getElementById('mobile-nav-close');
 const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
+const siteHeader = document.getElementById('site-header');
 
 if (mobileNavToggle && mobileNav && mobileNavClose && mobileNavBackdrop) {
   const setMobileNavState = (isOpen) => {
     mobileNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     document.body.classList.toggle('mobile-nav-open', isOpen);
+    if (isOpen && siteHeader) {
+      siteHeader.classList.remove('mobile-header-hidden');
+    }
   };
 
   const closeMobileNav = (returnFocus = false) => {
@@ -98,6 +102,75 @@ if (mobileNavToggle && mobileNav && mobileNavClose && mobileNavBackdrop) {
     link.addEventListener('click', closeMobileNav);
   });
 }
+
+if (siteHeader) {
+  // Ignore small changes in direction so touch scrolling does not make the
+  // header flicker in and out of view.
+  const mobileHeaderScrollThresholdPx = 10;
+
+  // Ignore elastic overscroll beyond the top or bottom of the page.
+  const getClampedScrollY = () => {
+    const maxScrollY = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight, 0);
+    return Math.min(Math.max(window.scrollY, 0), maxScrollY);
+  };
+
+  let accumulatedHeaderScroll = 0;
+  let lastHeaderScrollY = getClampedScrollY();
+  let headerScrollUpdatePending = false;
+
+  const showMobileHeader = () => {
+    siteHeader.classList.remove('mobile-header-hidden');
+  };
+
+  const updateMobileHeader = () => {
+    const currentScrollY = getClampedScrollY();
+    const scrollDelta = currentScrollY - lastHeaderScrollY;
+    lastHeaderScrollY = currentScrollY;
+    headerScrollUpdatePending = false;
+
+    if (window.innerWidth > mobileNavBreakpoint ||
+        currentScrollY <= siteHeader.offsetHeight ||
+        document.body.classList.contains('mobile-nav-open')) {
+      accumulatedHeaderScroll = 0;
+      showMobileHeader();
+      return;
+    }
+
+    if (scrollDelta === 0) {
+      return;
+    }
+
+    if ((scrollDelta > 0 && accumulatedHeaderScroll < 0) ||
+        (scrollDelta < 0 && accumulatedHeaderScroll > 0)) {
+      accumulatedHeaderScroll = 0;
+    }
+    accumulatedHeaderScroll += scrollDelta;
+
+    if (Math.abs(accumulatedHeaderScroll) < mobileHeaderScrollThresholdPx) {
+      return;
+    }
+
+    siteHeader.classList.toggle(
+        'mobile-header-hidden', accumulatedHeaderScroll > 0);
+    accumulatedHeaderScroll = 0;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!headerScrollUpdatePending) {
+      window.requestAnimationFrame(updateMobileHeader);
+      headerScrollUpdatePending = true;
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    accumulatedHeaderScroll = 0;
+    lastHeaderScrollY = getClampedScrollY();
+    if (window.innerWidth > mobileNavBreakpoint) {
+      showMobileHeader();
+    }
+  });
+}
 {%- endset -%}
 
 <!DOCTYPE html>
@@ -118,7 +191,7 @@ if (mobileNavToggle && mobileNav && mobileNavClose && mobileNavBackdrop) {
   <link rel="stylesheet" href="/_stylesheets/highlight.js/github.min.css">
 </head>
 
-<header>
+<header id="site-header">
   <button id="mobile-nav-toggle" class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="sidebar-left" aria-expanded="false">
     <span class="mobile-nav-toggle-bars" aria-hidden="true">
       <span></span>
@@ -132,6 +205,7 @@ if (mobileNavToggle && mobileNav && mobileNavClose && mobileNavBackdrop) {
   </a>
   <div id="search"></div>
 </header>
+<div id="mobile-header-spacer" aria-hidden="true"></div>
 
 <div id="mobile-nav-backdrop" aria-hidden="true"></div>
 

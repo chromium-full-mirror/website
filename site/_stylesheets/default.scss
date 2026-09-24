@@ -121,6 +121,10 @@ header {
   }
 }
 
+#mobile-header-spacer {
+  display: none;
+}
+
 .mobile-nav-toggle {
   align-items: center;
   background: transparent;
@@ -499,9 +503,33 @@ main {
 }
 
 @media (max-width: $mobile-nav-breakpoint) {
-  header {
+  #site-header {
+    background-color: $body-bg-color;
+    box-sizing: border-box;
     flex-wrap: nowrap;
-    margin: 5px;
+    height: 58px;
+    left: 0;
+    margin: 0;
+    padding: 5px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: transform 180ms ease-out;
+    z-index: 20;
+
+    &.mobile-header-hidden {
+      transform: translateY(-100%);
+    }
+
+    // Keep keyboard-focused header controls visible.
+    &:focus-within {
+      transform: translateY(0);
+    }
+  }
+
+  #mobile-header-spacer {
+    display: block;
+    height: 58px;
   }
 
   .header-brand {
@@ -689,9 +717,23 @@ main {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  #site-header {
+    transition: none;
+  }
+}
+
 // Below 400px, the full-size logo and title no longer fit beside the
 // search and navigation buttons without wrapping.
 @media (max-width: 400px) {
+  #site-header {
+    height: 46px;
+  }
+
+  #mobile-header-spacer {
+    height: 46px;
+  }
+
   .header-brand {
     img {
       height: 36px;
