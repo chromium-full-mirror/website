@@ -141,13 +141,6 @@ for, a CookieMonster has a notion of "cookieable schemes"--the schemes for which
 cookies will be stored in that monster. That list defaults to "http" and
 "https". For extensions it is set to "chrome-extension".
 
-When file cookies are enabled via --enable-file-cookies, the default list will
-include "file", and file cookies will be stored in the main CookieMonster. For
-file cookies, the key will be either null, or (for UNC names, e.g.
-//host.on.my.network/path/on/that/host) the hostname in the file cookie.
-Currently, the store does not distinguish carefully between file cookies and
-network cookies.
-
 **Implementation Details; Subject to Change Without Notice**
 
 The call graph of the routines used in the CookieMonster is included below. It
