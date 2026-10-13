@@ -16,6 +16,51 @@ if you're interested in updates, discussion, or feisty rants related to Chromium
 security.
 
 
+## Q3 2026
+
+# Chrome Security **2026 Q3** Update
+
+
+Hello everyone,
+
+Here's an update on what Chrome Security was up to in Q3 of 2026.
+
+The counter-abuse team has begun to roll out suspicious site warnings for [enhanced protection](https://support.google.com/chrome/answer/9890866?hl=en&co=GENIE.Platform%3DAndroid#zippy=%2Cenhanced-protection) users. These warnings will show on sites that appear similar to known phishing or scam sites. They complement the existing red interstitial warnings we show on our highest confidence verdicts, allowing us to expand the number of sites we're able to proactively protect users on. We also [published an update](https://blog.google/security/the-multi-layered-defenses-that-harden-chrome-against-abusive-notifications/) on our goal to minimize the number of unwanted notifications Chrome users receive -- by targeting the problem at multiple stages of the notification life cycle, we've been able to dramatically reduce potentially abusive notifications. Lastly, we've [updated extension install policies](https://chromestatus.com/feature/5137532038807552) to restrict the policy-installation of extensions that modify the default search engine or new tab page on low-trust, unmanaged devices.
+
+On the secure networking side, our efforts to bring quantum-resistant HTTPS to the web have continued, and we are working to finalize the Merkle Tree Certificate (MTC) [specs](https://datatracker.ietf.org/doc/draft-ietf-plants-merkle-tree-certs/), root program [policy](https://googlechrome.github.io/chromerootprogram/cqrp/draft-policy/), and Chrome and BoringSSL implementations. We've also made significant progress on server-side engineering to ensure we can monitor and detect misbehaving MTC Certification Authorities (CAs). This quarter also saw a lot of buy-in on MTCs from other organizations across the web, including commitments to participate from five of the largest CAs, Apple, and Edge.
+
+After successfully enabling [Ask-Before-HTTP](https://blog.google/security/https-by-defau/) for enhanced protection users last quarter, we have finished preparations for a full rollout of this feature to all users in the first half of Q4 -- this launch delivers a step-function change in ensuring users are protected, by default, against network-based attacks.
+
+And lastly, following recent third-party ccTLD hijacks in .gh, .sl, and .as, [we proactively used Certificate Transparency and CRLSets](https://blog.google/security/chromes-response-to-recent-cctld-registry-hijacks/) to identify and block unauthorized HTTPS certificates covering Google properties and others suspected to belong to global brands.
+
+The exploit defense teams published [Stronger with every update: How we're making Chrome and the web safer in the AI Era](https://blog.google/security/chrome-stronger-with-every-update/) which outlined our end-to-end strategy for scaling vulnerability discovery, triage, remediation, release cadence and memory safety in response to AI-assisted vulnerability research; since publication, we have found and patched an additional 1,472 security bugs making it a total of 3,138 security bugs fixed so far in 2026.
+
+As of Chrome 157, our automated AI security scanning pipeline is analyzing thousands of newly landed Chromium commits within 24 hours of submission. Operating inside isolated, network-restricted sandboxes, it enables us to identify and remediate newly introduced security flaws before they affect users on the Stable channel. Additionally, we incorporated our latest frontier models including the recently debuted [Gemini 3.8 Flash and Gemini 3.8 Flash Cyber](https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/) into our multi-agent discovery and critic workflows.
+
+We are also actively working to shrink the patch gap: the window between when a security fix is publicly committed to the Chromium open-source repository and when users are actively running the updated Chrome Stable release. On macOS, we recently strengthened defenses against N-day exploits by driving a 56% increase in devices adopting security patches within one day. We achieved this by opportunistically relaunching Chrome in the background when it enters a "zero-window" state. Building on this momentum, we are expanding experiments across all desktop platforms to restart Chrome when the system is idle, delivering timely security updates seamlessly without disrupting user workflows or state.
+
+While desktop improvements focus on restarts, our analysis on mobile platforms revealed that the patch gap is primarily driven by download latency rather than delayed restarts, as background store updates are often deferred until specific device conditions (such as charging and Wi-Fi) are met. To address this, we are developing in-app update capabilities to notify users directly within Chrome when an update is available and allow them to download and apply it seamlessly.
+
+Finally, we are advancing our dynamic patching initiative to deliver critical security updates seamlessly without requiring a full browser restart. Following foundational work on binary separation and early channel experiments, we are establishing the end-to-end distribution pipeline to validate patch distribution ahead of upcoming milestones.
+
+To make C++ code safer, we've worked on various potential mitigations In Q3. In Chrome 152 we started our DCHECK -> CHECK conversion and are now landing up to 5000 conversions per milestone and this will continue until at least Chrome 159. This hardens our invariants and flags mistakes in logic and prevents bugs from escalating. We've also continued investigating shipping sanitizer features with our enablement of `-fsanitize=unreachable`, preventing accidental undefined behaviour when unreachable code manages to be reached. We've also launched full MiraclePtr enforcement on all processes, and all chromium build platforms (removing the cast OS and Android renderer exemptions), this extends our protections further and protects from various use-after-frees.
+
+In Q3, the Rust in Chrome team [announced the availability of Crubit bindings](https://groups.google.com/a/chromium.org/g/rust-dev/c/Kixvw8bhfME/m/tkzaAac1BgAJ) for calling Rust from C++, and started working on Chromium integration of the reverse Crubit direction (calling C++ from Rust). Alongside continued progress on the [Rust ChildProcessSecurityPolicy experiment](https://crbug.com/482216433), we also advanced parser safety, Rust-based parsing for CBOR and Structured Headers are now in stable experiments, and we completed our migration to Rust for Pix QR code scanning. Additionally, we continued working closely with Microsoft Edge Security on migrating image decoders to Rust: following the 100% Stable launch of Rust BMP in Q2, Edge contributors removed the legacy C++ BMP decoder and wired in a new Rust-based JPEG decoder and encoder for experimentation.
+
+On Windows security, work continues on Basic Sandbox and Process Isolation. Process Isolation is now available in chrome://settings/system after enabling chrome://flags/#enable-process-isolation-ui -- please try it out and report any issues you may encounter.
+
+V8 security's Fuzzilli fuzzer now has an option to integrate with the Binaryen fuzzer allowing Binaryen-generated WebAssembly modules to be fuzzed with JavaScript code generated by Fuzzilli. We also made some progress on Fuzzilli's support of language features, e.g. supporting async iterators in JavaScript code and custom descriptors in WebAssembly code. Additionally, we have restarted the fuzzer VRP program and we welcome [contributions of blackbox fuzzers](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/security/vrp-faq.md#contributing-fuzzers) that can be run on ClusterFuzz infrastructure.
+
+In Product Security, we automated more of how we handle incoming security bug reports. All reports are now automatically reproduced, given a severity rating based on our updated [severity guidelines](https://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/security/severity-guidelines.md), and sent to the right team. Median triage time dropped from days to minutes, and low-quality reports get filtered out before they reach engineers. We published changes we made to our VRP program for the AI era and worked on adding flags to Chrome to facilitate definitive demonstration of some types of bugs. Our CVE issuing pipeline has also received an overhaul to adapt to the changes in reporting volumes using an automated system for generating descriptions with more updates coming up soon.
+
+And finally, Chromium third party dependencies which require patching or post-update code generation steps can now be automatically kept up to date using [Crowbar](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/managing-third-party/crowbar-workflow.md). New dependencies which require patching, partial checkouts or code generation should adopt this workflow on their initial import to minimise ongoing maintenance cost. Owners of existing dependencies can expect their onboarding to start in Q4 as we work toward keeping all Chromium dependencies fresh and up to date with upstream releases.
+
+Thank you for reading!
+
+Jasika
+
+On behalf of Chrome Security
+
 ## Q2 2026
 
 # Chrome Security **2026 Q2** Update
