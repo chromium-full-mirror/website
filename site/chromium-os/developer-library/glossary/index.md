@@ -113,9 +113,6 @@ title: Glossary
 *   __SW WP__: Software Write Protect.
 *   __Servo__: a debugging board that connects via USB to a host
     machine and a device under test.
-*   __TBR__: "To be reviewed". In
-    [specific circumstances](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/code_reviews.md#TBR-To-Be-Reviewed)
-    used to land code and have it reviewed later.
 *   __TCPC__: Type C Port Controller.
 *   __TPM__: ["Trusted Platform Module"](https://en.wikipedia.org/wiki/Trusted_Platform_Module),
     Tamper-resistant chip that the CPU can talk to. Securely stores

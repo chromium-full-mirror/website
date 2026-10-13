@@ -38,12 +38,6 @@ A comma-separated list of reviewer email addresses (e.g. foo@example.com,
 bar@example.com). This field will be going away with the switch to Gerrit, use
 the "-r foo@example.com" command line option to "git cl upload" instead.
 
-**Tbr:**
-
-Same format as the R line, but indicates to the commit queue that it can skip
-checking that all files in the change have been approved by their respective
-OWNERS.
-
 **Cq-Include-Trybots:**
 
 A comma-separated list of trybots which should be triggered and checked by the
