@@ -184,27 +184,42 @@ the following steps:
 [PasswordProtoMerge]: https://source.chromium.org/chromium/chromium/src/+/main:components/password_manager/core/browser/sync/password_proto_utils.cc;l=226-267;drc=32d86114a7d841e2b1b041b0d8b5434930164f17
 
 ### Browser upgrade flow
-To handle the scenario when unsupported fields become supported due to
-a browser upgrade, add the following code to your data-specific
-[`DataTypeSyncBridge`][DataTypeSyncBridge]:
-1. On startup, check whether the unsupported fields cache contains any field
-   that is supported in the current browser version. This can be done by using
-   the trimming function on cached protos and checking if it trims any fields
-   ([`Passwords example`][PasswordCacheCheck]).
-2. If the cache contains any fields that are already supported, simply force
-   the initial sync flow to deal with any inconsistencies between local and
-   server states
-   ([`Passwords example`][PasswordInitialSync]).
+When a client receives an entity containing fields from a newer browser version
+(or guarded behind a disabled feature flag) and later upgrades (or enables the
+flag) so those fields become supported, the local model must surface those
+newly-supported fields without waiting for another remote update. There are two
+valid patterns depending on how the [`DataTypeSyncBridge`][DataTypeSyncBridge]
+persists local data:
 
-It’s important to implement the trimming function correctly, otherwise the client
-can run into unnecessary sync data redownloads if a supported field gets cached
-unnecessarily.
-
-If the trimming function relies on having data-specific field present in the
-[`sync_pb::EntitySpecifics`][EntitySpecifics] proto ([`example`][PasswordCheckExample]),
-make sure to skip entries without these fields present in the startup check (as
-e.g. cache can be empty for entities that were created before this solution
-landed). This can be tested with the following [`Sync integration test`][SyncStartupTest].
+* **Pattern A: Structured local storage (e.g., SQLite tables) + startup cache
+  check**: When local storage only persists known fields (such as explicit SQL
+  columns), unrecognized fields exist *only* in
+  `EntityMetadata::possibly_trimmed_base_specifics`.
+  1. On startup, check whether the unsupported fields cache contains any field
+     that is supported in the current browser version. This can be done by
+     running `TrimAllSupportedFieldsFromRemoteSpecifics()` on cached protos and
+     checking if it trims any fields ([Passwords example][PasswordCacheCheck]).
+     If the trimming function relies on having the data-specific field present in
+     [`sync_pb::EntitySpecifics`][EntitySpecifics] ([example][PasswordCheckExample]),
+     make sure to skip entries without that field present in the startup check
+     (as the cache is empty when no unknown fields were present).
+  2. If the cache contains any fields that are now supported, force the initial
+     sync flow (`MergeFullSyncData`) to redownload and reconcile local and
+     server state ([Passwords example][PasswordInitialSync]).
+  * Note: It is critical to implement the trimming function accurately; failing
+    to clear a supported field will cause it to be cached in
+    `possibly_trimmed_base_specifics` and trigger unnecessary sync data
+    redownloads on every startup. This can be tested with a
+    [Sync integration test][SyncStartupTest].
+* **Pattern B: Full proto persistence in `DataTypeStore`**: When the bridge
+  persists the full remote specifics proto (including `unknown_fields()`) in
+  `DataTypeStore` during `MergeFullSyncData` and `ApplyIncrementalSyncChanges`
+  (and preserves `GetPossiblyTrimmedRemoteSpecifics` when writing local updates
+  to `DataTypeStore`), unrecognized fields are already retained in the stored
+  proto's `unknown_fields()`. Upon browser upgrade or feature flag enablement,
+  deserializing the stored proto on startup automatically populates the
+  newly-supported fields without requiring a startup cache check or server
+  redownload.
 
 [DataTypeSyncBridge]: https://cs.chromium.org/chromium/src/components/sync/model/data_type_sync_bridge.h
 [PasswordCheckExample]: https://cs.chromium.org/chromium/src/components/password_manager/core/browser/sync/password_sync_bridge.cc;l=904;drc=d149054a527b4fae61477ce9c338aeff64273d06
