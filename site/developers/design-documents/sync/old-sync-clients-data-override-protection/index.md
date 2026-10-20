@@ -85,38 +85,55 @@ fields are **supported** in the current browser version. Any field that is
 [`DataTypeLocalChangeProcessor`][DataTypeLocalChangeProcessor] and can be used
 during commits to the server to prevent the data loss.
 
-Fields that should **not** be marked as supported:
+Fields that should **not** be marked as supported (i.e. must **not** be cleared
+by trimming):
 * Unknown fields in the current browser version
 * Known fields that are just defined and not actively used, e.g.:
     * Partially-implemented functionality
-    * Functionality guarded behind a feature toggle
+    * Functionality guarded behind a feature toggle (if a field is only read and
+      written when a `base::Feature` is enabled, do **not** clear it when the
+      feature is disabled, otherwise clients with the flag off will wipe the
+      field written by clients with the flag on)
 
 [`TrimAllSupportedFieldsFromRemoteSpecifics`][TRSFC] is a function of
 [`DataTypeSyncBridge`][DataTypeSyncBridge] that:
 * Takes a [`sync_pb::EntitySpecifics`][EntitySpecifics] object as an argument.
 * Returns [`sync_pb::EntitySpecifics`][EntitySpecifics] object that will be
-  cached by the [`DataTypeLocalChangeProcessor`][DataTypeLocalChangeProcessor].
+  cached by the [`DataTypeLocalChangeProcessor`][DataTypeLocalChangeProcessor]
+  (if its `ByteSizeLong() > 0`).
 * By default trims all proto fields.
 
 To add a data-specific unsupported fields caching, override the trimming
 function in the data-specific [`DataTypeSyncBridge`][DataTypeSyncBridge] to
 clear all its supported fields (i.e. fields that are actively used by the
-implementation and fully launched):
+implementation and fully launched). Wrap both the `.proto` definition and the
+trimming implementation in `LINT.IfChange` / `LINT.ThenChange` comments to keep
+them in sync, and only populate the datatype field on the returned
+`EntitySpecifics` if `trimmed_specifics.ByteSizeLong() > 0u` (otherwise an empty
+submessage shell will be cached in metadata for every entity):
 
 ```cpp
 sync_pb::EntitySpecifics DataSpecificBridge::TrimAllSupportedFieldsFromRemoteSpecifics(
-   const sync_pb::EntitySpecifics& entity_specifics) const {
- sync_pb::EntitySpecifics trimmed_entity_specifics = entity_specifics;
- {...}
- trimmed_entity_specifics.clear_username();
- trimmed_entity_specifics.clear_password();
- sync_pb::SpecificsSubmessage* submessage = trimmed_entity_specifics.mutable_submessage();
- mutable_submessage->clear_field();
- if (mutable_submessage->ByteSizeLong() == 0u) {
-   trimmed_entity_specifics.clear_submessage();
- }
- {...}
- return trimmed_entity_specifics;
+    const sync_pb::EntitySpecifics& entity_specifics) const {
+  // LINT.IfChange(TrimAllSupportedFieldsFromRemoteSpecifics)
+  sync_pb::MyTypeSpecifics trimmed_specifics = entity_specifics.my_type();
+  trimmed_specifics.clear_username();
+  trimmed_specifics.clear_password();
+  if (trimmed_specifics.has_submessage()) {
+    sync_pb::SpecificsSubmessage* submessage =
+        trimmed_specifics.mutable_submessage();
+    submessage->clear_field();
+    if (submessage->ByteSizeLong() == 0u) {
+      trimmed_specifics.clear_submessage();
+    }
+  }
+  // LINT.ThenChange(//components/sync/protocol/my_type_specifics.proto:MyTypeSpecifics)
+
+  sync_pb::EntitySpecifics trimmed_entity_specifics;
+  if (trimmed_specifics.ByteSizeLong() > 0u) {
+    *trimmed_entity_specifics.mutable_my_type() = std::move(trimmed_specifics);
+  }
+  return trimmed_entity_specifics;
 }
 ```
 
@@ -130,27 +147,34 @@ Forgetting to trim fields that are supported might result in:
 * I/O, memory overhead (caching unnecessary data)
 * Unnecessary sync data redownloads on browser startup (more details below)
 
-To prevent this scenario, add a check that:
-* Takes a local representation of the proto (containing supported fields only)
-* Makes sure that trimming it would return an empty proto
-
-This should be done before every commit to the Sync server:
+To prevent this scenario, add unit tests (and/or a `DCHECK` before every commit
+to the Sync server) that:
+* Take a local representation of the proto (containing supported fields only)
+* Make sure that trimming it returns an empty proto (and that trimming a proto
+  with unknown fields preserves them)
 
 ```cpp
-DCHECK_EQ(TrimAllSupportedFieldsFromRemoteSpecifics(datatype_specifics.ByteSizeLong()), 0u);
+DCHECK_EQ(TrimAllSupportedFieldsFromRemoteSpecifics(entity_specifics).ByteSizeLong(), 0u);
 ```
 
 ### Local update flow
-To use the cached unsupported fields data during commits to the server, add the
-code that does the following steps:
+To use the cached unsupported fields data during commits to the server (both in
+`change_processor()->Put()` and in `GetDataForCommit()`), add the code that does
+the following steps:
 1. Query cached [`sync_pb::EntitySpecifics`][EntitySpecifics] from the
-   [`DataTypeLocalChangeProcessor`][DataTypeLocalChangeProcessor]
+   [`DataTypeLocalChangeProcessor`][DataTypeLocalChangeProcessor] via
+   `GetPossiblyTrimmedRemoteSpecifics(storage_key)`
    ([`Passwords example`][PasswordCacheQuery]).
 1. Use the cached proto as a base for a commit and fill it with the supported
    fields from the local proto representation
    ([`Passwords example`][PasswordProtoMerge]).
-   *  Make it sure that all known fields are explicitly cleared or set to avoid
-      preserving known fields in some corner cases.
+   *  Make sure that all known supported fields are **explicitly set or
+      cleared** (e.g. if an optional field is unset in the local model, call
+      `clear_foo()`) to avoid preserving stale values in corner cases.
+   *  For enum fields, if the local model has an `UNSPECIFIED`/`UNKNOWN` value
+      because the entity originally had an unrecognized enum value from a newer
+      client, avoid calling `set_my_enum(FOO_UNSPECIFIED)` if doing so would
+      overwrite the unknown value preserved in `base_specifics`.
 1. Commit the merged proto to the server
    ([`Passwords example`][PasswordMergeCommit]).
 
@@ -203,16 +227,44 @@ time until it can be used reliably. This is due to the facts that:
 * Sync supported version horizon is pretty long (multiple years).
 
 ### Deprecating a field
-Deprecated fields should still be treated as supported to prevent their
-unnecessary caching.
+Deprecated fields (even ones that are no longer read or written by the bridge)
+must **not** be removed from the `.proto` file or from
+`TrimAllSupportedFieldsFromRemoteSpecifics()`, and must still be treated as
+supported. Otherwise, deprecated fields still present on the server would fail
+to be trimmed and would be cached in `possibly_trimmed_base_specifics` and
+carried forward indefinitely.
 
 ### Migrating a field
 This requires client-side handling as the newer clients will have both fields
 present and the legacy clients will have access to the deprecated field only.
 Newer clients should:
 * Keep filling the deprecated field for legacy clients to use
-* Add a logic to pick a correct value from a deprecated and new field to
-  account for updates from legacy clients
+* Add logic to pick a correct value from a deprecated and new field to account
+  for updates from legacy clients
+
+### Enums
+In `proto2`, when an older client receives an unrecognized enum value introduced
+in a newer version, `proto2` places the raw value in `unknown_fields()` rather
+than the named field. As a result, `clear_<enum_field>()` in
+`TrimAllSupportedFieldsFromRemoteSpecifics()` does not strip the unrecognized
+enum value from `unknown_fields()`, and `possibly_trimmed_base_specifics`
+retains it. When committing a local update that starts from
+`GetPossiblyTrimmedRemoteSpecifics`, if the local model still holds the
+`UNSPECIFIED` fallback value (meaning the enum was not modified locally), the
+bridge should avoid calling `set_<enum_field>(..._UNSPECIFIED)` so the
+unrecognized enum value in `unknown_fields()` is preserved on commit.
+
+### `oneof` fields
+Clearing all currently known variants of a `oneof` in
+`TrimAllSupportedFieldsFromRemoteSpecifics()` leaves any newly introduced
+variant untouched in `unknown_fields()`, allowing it to be preserved in
+`possibly_trimmed_base_specifics`. However, if an older client modifies the
+entity and sets one of its known `oneof` variants on top of the cached
+`possibly_trimmed_base_specifics`, the serialized proto would contain two active
+variants of the same `oneof` (one known, one in `unknown_fields()`), and newer
+clients parsing that commit will have one overwrite the other depending on wire
+order. Avoid allowing older clients to modify entities whose `oneof` variant was
+`NOT_SET` (unrecognized).
 
 ### Repeated fields
 No client-side logic is required - the solution will work by default.
