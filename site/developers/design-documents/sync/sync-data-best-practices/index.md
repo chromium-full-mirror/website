@@ -98,3 +98,28 @@ Instead, it's usually best to fix up the data locally *without* committing it,
 and relying on the next natural change to commit the fixed data to the server.
 If you absolutely must re-upload the fixed data, this must be rate-limited in
 some way, e.g. do it at most once per browser startup.
+
+### Entity size limits
+
+The Chrome Sync server enforces a hard **10 KB (`10,240`-byte)** limit per
+serialized entity (including `SyncEntity` metadata and server wrapper
+attributes). If a committed entity exceeds 10 KB, the server silently drops the
+write and returns a fake `SUCCESS` response to prevent infinite client retry
+loops, resulting in silent data loss. Note that this limit is subject to
+change; if your feature needs to exceed this limit, reach out to the Sync team.
+
+Additionally, when Nigori encryption is active (for users with a custom
+passphrase or for always-encrypted data types),
+[`Nigori::Encrypt()`](https://source.chromium.org/chromium/chromium/src/+/main:components/sync/model/crypto/nigori.cc)
+AES-CBC encrypts and Base64-encodes the serialized `EntitySpecifics` into
+`EncryptedData.blob`, which inflates the payload size by ~33% (4/3x) and reduces
+the effective plaintext `EntitySpecifics` ceiling to ~7–8 KB.
+
+To avoid hitting this limit:
+* Keep serialized plaintext `EntitySpecifics` well below **8 KB** (ideally under
+  a few KB, and strictly below ~7.3 KB if the type can be encrypted).
+* Enforce upper bounds on variable-length string, bytes, or repeated fields
+  (such as URLs, notes, or descriptions) in the bridge before committing.
+* Monitor client-side entity sizes via the
+  `Sync.EntitySizeOnCommit.Entity.SpecificsOnly.<DataType>` and
+  `Sync.EntitySizeOnCommit.Entity.WithMetadata.<DataType>` histograms.
