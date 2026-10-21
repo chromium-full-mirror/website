@@ -55,15 +55,17 @@ To implement this solution, a Sync datatype owner should follow these steps:
 1. [Optional] Add DCHECK to local updates flow (see this [`section`](#safety-check)).
 1. Include unsupported fields in local changes (see this
    [`section`](#local-update-flow)).
-1. Redownload the data on browser upgrade (see this [`section`](#browser-upgrade-flow)).
+1. Surface newly-supported fields on browser upgrade (see this
+   [`section`](#browser-upgrade-flow)).
 1. [Optional] Add a `version` field to proto in the same milestone.
 1. [Optional] Add sync integration test (see this [`section`](#integration-test)).
 
 The result of these steps is that:
 * Local updates will carry over unsupported fields received previously from the
   Server.
-* Initial sync will be triggered if upgrading the client to a more modern
-  version causes an unsupported field to be newly supported.
+* Upgrading the client to a more modern version where a previously unsupported
+  field becomes supported will surface that field locally (either by merging from
+  sync metadata on startup or by triggering an initial sync redownload).
 * Modern clients may use the `version` field to discard some fields which were
   populated by the client which carried over them as unsupported fields (for
   cases where the carry-over-value behavior is not desired and the feature
@@ -187,13 +189,14 @@ the following steps:
 When a client receives an entity containing fields from a newer browser version
 (or guarded behind a disabled feature flag) and later upgrades (or enables the
 flag) so those fields become supported, the local model must surface those
-newly-supported fields without waiting for another remote update. There are two
-valid patterns depending on how the [`DataTypeSyncBridge`][DataTypeSyncBridge]
-persists local data:
+newly-supported fields without waiting for another remote update. There are
+three valid patterns depending on how the
+[`DataTypeSyncBridge`][DataTypeSyncBridge] persists local data:
 
 * **Pattern A: Structured local storage (e.g., SQLite tables) + startup cache
   check**: When local storage only persists known fields (such as explicit SQL
-  columns), unrecognized fields exist *only* in
+  columns) and does not load sync metadata alongside the data on startup,
+  unrecognized fields exist *only* in
   `EntityMetadata::possibly_trimmed_base_specifics`.
   1. On startup, check whether the unsupported fields cache contains any field
      that is supported in the current browser version. This can be done by
@@ -211,15 +214,30 @@ persists local data:
     `possibly_trimmed_base_specifics` and trigger unnecessary sync data
     redownloads on every startup. This can be tested with a
     [Sync integration test][SyncStartupTest].
-* **Pattern B: Full proto persistence in `DataTypeStore`**: When the bridge
-  persists the full remote specifics proto (including `unknown_fields()`) in
-  `DataTypeStore` during `MergeFullSyncData` and `ApplyIncrementalSyncChanges`
-  (and preserves `GetPossiblyTrimmedRemoteSpecifics` when writing local updates
-  to `DataTypeStore`), unrecognized fields are already retained in the stored
+* **Pattern B: Proto persistence in `DataTypeStore` + startup merge with sync
+  metadata**: When the bridge stores entity protos in `DataTypeStore`, it only
+  needs to write known fields to the local data record, avoiding duplicating
+  unknown fields that are already stored in
+  `EntityMetadata::possibly_trimmed_base_specifics`. On startup (e.g. in
+  `OnReadAllDataAndMetadata`), before constructing the in-memory model for each
+  record, start from the entity's `possibly_trimmed_base_specifics` in
+  `metadata_batch->GetAllMetadata()` and merge the stored local proto on top
+  (`specifics.MergeFrom(local_data.specifics())`). Upon browser upgrade or
+  feature flag enablement, deserializing `possibly_trimmed_base_specifics` and
+  merging it with the stored proto automatically populates the newly-supported
+  fields without requiring a startup cache check, server redownload, or storage
+  duplication.
+* **Pattern C: Full proto persistence in `DataTypeStore`**: Alternatively, when
+  the bridge persists the full remote specifics proto (including
+  `unknown_fields()`) in `DataTypeStore` during `MergeFullSyncData` and
+  `ApplyIncrementalSyncChanges` (and preserves
+  `GetPossiblyTrimmedRemoteSpecifics` when writing local updates to
+  `DataTypeStore`), unrecognized fields are already retained in the stored
   proto's `unknown_fields()`. Upon browser upgrade or feature flag enablement,
   deserializing the stored proto on startup automatically populates the
   newly-supported fields without requiring a startup cache check or server
-  redownload.
+  redownload (at the cost of duplicating unknown fields in both `DataTypeStore`
+  data and sync metadata).
 
 [DataTypeSyncBridge]: https://cs.chromium.org/chromium/src/components/sync/model/data_type_sync_bridge.h
 [PasswordCheckExample]: https://cs.chromium.org/chromium/src/components/password_manager/core/browser/sync/password_sync_bridge.cc;l=904;drc=d149054a527b4fae61477ce9c338aeff64273d06
