@@ -9,13 +9,13 @@ title: CL Footer Syntax
 ---
 
 Chromium stores a lot of information in footers at the bottom of commit
-messages. With the exception of R=, these trailers are only valid in the last
-paragraph of a commit message; any trailers separated from the last line of the
-message by whitespace or non-trailer lines will be ignored. This includes
-everything from the unique "Change-Id" which identifies a Gerrit change, to more
-useful metadata like bugs the change helps fix, trybots which should be run to
-test the change, and more. This page includes a listing of well-known footers,
-their meanings, and their formats.
+messages. These trailers are only valid in the last paragraph of a commit
+message; any trailers separated from the last line of the message by whitespace
+or non-trailer lines will be ignored. This includes everything from the unique
+"Change-Id" which identifies a Gerrit change, to more useful metadata like bugs
+the change helps fix, trybots which should be run to test the change, and more.
+This page includes a listing of well-known footers, their meanings, and their
+formats.
 
 See also <https://chromium.googlesource.com/chromium/src/+/main/docs/infra/cq.md#options>
 
@@ -31,12 +31,6 @@ name.
 
 The same as Bug:, but will automatically close the bug(s) as fixed when the CL
 lands.
-
-**R=**
-
-A comma-separated list of reviewer email addresses (e.g. foo@example.com,
-bar@example.com). This field will be going away with the switch to Gerrit, use
-the "-r foo@example.com" command line option to "git cl upload" instead.
 
 **Cq-Include-Trybots:**
 
