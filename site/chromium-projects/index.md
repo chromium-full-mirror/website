@@ -8,7 +8,7 @@ use_title_as_h1: false
 The Chromium projects include Chromium and ChromiumOS, the open-source projects
 behind the [Google Chrome](https://www.google.com/chrome) browser and
 [Google ChromeOS](https://chromeos.google/), respectively. This site houses the
-documentation and code related tothe Chromium projects and is intended for
+documentation and code related to the Chromium projects and is intended for
 developers interested in learning about and contributing to the open-source
 projects.
 
