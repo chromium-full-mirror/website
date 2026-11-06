@@ -83,6 +83,12 @@ name format is:
 The important thing to note here is that the hexadecimal value of the firmware
 version is encoded into the firmware blob name.
 
+> **Note:** Before naming the package, check that no tarball with that name
+> already exists in `chromeos-localmirror/distfiles`. Abandoned uprevs can
+> leave distfiles behind. If a vendor reuses a firmware version number for a
+> different build, ask the vendor for a new version number. Never overwrite a
+> published distfile.
+
 ### Uprev ebuild to build the new PD firmware as a package
 
 Once the PD firmware tarball is uploaded to Google Cloud Platform Storage, add
@@ -109,10 +115,10 @@ firmware package, to identify the package version. The install rules in the
 ebuild file encodes the firmware version into a separate hash file and strips
 the same from the firmware blob name.
 
-Note: The PD firmware packages for a new TCPC chip need to be masked by default
-in the [package.mask] file. This is usually done when the first PD firmware
-package for a TCPC chip is added. The required PD firmware version for a board
-is unmasked in the concerned board's package.unmask file.
+> **Note:** The PD firmware packages for a new TCPC chip need to be masked by
+> default in the [package.mask] file. This is usually done when the first PD
+> firmware package for a TCPC chip is added. The required PD firmware version
+> for a board is unmasked in the concerned board's package.unmask file.
 
 ### Update private overlay of the board to include the new PD firmware
 
@@ -145,11 +151,11 @@ update:
 
 *   Firmware version in the live chip must differ from the firmware version in
     the CBFS.
-*   EC & PD Software Sync must be enabled. To ensure that EC & PD SW Sync are
-    enabled, get the GBB flags from a live system using
-    `/usr/bin/futility gbb --flash --get --flags` and ensure that
-    GBB_FLAG_DISABLE_EC_SOFTWARE_SYNC (1 << 9) and
-    GBB_FLAG_DISABLE_PD_SOFTWARE_SYNC (1 << 11) flags are not set.
+*   Auxiliary firmware (auxfw) software sync must be enabled. Get the GBB flags
+    from the live system using `/usr/bin/futility gbb --flash --get --flags` and
+    ensure that `GBB_FLAG_DISABLE_AUXFW_SOFTWARE_SYNC` (`1 << 11`, formerly
+    `GBB_FLAG_DISABLE_PD_SOFTWARE_SYNC`) is clear. When it is set, depthcharge
+    skips the PD firmware check entirely.
 *   EC must be able to suspend and resume the TCPC chips. One of the conditions
     where TCPC chips cannot be suspended is the absence of battery - a common
     scenario during proto stages. When the battery is absent and the concerned
@@ -175,11 +181,14 @@ the PD firmware update again.
 In order to identify the PD firmware version on a live/running chip, please
 execute the below command from the Device Under Test (DUT):
 
-`ectool pdchipinfo <port_num>`
+`ectool pdchipinfo <port_num> 1`
 
 The output of the above command includes the live PD firmware version from the
 chip. This information can be used to ensure that the PD firmware update is
 successful.
+
+The trailing `1` requests the live value from the chip. Without it, ectool
+returns a cached firmware version, which may predate the update.
 
 
 [verified boot]: /chromium-os/chromiumos-design-docs/verified-boot
