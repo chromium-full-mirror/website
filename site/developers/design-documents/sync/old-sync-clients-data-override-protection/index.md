@@ -17,7 +17,7 @@ title: Protection against data override by old Sync clients
 ### Problem
 
 This document outlines the necessary steps to prevent data loss scenarios with
-[Sync's Model API][SyncModelApi] for **multi-client** Sync users. A typical
+[Sync's Model API][SyncModelAPI] for **multi-client** Sync users. A typical
 problematic scenario is as follows:
 1. New proto field `F` is introduced in data [specifics][DataSpecifics] (e.g.
    [`PasswordSpecifics`][PasswordSpecifics]).
@@ -27,9 +27,9 @@ problematic scenario is as follows:
 4. Client `O` submits a change to the same proto, which results in discarding
    field’s `F` data from client `N`.
 
-[DataSpecifics]: /developers/design-documents/sync/model-api/#specifics
+[DataSpecifics]: ../model-api/#specifics
 [PasswordSpecifics]: https://cs.chromium.org/chromium/src/components/sync/protocol/password_specifics.proto
-[SyncModelAPI]: /developers/design-documents/sync/model-api
+[SyncModelAPI]: ../model-api
 
 ### Solution
 
