@@ -238,7 +238,7 @@ Recommended process:
 
 ## How long do Origin Trials typically last?
 
-Origin trials can run for up to 6 milestones (~24 weeks), and can be extended
+Origin trials can run for up to 12 milestones (~24 weeks), and can be extended
 under certain conditions.
 See [here](/blink/launching-features/#step-3-optional-origin-trial)
 for more details.
@@ -255,7 +255,7 @@ There are two general cases where experimentation may continue beyond the planne
 end date:
 
 1.  Unexpected delays in releasing
-    *   With the 4 week Chrome release cycle, code may not land in the
+    *   With the 2 week Chrome release cycle, code may not land in the
                 intended release, meaning it is not shipped until the subsequent
                 release. Alternatively, the code may land in the release, but
                 the Chrome stable rollout is delayed, meaning it not
