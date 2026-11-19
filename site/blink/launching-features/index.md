@@ -148,11 +148,12 @@ or implementation.
 
 For all types of features, the first step is to create a ChromeStatus entry. Go
 to <https://www.chromestatus.com/features>, ensure you are logged in (see the
-upper right corner), and click “Add new feature”. If you do no have access to
+upper right corner), and click "Create feature”. If you do no have access to
 create a new feature, please send an email to
 [webstatus-request@google.com](mailto:webstatus-request@google.com) to request
-access. Follow the directions to name your feature and give a short summary, and
-select the appropriate feature type.
+access. Use the form to select the appropriate feature type, name your feature,
+and give a short summary.  Follow the field-level help when writing the name
+and summary because those fields are used directly in the release notes.
 
 For Chrome, some launches will require a formal Chrome launch
 review (especially if your feature has security, privacy,
@@ -437,18 +438,26 @@ Update ChromeStatus with:
   change) and
 * any changes in vendor signals.
 
-Proceed to the “Prepare to Ship” stage in ChromeStatus. Use the buttons at the
-top of this section to request reviews for gates such as privacy and security.
-The “API Owners” button will give you the option to generate an “Intent to Ship”
-mail that you should send to [blink-dev](mailto:blink-dev@chromium.org). If your
-specification isn't a modification of an existing specification, include a
-one-line [spec maturity
+Proceed to the “Prepare to Ship” stage in ChromeStatus. Use the gate chips at
+the top of this section to see details on review gates such as privacy and
+security.  For each gate, follow the instruction in the gate column and use the
+blue button at the top of the column to request a review.  If a gate is marked
+"Needs work" by a reviewer: make the requested changes, and post a comment on
+the gate if needed, then click the blue "Re-request review" button. All cross-functional reviews should be requested before starting the API owners
+review, and they must all be resolved before shipping.
+The “API Owners” gate will give you the option to send an “Intent to Ship”
+mail to [blink-dev](mailto:blink-dev@chromium.org).
+
+If your specification isn't a modification of an existing specification,
+post to the I2S thread to include a one-line [spec maturity
 summary](/blink/spec-mentors/#reviewing-the-specification) from someone outside
 your team (like your [spec mentor](/blink/spec-mentors)) who has done a review.
 This will spark a conversation with the API owners; address any feedback from
 them, and once you get [3 LGTMs from the API
 owners](/blink/guidelines/api-owners/procedures), you may enable the feature by
-default. You can learn more about the policies and guidelines the API owners
+default.
+
+You can learn more about the policies and guidelines the API owners
 evaluate [here](/blink/guidelines). Requirements for new API owners are
 [here](/blink/blink-api-owners-requirements). Email
 blink-api-owners-discuss@chromium.org or reach out to one of the[ API
@@ -456,8 +465,8 @@ owners](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/
 if there is no open/unaddressed feedback and you are still blocked on LGTMs
 after 5 days.
 
-Once you have the needed approvals, you will likely also need to land a Chromium CL to turn on the feature.
-Link to the blink-dev thread via the [Google Groups web interface](https://groups.google.com/a/chromium.org/g/blink-dev)
+Once you have the needed approvals, you will likely also need to land a Chromium
+CL to turn on the feature. Link to your ChromeStatus feature entry
 in your CL's commit message to make it easy and clear to review.
 
 ### Implementations of already-defined consensus-based standards {:#process-existing-standard}
@@ -512,12 +521,17 @@ remember to keep this updated, if things change). If you are working with DevRel
 on documentation, this is the time to finish that work and update for any
 changes in vendor signals.
 
-Proceed to the “Prepare to Ship” stage in ChromeStatus; this will generate an
-Intent to Ship
-mail that you should send to [blink-dev](mailto:blink-dev@chromium.org). This
+Proceed to the “Prepare to Ship” stage in ChromeStatus. Use the gate chips at
+the top of this section to request all cross-functional reviews before
+requesting API owners' review.
+The “API Owners” gate will give you the option to send an “Intent to Ship”
+email to [blink-dev](mailto:blink-dev@chromium.org). This
 will spark a conversation with the API owners; address any feedback from them,
-and once you [get 3 LGTMs](/blink/guidelines/api-owners/procedures) from the API
-owners, you may enable the feature by default. See[
+and
+
+Once you [get 3 LGTMs](/blink/guidelines/api-owners/procedures) from the API
+owners, and you have resolved all cross-functional gates,you may enable the
+feature by default. See[
 here](/blink/guidelines/web-platform-changes-guidelines) for the principles the
 API owners will apply in evaluating whether the feature is mature enough to
 ship. (API owners requirements are listed[
@@ -528,7 +542,7 @@ if no open/unaddressed feedback and you are still blocked on LGTMs after 5
 days.)
 
 Once you have the needed approvals, you will likely also need to land a Chromium CL to turn on the feature.
-Link to the blink-dev thread via the [Google Groups web interface](https://groups.google.com/a/chromium.org/g/blink-dev)
+Link to the ChromeStatus feature entry
 in your CL's commit message to make it easy and clear to review.
 
 ### Feature deprecations
@@ -819,8 +833,10 @@ can try out this change.
 
 You should update ChromeStatus with a target milestone for shipping (and
 remember to keep this updated, if things change). Proceed to the “Prepare to
-Ship” stage in ChromeStatus; this will generate a “Web-Facing Change PSA” mail
-for you. Send that email to [blink-dev](mailto:blink-dev@chromium.org) with the
+Ship” stage in ChromeStatus and work through all review gates. Once all gates
+are resolved, use the "Draft Web-Facing Change PSA email" button to send
+a “Web-Facing Change PSA” mail
+to [blink-dev](mailto:blink-dev@chromium.org) with the
 summary of the code change and the expected milestone.
 
 For a PSA you're expected to follow the [flag guarding
